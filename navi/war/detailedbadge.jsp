@@ -12,9 +12,10 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1"> 
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+	<script src="http://beta.openbadges.org/issuer.js"></script>
 	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
-
+	
 <!-- <link rel='stylesheet' id='style-css'  href='/mobile.css' type='text/css' media='all' />  -->
 </head>
   <body>
@@ -40,16 +41,23 @@
 
 <%
 
-	Collection<BadgeForDisplay> badges = (Collection<BadgeForDisplay>)request.getSession().getAttribute("badges");
+	Collection<BadgeForDisplay> badges = (Collection<BadgeForDisplay>)request.getSession().getAttribute("detailedBadgesList");
 	int index = Integer.parseInt(request.getParameter("id"));	
 	BadgeForDisplay badge = (BadgeForDisplay) badges.toArray()[index];
 	
 	%> 
-	<img style="width:20%;float:right;" src="<%= badge.url %>" alt="<%= badge.name %>"/>
+	<img style="width:20%;float:right;" src="<%= badge.imageUrl %>" alt="<%= badge.name %>"/>
 	<div><h2><%= badge.name %></h2>
 	<p><%= badge.description %></p>
  	</div>
+ 	<div class="ui-grid-a">
+ 	<div class="ui-block-a">
  	<a data-role="button" href="/navi.jsp">Close</a>
+ 	</div>
+ 	<div class="ui-block-b">
+ 	<a data-role="button" data-theme="a" data-icon="star" href="javascript:OpenBadges.issue('<%= badge.url %>');">Add to Backpack</a>
+ 	</div>
+ 	</div>
  	<%
     }
  	%>

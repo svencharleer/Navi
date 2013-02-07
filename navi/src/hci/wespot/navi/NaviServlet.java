@@ -61,6 +61,7 @@ class OpenBadges_Badge
 
 class JoseBadge
 {
+	String id; 
 	OpenBadges_Badge badge;
 	String recipient;
 }
@@ -94,7 +95,7 @@ public class NaviServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 		//UserService userService = UserServiceFactory.getUserService();
         //User user = userService.getCurrentUser();
-		String userName = (String) req.getAttribute("username");
+		String userName = (String) req.getSession().getAttribute("username");
 		if(userName == null || userName == "")
 		{
 			resp.sendRedirect("/login.jsp");
@@ -128,8 +129,9 @@ public class NaviServlet extends HttpServlet {
 				}
 				BadgeForDisplay displayBadge = new BadgeForDisplay();
 				displayBadge.description = badge.badge.description;
-				displayBadge.url =  "http://openbadges-hci.appspot.com"+badge.badge.image;
+				displayBadge.imageUrl =  "http://openbadges-hci.appspot.com"+badge.badge.image;
 				displayBadge.name = badge.badge.name;
+				displayBadge.url = "http://openbadges-hci.appspot.com/rest/getinfo/id/" + badge.id;
 				badgesPerName.get(badge.badge.name).add(displayBadge);
 			
 			}
@@ -140,7 +142,7 @@ public class NaviServlet extends HttpServlet {
 		
 		req.getSession().setAttribute("badges", badgesPerName);
 		
-		req.getSession().setAttribute("username", userName);
+		//req.getSession().setAttribute("username", userName);
 		RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/navi.jsp");
 		if(dispatch != null)
 			dispatch.forward(req, resp);

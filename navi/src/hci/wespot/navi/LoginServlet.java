@@ -27,8 +27,8 @@ public class LoginServlet extends HttpServlet {
 		String action = (String)req.getParameter("do");
 		if(action != null && action.compareTo("logout") == 0)
 		{
-			req.removeAttribute("userId");
-			req.removeAttribute("username");
+			req.getSession().removeAttribute("userId");
+			req.getSession().removeAttribute("username");
 		}
 		resp.sendRedirect("/login.jsp");
 		return;
@@ -50,8 +50,8 @@ public class LoginServlet extends HttpServlet {
         OpenBadges_ConvertEmailReply tmp = (OpenBadges_ConvertEmailReply)json.fromJson(returnValue, returnType);
         if(tmp != null  && tmp.status.compareTo("okay")==0)
         {
-        	req.setAttribute("userId", ""+ tmp.userId + "");
-        	req.setAttribute("username", username);
+        	req.getSession().setAttribute("userId", ""+ tmp.userId + "");
+        	req.getSession().setAttribute("username", username);
         	RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/navi");
         	if(dispatch != null)
         		dispatch.forward(req, resp);

@@ -8,6 +8,7 @@
 <%@ page import="java.util.Iterator" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.Set" %>
+<%@ page import="java.util.ArrayList" %>
 
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
@@ -16,7 +17,7 @@
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
 	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
-
+	<script src="http://beta.openbadges.org/issuer.js"></script>
 <!-- <link rel='stylesheet' id='style-css'  href='/mobile.css' type='text/css' media='all' />  -->
 </head>
   <body>
@@ -51,6 +52,7 @@
 	Iterator it = badges.entrySet().iterator();
 	int i = 0;
 	int index = 0;
+	Collection<BadgeForDisplay> detailedBadgesList = new ArrayList<BadgeForDisplay>();
 	while(it.hasNext())
 	{
 		Map.Entry m = (Map.Entry)it.next();
@@ -58,8 +60,9 @@
 		int count = sameBadges.size();
 		
 		BadgeForDisplay badge = (BadgeForDisplay)sameBadges.iterator().next();
+		detailedBadgesList.add(badge);
 	%>
- 		<li  data-icon="false"><a href="/detailedbadge.jsp?id=<%= index %>" data-rel="dialog" data-transition="slidedown"><img  src="<%= badge.url %>" alt="<%= badge.name %>"/><%= badge.name %> 
+ 		<li  data-icon="false"><a href="/detailedbadge.jsp?id=<%= index %>" data-rel="dialog" data-transition="slidedown"><img  src="<%= badge.imageUrl %>" alt="<%= badge.name %>"/><%= badge.name %> 
  		
  		<% if(count > 1){ %>
  		
@@ -71,10 +74,11 @@
  	i = (i+1)%2;
 	}
 
-
+	request.getSession().setAttribute("detailedBadgesList",detailedBadgesList);
     }
 %>
 </ul>
+</div>
 </div>
   </body>
 </html>
