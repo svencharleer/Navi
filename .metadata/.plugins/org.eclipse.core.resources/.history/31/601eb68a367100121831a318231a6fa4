@@ -48,24 +48,14 @@
 <%
 
 	Map<String,Collection<BadgeForDisplay>> badges = (Map<String,Collection<BadgeForDisplay>>)request.getSession().getAttribute("badges");
-	Iterator it = badges.entrySet().iterator();
+	Iterator<BadgeForDisplay> it = badges.entrySet().iterator();
 	int i = 0;
 	int index = 0;
 	while(it.hasNext())
 	{
-		Map.Entry m = (Map.Entry)it.next();
-		Collection<BadgeForDisplay> sameBadges = (Collection<BadgeForDisplay>)m.getValue();
-		int count = sameBadges.size();
-		
-		BadgeForDisplay badge = (BadgeForDisplay)sameBadges.iterator().next();
+		BadgeForDisplay badge = (BadgeForDisplay)it.next();
 	%>
- 		<li  data-icon="false"><a href="/detailedbadge.jsp?id=<%= index %>" data-rel="dialog" data-transition="slidedown"><img  src="<%= badge.url %>" alt="<%= badge.name %>"/><%= badge.name %> 
- 		
- 		<% if(count > 1){ %>
- 		
- 		<i>x<%= count %></i>
- 		<% } %>
- 		</a></li>
+ 		<li  data-icon="false"><a href="/detailedbadge.jsp?id=<%= index %>" data-rel="dialog" data-transition="slidedown"><img  src="<%= badge.url %>" alt="<%= badge.name %>"/><%= badge.name %></a></li>
  	<% 
  	index++;
  	i = (i+1)%2;

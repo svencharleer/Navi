@@ -106,16 +106,18 @@ public class NaviServlet extends HttpServlet {
 		Gson json = new Gson();
 		String returnValue = get("http://openbadges-hci.appspot.com/rest/getinfo/badgesusers");
 		
+		Collection<BadgeForDisplay> badgesForDisplay = new ArrayList<BadgeForDisplay>();
 		
 		Type returnType = new TypeToken<Collection<JoseBadge>>(){}.getType();
 		Collection<JoseBadge> badges = (Collection<JoseBadge>)json.fromJson(returnValue, returnType);
+		
 		
 			
 		
 		
 		
 		Iterator<JoseBadge> it = badges.iterator();
-		Map<String, Collection<BadgeForDisplay>> badgesPerName = new HashMap<String,Collection<BadgeForDisplay>>(); 
+		Map<String, Collection<JoseBadge>> badgesPerName = new HashMap<String,Collection<JoseBadge>>(); 
 		while(it.hasNext())
 		{
 			
@@ -124,21 +126,20 @@ public class NaviServlet extends HttpServlet {
 			{
 				if(!badgesPerName.containsKey(badge.badge.name))
 				{
-					badgesPerName.put(badge.badge.name, new ArrayList<BadgeForDisplay>());
+					badgesPerName.put(badge.badge.name, new ArrayList<JoseBadge>());
 				}
 				BadgeForDisplay displayBadge = new BadgeForDisplay();
 				displayBadge.description = badge.badge.description;
 				displayBadge.url =  "http://openbadges-hci.appspot.com"+badge.badge.image;
 				displayBadge.name = badge.badge.name;
 				badgesPerName.get(badge.badge.name).add(displayBadge);
-			
 			}
 			
 		}
 			
 			
 		
-		req.getSession().setAttribute("badges", badgesPerName);
+		req.getSession().setAttribute("badges", badgesForDisplay);
 		
 		req.getSession().setAttribute("username", userName);
 		RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/navi.jsp");
