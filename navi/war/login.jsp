@@ -3,15 +3,27 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
-<link rel='stylesheet' id='style-css'  href='/mobile.css' type='text/css' media='all' />
-<title>Navi HCI</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+
+<!-- <link rel='stylesheet' id='style-css'  href='/mobile.css' type='text/css' media='all' />  -->
 </head>
-<body>
+  <body>
+  <div data-role="page" data-theme="b">
+
+	<div data-role="header">
+	<h1>Navi HCI</h1>
+	</div><!-- /header -->
+	<div data-role="content">
 <form action=/login method="POST">
-OpenBadge Login: <input type="text" name="username">
+<div data-role="fieldcontain" class="ui-hide-label">
+<label for="username">OpenBadge Login:</label> <input type="text" id="username" placeholder="OpenBadge ID" name="username">
+
+</div>
 <input type="submit" value="Submit" />
 </form>
+</div>
 </body>
 </html>

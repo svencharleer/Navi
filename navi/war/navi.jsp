@@ -10,12 +10,18 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head>
-<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
-<link rel='stylesheet' id='style-css'  href='/mobile.css' type='text/css' media='all' />
+<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+
+<!-- <link rel='stylesheet' id='style-css'  href='/mobile.css' type='text/css' media='all' />  -->
 </head>
   <body>
-<div id="greeting">
-<%
+  <div data-role="page" data-theme="b">
+
+	<div data-role="header">
+		<%
 	String userId = (String) request.getSession().getAttribute("userId");
     if (userId == null || userId == "") 
     {
@@ -28,26 +34,35 @@
       
     	  
 %>
-<p><strong><%=username %></strong> <br/>[<a href="/login?do=logout">sign out</a>]</p>
-</div>
-<div id="badges">
+<h1><%=username %></h1><a data-role="button" data-theme="b" href="/login?do=logout">Logout</a>
+
+	</div><!-- /header -->
+	<div data-role="content">
+  <ul data-role="listview" data-inset="true" data-filter="true">
+	
+
+
+
 <%
 
 	Collection<BadgeForDisplay> badges = (Collection<BadgeForDisplay>)request.getSession().getAttribute("badges");
 	Iterator<BadgeForDisplay> it = badges.iterator();
 	int i = 0;
+	int index = 0;
 	while(it.hasNext())
 	{
 		BadgeForDisplay badge = (BadgeForDisplay)it.next();
 	%>
- 		<img class="badge<%= i %>" src="<%= badge.url %>" alt="<%= badge.description %>"/>
+ 		<li  data-icon="false"><a href="/detailedbadge.jsp?id=<%= index %>" data-rel="dialog" data-transition="slidedown"><img  src="<%= badge.url %>" alt="<%= badge.name %>"/><%= badge.name %></a></li>
  	<% 
+ 	index++;
  	i = (i+1)%2;
 	}
 
 
     }
 %>
+</ul>
 </div>
   </body>
 </html>

@@ -3565,3 +3565,273 @@ Binding(CTRL+SHIFT+ARROW_RIGHT,
 		,,true),null),
 	org.eclipse.ui.defaultAcceleratorConfiguration,
 	org.eclipse.jdt.ui.javaEditorScope,,cocoa,system)
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 12:07:49.295
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Badge.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 12:07:49.296
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeAssertion.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 12:07:49.296
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeData.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 12:07:49.296
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_ConvertEmailReply.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 12:07:49.296
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Group.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 12:07:49.297
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Groups.class
+
+!ENTRY org.eclipse.jface.text 4 0 2013-02-07 12:08:01.366
+!MESSAGE Unexpected runtime error while computing a text hover
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -1
+	at java.lang.String.substring(String.java:1937)
+	at org.eclipse.jst.jsp.core.internal.java.JSPTranslation.initJspAndServletNames(JSPTranslation.java:422)
+	at org.eclipse.jst.jsp.core.internal.java.JSPTranslation.fixupMangledName(JSPTranslation.java:404)
+	at org.eclipse.jst.jsp.ui.internal.taginfo.JSPJavaJavadocHoverProcessor.getHoverInfo(JSPJavaJavadocHoverProcessor.java:106)
+	at org.eclipse.wst.sse.ui.internal.taginfo.BestMatchHover.getHoverInfo2(BestMatchHover.java:131)
+	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:166)
+
+!ENTRY org.eclipse.jface.text 4 0 2013-02-07 12:08:07.995
+!MESSAGE Unexpected runtime error while computing a text hover
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -1
+	at java.lang.String.substring(String.java:1937)
+	at org.eclipse.jst.jsp.core.internal.java.JSPTranslation.initJspAndServletNames(JSPTranslation.java:422)
+	at org.eclipse.jst.jsp.core.internal.java.JSPTranslation.fixupMangledName(JSPTranslation.java:404)
+	at org.eclipse.jst.jsp.ui.internal.taginfo.JSPJavaJavadocHoverProcessor.getHoverInfo(JSPJavaJavadocHoverProcessor.java:106)
+	at org.eclipse.wst.sse.ui.internal.taginfo.BestMatchHover.getHoverInfo2(BestMatchHover.java:131)
+	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:166)
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 12:08:55.225
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Badge.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 12:08:55.225
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeAssertion.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 12:08:55.226
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeData.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 12:08:55.226
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_ConvertEmailReply.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 12:08:55.226
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Group.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 12:08:55.226
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Groups.class
+
+!ENTRY org.eclipse.jface.text 4 0 2013-02-07 12:10:00.935
+!MESSAGE Unexpected runtime error while computing a text hover
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -1
+	at java.lang.String.substring(String.java:1937)
+	at org.eclipse.jst.jsp.core.internal.java.JSPTranslation.initJspAndServletNames(JSPTranslation.java:422)
+	at org.eclipse.jst.jsp.core.internal.java.JSPTranslation.fixupMangledName(JSPTranslation.java:404)
+	at org.eclipse.jst.jsp.ui.internal.taginfo.JSPJavaJavadocHoverProcessor.getHoverInfo(JSPJavaJavadocHoverProcessor.java:106)
+	at org.eclipse.wst.sse.ui.internal.taginfo.BestMatchHover.getHoverInfo2(BestMatchHover.java:131)
+	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:166)
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 12:10:28.678
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Badge.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 12:10:28.679
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeAssertion.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 12:10:28.680
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeData.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 12:10:28.680
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_ConvertEmailReply.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 12:10:28.681
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Group.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 12:10:28.681
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Groups.class
+
+!ENTRY org.eclipse.jface.text 4 0 2013-02-07 12:10:36.715
+!MESSAGE Unexpected runtime error while computing a text hover
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -1
+	at java.lang.String.substring(String.java:1937)
+	at org.eclipse.jst.jsp.core.internal.java.JSPTranslation.initJspAndServletNames(JSPTranslation.java:422)
+	at org.eclipse.jst.jsp.core.internal.java.JSPTranslation.fixupMangledName(JSPTranslation.java:404)
+	at org.eclipse.jst.jsp.ui.internal.taginfo.JSPJavaJavadocHoverProcessor.getHoverInfo(JSPJavaJavadocHoverProcessor.java:106)
+	at org.eclipse.wst.sse.ui.internal.taginfo.BestMatchHover.getHoverInfo2(BestMatchHover.java:131)
+	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:166)
+
+!ENTRY org.eclipse.jface.text 4 0 2013-02-07 12:10:43.356
+!MESSAGE Unexpected runtime error while computing a text hover
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -1
+	at java.lang.String.substring(String.java:1937)
+	at org.eclipse.jst.jsp.core.internal.java.JSPTranslation.initJspAndServletNames(JSPTranslation.java:422)
+	at org.eclipse.jst.jsp.core.internal.java.JSPTranslation.fixupMangledName(JSPTranslation.java:404)
+	at org.eclipse.jst.jsp.ui.internal.taginfo.JSPJavaJavadocHoverProcessor.getHoverInfo(JSPJavaJavadocHoverProcessor.java:106)
+	at org.eclipse.wst.sse.ui.internal.taginfo.BestMatchHover.getHoverInfo2(BestMatchHover.java:131)
+	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:166)
+
+!ENTRY org.eclipse.jface.text 4 0 2013-02-07 12:10:50.510
+!MESSAGE Unexpected runtime error while computing a text hover
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -1
+	at java.lang.String.substring(String.java:1937)
+	at org.eclipse.jst.jsp.core.internal.java.JSPTranslation.initJspAndServletNames(JSPTranslation.java:422)
+	at org.eclipse.jst.jsp.core.internal.java.JSPTranslation.fixupMangledName(JSPTranslation.java:404)
+	at org.eclipse.jst.jsp.ui.internal.taginfo.JSPJavaJavadocHoverProcessor.getHoverInfo(JSPJavaJavadocHoverProcessor.java:106)
+	at org.eclipse.wst.sse.ui.internal.taginfo.BestMatchHover.getHoverInfo2(BestMatchHover.java:131)
+	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:166)
+
+!ENTRY org.eclipse.jface.text 4 0 2013-02-07 12:30:32.522
+!MESSAGE Unexpected runtime error while computing a text hover
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -1
+	at java.lang.String.substring(String.java:1937)
+	at org.eclipse.jst.jsp.core.internal.java.JSPTranslation.initJspAndServletNames(JSPTranslation.java:422)
+	at org.eclipse.jst.jsp.core.internal.java.JSPTranslation.fixupMangledName(JSPTranslation.java:404)
+	at org.eclipse.jst.jsp.ui.internal.taginfo.JSPJavaJavadocHoverProcessor.getHoverInfo(JSPJavaJavadocHoverProcessor.java:106)
+	at org.eclipse.wst.sse.ui.internal.taginfo.BestMatchHover.getHoverInfo2(BestMatchHover.java:131)
+	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:166)
+
+!ENTRY org.eclipse.jface.text 4 0 2013-02-07 12:30:33.416
+!MESSAGE Unexpected runtime error while computing a text hover
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -1
+	at java.lang.String.substring(String.java:1937)
+	at org.eclipse.jst.jsp.core.internal.java.JSPTranslation.initJspAndServletNames(JSPTranslation.java:422)
+	at org.eclipse.jst.jsp.core.internal.java.JSPTranslation.fixupMangledName(JSPTranslation.java:404)
+	at org.eclipse.jst.jsp.ui.internal.taginfo.JSPJavaJavadocHoverProcessor.getHoverInfo(JSPJavaJavadocHoverProcessor.java:106)
+	at org.eclipse.wst.sse.ui.internal.taginfo.BestMatchHover.getHoverInfo2(BestMatchHover.java:131)
+	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:166)
+
+!ENTRY org.eclipse.jface.text 4 0 2013-02-07 12:31:13.887
+!MESSAGE Unexpected runtime error while computing a text hover
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -1
+	at java.lang.String.substring(String.java:1937)
+	at org.eclipse.jst.jsp.core.internal.java.JSPTranslation.initJspAndServletNames(JSPTranslation.java:422)
+	at org.eclipse.jst.jsp.core.internal.java.JSPTranslation.fixupMangledName(JSPTranslation.java:404)
+	at org.eclipse.jst.jsp.ui.internal.taginfo.JSPJavaJavadocHoverProcessor.getHoverInfo(JSPJavaJavadocHoverProcessor.java:106)
+	at org.eclipse.wst.sse.ui.internal.taginfo.BestMatchHover.getHoverInfo2(BestMatchHover.java:131)
+	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:166)
+
+!ENTRY org.eclipse.jface.text 4 0 2013-02-07 12:31:21.572
+!MESSAGE Unexpected runtime error while computing a text hover
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -1
+	at java.lang.String.substring(String.java:1937)
+	at org.eclipse.jst.jsp.core.internal.java.JSPTranslation.initJspAndServletNames(JSPTranslation.java:422)
+	at org.eclipse.jst.jsp.core.internal.java.JSPTranslation.fixupMangledName(JSPTranslation.java:404)
+	at org.eclipse.jst.jsp.ui.internal.taginfo.JSPJavaJavadocHoverProcessor.getHoverInfo(JSPJavaJavadocHoverProcessor.java:106)
+	at org.eclipse.wst.sse.ui.internal.taginfo.BestMatchHover.getHoverInfo2(BestMatchHover.java:131)
+	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:166)
+
+!ENTRY org.eclipse.jface.text 4 0 2013-02-07 12:36:31.229
+!MESSAGE Unexpected runtime error while computing a text hover
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -1
+	at java.lang.String.substring(String.java:1937)
+	at org.eclipse.jst.jsp.core.internal.java.JSPTranslation.initJspAndServletNames(JSPTranslation.java:422)
+	at org.eclipse.jst.jsp.core.internal.java.JSPTranslation.fixupMangledName(JSPTranslation.java:404)
+	at org.eclipse.jst.jsp.ui.internal.taginfo.JSPJavaJavadocHoverProcessor.getHoverInfo(JSPJavaJavadocHoverProcessor.java:106)
+	at org.eclipse.wst.sse.ui.internal.taginfo.BestMatchHover.getHoverInfo2(BestMatchHover.java:131)
+	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:166)
+
+!ENTRY org.eclipse.jface.text 4 0 2013-02-07 12:37:51.173
+!MESSAGE Unexpected runtime error while computing a text hover
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -1
+	at java.lang.String.substring(String.java:1937)
+	at org.eclipse.jst.jsp.core.internal.java.JSPTranslation.initJspAndServletNames(JSPTranslation.java:422)
+	at org.eclipse.jst.jsp.core.internal.java.JSPTranslation.fixupMangledName(JSPTranslation.java:404)
+	at org.eclipse.jst.jsp.ui.internal.taginfo.JSPJavaJavadocHoverProcessor.getHoverInfo(JSPJavaJavadocHoverProcessor.java:106)
+	at org.eclipse.wst.sse.ui.internal.taginfo.BestMatchHover.getHoverInfo2(BestMatchHover.java:131)
+	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:166)
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 13:07:19.104
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Badge.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 13:07:19.105
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeAssertion.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 13:07:19.105
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeData.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 13:07:19.105
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_ConvertEmailReply.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 13:07:19.105
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Group.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 13:07:19.105
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Groups.class
+
+!ENTRY org.eclipse.jface.text 4 0 2013-02-07 13:09:16.562
+!MESSAGE Unexpected runtime error while computing a text hover
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -1
+	at java.lang.String.substring(String.java:1937)
+	at org.eclipse.jst.jsp.core.internal.java.JSPTranslation.initJspAndServletNames(JSPTranslation.java:422)
+	at org.eclipse.jst.jsp.core.internal.java.JSPTranslation.fixupMangledName(JSPTranslation.java:404)
+	at org.eclipse.jst.jsp.ui.internal.taginfo.JSPJavaJavadocHoverProcessor.getHoverInfo(JSPJavaJavadocHoverProcessor.java:106)
+	at org.eclipse.wst.sse.ui.internal.taginfo.BestMatchHover.getHoverInfo2(BestMatchHover.java:131)
+	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:166)
+
+!ENTRY org.eclipse.jface.text 4 0 2013-02-07 13:09:46.223
+!MESSAGE Unexpected runtime error while computing a text hover
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -1
+	at java.lang.String.substring(String.java:1937)
+	at org.eclipse.jst.jsp.core.internal.java.JSPTranslation.initJspAndServletNames(JSPTranslation.java:422)
+	at org.eclipse.jst.jsp.core.internal.java.JSPTranslation.fixupMangledName(JSPTranslation.java:404)
+	at org.eclipse.jst.jsp.ui.internal.taginfo.JSPJavaJavadocHoverProcessor.getHoverInfo(JSPJavaJavadocHoverProcessor.java:106)
+	at org.eclipse.wst.sse.ui.internal.taginfo.BestMatchHover.getHoverInfo2(BestMatchHover.java:131)
+	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:166)
+
+!ENTRY org.eclipse.jface.text 4 0 2013-02-07 13:16:11.558
+!MESSAGE Unexpected runtime error while computing a text hover
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -1
+	at java.lang.String.substring(String.java:1937)
+	at org.eclipse.jst.jsp.core.internal.java.JSPTranslation.initJspAndServletNames(JSPTranslation.java:422)
+	at org.eclipse.jst.jsp.core.internal.java.JSPTranslation.fixupMangledName(JSPTranslation.java:404)
+	at org.eclipse.jst.jsp.ui.internal.taginfo.JSPJavaJavadocHoverProcessor.getHoverInfo(JSPJavaJavadocHoverProcessor.java:106)
+	at org.eclipse.wst.sse.ui.internal.taginfo.BestMatchHover.getHoverInfo2(BestMatchHover.java:131)
+	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:166)
+
+!ENTRY org.eclipse.jface.text 4 0 2013-02-07 13:16:29.293
+!MESSAGE Unexpected runtime error while computing a text hover
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -1
+	at java.lang.String.substring(String.java:1937)
+	at org.eclipse.jst.jsp.core.internal.java.JSPTranslation.initJspAndServletNames(JSPTranslation.java:422)
+	at org.eclipse.jst.jsp.core.internal.java.JSPTranslation.fixupMangledName(JSPTranslation.java:404)
+	at org.eclipse.jst.jsp.ui.internal.taginfo.JSPJavaJavadocHoverProcessor.getHoverInfo(JSPJavaJavadocHoverProcessor.java:106)
+	at org.eclipse.wst.sse.ui.internal.taginfo.BestMatchHover.getHoverInfo2(BestMatchHover.java:131)
+	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:166)
+
+!ENTRY org.eclipse.jface.text 4 0 2013-02-07 13:18:27.956
+!MESSAGE Unexpected runtime error while computing a text hover
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -1
+	at java.lang.String.substring(String.java:1937)
+	at org.eclipse.jst.jsp.core.internal.java.JSPTranslation.initJspAndServletNames(JSPTranslation.java:422)
+	at org.eclipse.jst.jsp.core.internal.java.JSPTranslation.fixupMangledName(JSPTranslation.java:404)
+	at org.eclipse.jst.jsp.ui.internal.taginfo.JSPJavaJavadocHoverProcessor.getHoverInfo(JSPJavaJavadocHoverProcessor.java:106)
+	at org.eclipse.wst.sse.ui.internal.taginfo.BestMatchHover.getHoverInfo2(BestMatchHover.java:131)
+	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:166)
+
+!ENTRY org.eclipse.jface.text 4 0 2013-02-07 13:18:37.394
+!MESSAGE Unexpected runtime error while computing a text hover
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -1
+	at java.lang.String.substring(String.java:1937)
+	at org.eclipse.jst.jsp.core.internal.java.JSPTranslation.initJspAndServletNames(JSPTranslation.java:422)
+	at org.eclipse.jst.jsp.core.internal.java.JSPTranslation.fixupMangledName(JSPTranslation.java:404)
+	at org.eclipse.jst.jsp.ui.internal.taginfo.JSPJavaJavadocHoverProcessor.getHoverInfo(JSPJavaJavadocHoverProcessor.java:106)
+	at org.eclipse.wst.sse.ui.internal.taginfo.BestMatchHover.getHoverInfo2(BestMatchHover.java:131)
+	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:166)

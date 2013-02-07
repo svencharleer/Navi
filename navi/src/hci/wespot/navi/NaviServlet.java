@@ -77,6 +77,10 @@ class OpenBadges_BadgeData
 
 @SuppressWarnings("serial")
 public class NaviServlet extends HttpServlet {
+	
+	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+		doPost(req,resp);
+	}
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 		//UserService userService = UserServiceFactory.getUserService();
         //User user = userService.getCurrentUser();
@@ -129,6 +133,7 @@ public class NaviServlet extends HttpServlet {
             		badge.url = tmp4.imageUrl;
             		badge.name = tmp4.assertion.badge.name;
             		badgesForDisplay.add(badge);
+            		
             		
             	}
             	
