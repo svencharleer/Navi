@@ -4652,3 +4652,20 @@ java.lang.StringIndexOutOfBoundsException: String index out of range: -1
 
 !ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 17:43:12.892
 !MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Groups.class
+
+!ENTRY com.google.appengine.eclipse.core 1 0 2013-02-07 18:00:20.577
+!MESSAGE navi successfully deployed to Google App Engine
+
+!ENTRY org.eclipse.jface.text 4 0 2013-02-07 18:04:57.173
+!MESSAGE Unexpected runtime error while computing a text hover
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -1
+	at java.lang.String.substring(String.java:1937)
+	at org.eclipse.jst.jsp.core.internal.java.JSPTranslation.initJspAndServletNames(JSPTranslation.java:422)
+	at org.eclipse.jst.jsp.core.internal.java.JSPTranslation.fixupMangledName(JSPTranslation.java:404)
+	at org.eclipse.jst.jsp.ui.internal.taginfo.JSPJavaJavadocHoverProcessor.getHoverInfo(JSPJavaJavadocHoverProcessor.java:106)
+	at org.eclipse.wst.sse.ui.internal.taginfo.BestMatchHover.getHoverInfo2(BestMatchHover.java:131)
+	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:166)
+
+!ENTRY com.google.appengine.eclipse.core 1 0 2013-02-07 18:06:15.243
+!MESSAGE navi successfully deployed to Google App Engine

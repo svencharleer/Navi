@@ -51,9 +51,8 @@
 	<p><%= badge.description %></p>
  	</div>
  	
- 	
- 	<a data-role="button" data-theme="a" data-icon="star" href="javascript:OpenBadges.issue('<%= badge.url %>');">Add to Backpack</a>
  	<a data-role="button" href="/navi.jsp">Close</a>
+ 	<a data-role="button" data-theme="a" data-icon="star" href="javascript:OpenBadges.issue('<%= badge.url %>');">Add to Backpack</a>
  	<%
     }
  	%>

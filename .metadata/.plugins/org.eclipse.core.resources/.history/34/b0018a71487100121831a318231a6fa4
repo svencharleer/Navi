@@ -50,14 +50,18 @@
 	<div><h2><%= badge.name %></h2>
 	<p><%= badge.description %></p>
  	</div>
- 	
- 	
- 	<a data-role="button" data-theme="a" data-icon="star" href="javascript:OpenBadges.issue('<%= badge.url %>');">Add to Backpack</a>
+ 	<div class="ui-grid-a">
+ 	<div class="ui-block-a">
  	<a data-role="button" href="/navi.jsp">Close</a>
+ 	</div>
+ 	<div class="ui-block-b">
+ 	<a data-role="button" data-theme="a" data-icon="star" href="javascript:OpenBadges.issue('<%= badge.url %>');">Add to Backpack</a>
+ 	</div>
+ 	</div>
  	<%
     }
  	%>
-</div>
+
 </div>
   </body>
 </html>
