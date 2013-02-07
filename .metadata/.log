@@ -3844,3 +3844,513 @@ java.lang.StringIndexOutOfBoundsException: String index out of range: -1
 
 !ENTRY com.google.appengine.eclipse.core 1 0 2013-02-07 14:30:41.326
 !MESSAGE navi successfully deployed to Google App Engine
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:43:29.215
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Badge.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:43:29.216
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeAssertion.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:43:29.216
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeData.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:43:29.216
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_ConvertEmailReply.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:43:29.216
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Group.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:43:29.217
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Groups.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:49:15.886
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Badge.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:49:15.887
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeAssertion.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:49:15.887
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeData.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:49:15.887
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_ConvertEmailReply.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:49:15.887
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Group.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:49:15.887
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Groups.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:50:25.496
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Badge.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:50:25.496
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeAssertion.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:50:25.498
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeData.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:50:25.498
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_ConvertEmailReply.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:50:25.498
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Group.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:50:25.499
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Groups.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:50:41.508
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Badge.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:50:41.509
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeAssertion.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:50:41.509
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeData.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:50:41.509
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_ConvertEmailReply.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:50:41.509
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Group.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:50:41.510
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Groups.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:50:47.309
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Badge.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:50:47.309
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeAssertion.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:50:47.309
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeData.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:50:47.309
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_ConvertEmailReply.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:50:47.310
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Group.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:50:47.310
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Groups.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:53:53.388
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/JoseBadge.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:53:53.389
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Badge.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:53:53.389
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeAssertion.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:53:53.389
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeData.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:53:53.389
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_ConvertEmailReply.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:53:53.390
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Group.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:53:53.390
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Groups.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:54:03.406
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/JoseBadge.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:54:03.407
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Badge.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:54:03.407
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeAssertion.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:54:03.407
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeData.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:54:03.408
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_ConvertEmailReply.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:54:03.408
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Group.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:54:03.408
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Groups.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:54:12.641
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/JoseBadge.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:54:12.642
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Badge.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:54:12.642
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeAssertion.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:54:12.643
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeData.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:54:12.643
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_ConvertEmailReply.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:54:12.643
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Group.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:54:12.643
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Groups.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:55:02.453
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/JoseBadge.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:55:02.453
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Badge.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:55:02.454
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeAssertion.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:55:02.454
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeData.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:55:02.455
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_ConvertEmailReply.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:55:02.455
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Group.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:55:02.455
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Groups.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:55:04.593
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/JoseBadge.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:55:04.594
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Badge.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:55:04.594
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeAssertion.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:55:04.594
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeData.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:55:04.594
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_ConvertEmailReply.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:55:04.594
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Group.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:55:04.595
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Groups.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:55:14.429
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/JoseBadge.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:55:14.430
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Badge.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:55:14.430
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeAssertion.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:55:14.430
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeData.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:55:14.430
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_ConvertEmailReply.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:55:14.430
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Group.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:55:14.431
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Groups.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:56:55.142
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/JoseBadge.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:56:55.142
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Badge.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:56:55.142
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeAssertion.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:56:55.143
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeData.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:56:55.143
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_ConvertEmailReply.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:56:55.143
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Group.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:56:55.143
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Groups.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:58:15.042
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/JoseBadge.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:58:15.042
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Badge.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:58:15.043
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeAssertion.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:58:15.043
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeData.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:58:15.043
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_ConvertEmailReply.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:58:15.043
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Group.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:58:15.043
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Groups.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:59:30.168
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/JoseBadge.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:59:30.168
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Badge.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:59:30.169
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeAssertion.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:59:30.169
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeData.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:59:30.169
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_ConvertEmailReply.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:59:30.169
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Group.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 14:59:30.169
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Groups.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:04:29.698
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/JoseBadge.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:04:29.699
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Badge.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:04:29.699
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeAssertion.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:04:29.699
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeData.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:04:29.699
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_ConvertEmailReply.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:04:29.700
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Group.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:04:29.700
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Groups.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:04:55.065
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/JoseBadge.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:04:55.065
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Badge.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:04:55.065
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeAssertion.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:04:55.066
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeData.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:04:55.066
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_ConvertEmailReply.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:04:55.066
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Group.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:04:55.067
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Groups.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:05:32.672
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/JoseBadge.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:05:32.673
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Badge.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:05:32.673
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeAssertion.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:05:32.673
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeData.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:05:32.673
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_ConvertEmailReply.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:05:32.673
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Group.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:05:32.674
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Groups.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:07:53.259
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/JoseBadge.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:07:53.260
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Badge.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:07:53.260
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeAssertion.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:07:53.260
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeData.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:07:53.260
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_ConvertEmailReply.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:07:53.261
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Group.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:07:53.261
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Groups.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:08:29.498
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/JoseBadge.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:08:29.499
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Badge.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:08:29.500
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeAssertion.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:08:29.501
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeData.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:08:29.501
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_ConvertEmailReply.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:08:29.502
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Group.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:08:29.502
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Groups.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:09:56.714
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/JoseBadge.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:09:56.715
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Badge.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:09:56.715
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeAssertion.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:09:56.715
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeData.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:09:56.715
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_ConvertEmailReply.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:09:56.716
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Group.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:09:56.716
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Groups.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:12:27.813
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/JoseBadge.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:12:27.813
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Badge.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:12:27.813
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeAssertion.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:12:27.814
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeData.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:12:27.814
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_ConvertEmailReply.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:12:27.814
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Group.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:12:27.814
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Groups.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:13:41.532
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/JoseBadge.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:13:41.533
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Badge.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:13:41.533
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeAssertion.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:13:41.533
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeData.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:13:41.533
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_ConvertEmailReply.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:13:41.534
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Group.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:13:41.534
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Groups.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:13:52.617
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/JoseBadge.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:13:52.617
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Badge.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:13:52.617
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeAssertion.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:13:52.618
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeData.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:13:52.618
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_ConvertEmailReply.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:13:52.618
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Group.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:13:52.618
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Groups.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:13:54.747
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/JoseBadge.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:13:54.747
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Badge.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:13:54.747
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeAssertion.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:13:54.748
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeData.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:13:54.748
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_ConvertEmailReply.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:13:54.748
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Group.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:13:54.748
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Groups.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:14:12.859
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/JoseBadge.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:14:12.859
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Badge.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:14:12.860
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeAssertion.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:14:12.860
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_BadgeData.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:14:12.860
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_ConvertEmailReply.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:14:12.860
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Group.class
+
+!ENTRY com.google.appengine.eclipse.core 2 0 2013-02-07 15:14:12.860
+!MESSAGE Could not find Java source for class file /navi/war/WEB-INF/classes/hci/wespot/navi/OpenBadges_Groups.class

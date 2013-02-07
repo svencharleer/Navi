@@ -59,7 +59,6 @@ class OpenBadges_Badge
 class JoseBadge
 {
 	OpenBadges_Badge badge;
-	String recipient;
 }
 
 class OpenBadges_BadgeAssertion

@@ -53,13 +53,11 @@ class OpenBadges_Badge
 	String criteria;
 	String image;
 	Object issuer;
-	String recipient;
 }
 
 class JoseBadge
 {
 	OpenBadges_Badge badge;
-	String recipient;
 }
 
 class OpenBadges_BadgeAssertion
@@ -91,8 +89,8 @@ public class NaviServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 		//UserService userService = UserServiceFactory.getUserService();
         //User user = userService.getCurrentUser();
-		String userName = (String) req.getAttribute("username");
-		if(userName == null || userName == "")
+		String userId = (String) req.getAttribute("userId");
+		if(userId == null || userId == "")
 		{
 			resp.sendRedirect("/login.jsp");
 			return;
@@ -100,45 +98,44 @@ public class NaviServlet extends HttpServlet {
 		 
 		 
 		
-		Gson json = new Gson();
-		String returnValue = get("http://openbadges-hci.appspot.com/rest/getinfo/badgesusers");
-		
-		Collection<BadgeForDisplay> badgesForDisplay = new ArrayList<BadgeForDisplay>();
-		
-		Type returnType = new TypeToken<Collection<JoseBadge>>(){}.getType();
-		Collection<JoseBadge> badges = (Collection<JoseBadge>)json.fromJson(returnValue, returnType);
-		
-		
-			
-		
-		
-		
-		Iterator<JoseBadge> it = badges.iterator();
-		
-		while(it.hasNext())
-		{
-			
-			JoseBadge badge = (JoseBadge)it.next();
-			if(badge != null && badge != null && badge.recipient.compareToIgnoreCase(userName)==0)
-			{
-				BadgeForDisplay displayBadge = new BadgeForDisplay();
-				displayBadge.description = badge.badge.description;
-				displayBadge.url =  "http://openbadges-hci.appspot.com"+badge.badge.image;
-				displayBadge.name = badge.badge.name;
-				badgesForDisplay.add(displayBadge);
-			}
-			
-		}
-			
-			
-		
-		req.getSession().setAttribute("badges", badgesForDisplay);
-		
-		req.getSession().setAttribute("username", userName);
-		RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/navi.jsp");
-		if(dispatch != null)
-			dispatch.forward(req, resp);
-
+			Gson json = new Gson();
+            String returnValue = get("http://openbadges-hci.appspot.com/rest/getinfo/badgesusers");
+            
+            Collection<BadgeForDisplay> badgesForDisplay = new ArrayList<BadgeForDisplay>();
+            
+            Type returnType = new TypeToken<Collection<JoseBadge>>(){}.getType();
+            Collection<JoseBadge> badges = (Collection<JoseBadge>)json.fromJson(returnValue, returnType);
+    		
+            
+        	
+        	
+        	
+        	
+        	Iterator<JoseBadge> it = badges.iterator();
+        	
+        	while(it.hasNext())
+        	{
+        		
+        		 returnType = new TypeToken<OpenBadges_BadgeData>(){}.getType();
+        		 OpenBadges_BadgeData tmp4 = (OpenBadges_BadgeData)json.fromJson(it.next().toString(), returnType);
+        		
+       
+        		BadgeForDisplay badge = new BadgeForDisplay();
+        		badge.description = tmp4.assertion.badge.description;
+        		badge.url = tmp4.imageUrl;
+        		badge.name = tmp4.assertion.badge.name;
+        		badgesForDisplay.add(badge);
+        		
+        		
+        	}
+            	
+            	
+            
+            req.getSession().setAttribute("badges", badgesForDisplay);
+            RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/navi.jsp");
+        	if(dispatch != null)
+        		dispatch.forward(req, resp);
+        
         
 	}
 	

@@ -59,7 +59,6 @@ class OpenBadges_Badge
 class JoseBadge
 {
 	OpenBadges_Badge badge;
-	String recipient;
 }
 
 class OpenBadges_BadgeAssertion
@@ -100,45 +99,45 @@ public class NaviServlet extends HttpServlet {
 		 
 		 
 		
-		Gson json = new Gson();
-		String returnValue = get("http://openbadges-hci.appspot.com/rest/getinfo/badgesusers");
-		
-		Collection<BadgeForDisplay> badgesForDisplay = new ArrayList<BadgeForDisplay>();
-		
-		Type returnType = new TypeToken<Collection<JoseBadge>>(){}.getType();
-		Collection<JoseBadge> badges = (Collection<JoseBadge>)json.fromJson(returnValue, returnType);
-		
-		
-			
-		
-		
-		
-		Iterator<JoseBadge> it = badges.iterator();
-		
-		while(it.hasNext())
-		{
-			
-			JoseBadge badge = (JoseBadge)it.next();
-			if(badge != null && badge != null && badge.recipient.compareToIgnoreCase(userName)==0)
-			{
-				BadgeForDisplay displayBadge = new BadgeForDisplay();
-				displayBadge.description = badge.badge.description;
-				displayBadge.url =  "http://openbadges-hci.appspot.com"+badge.badge.image;
-				displayBadge.name = badge.badge.name;
-				badgesForDisplay.add(displayBadge);
-			}
-			
-		}
-			
-			
-		
-		req.getSession().setAttribute("badges", badgesForDisplay);
-		
-		req.getSession().setAttribute("username", userName);
-		RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/navi.jsp");
-		if(dispatch != null)
-			dispatch.forward(req, resp);
-
+			Gson json = new Gson();
+            String returnValue = get("http://openbadges-hci.appspot.com/rest/getinfo/badgesusers");
+            
+            Collection<BadgeForDisplay> badgesForDisplay = new ArrayList<BadgeForDisplay>();
+            
+            Type returnType = new TypeToken<Collection<JoseBadge>>(){}.getType();
+            Collection<JoseBadge> badges = (Collection<JoseBadge>)json.fromJson(returnValue, returnType);
+    		
+            
+        	
+        	
+        	
+        	
+        	Iterator<JoseBadge> it = badges.iterator();
+        	
+        	while(it.hasNext())
+        	{
+        		
+        		JoseBadge badge = (JoseBadge)it.next();
+        		if(badge != null && badge.badge != null && badge.badge.recipient.compareToIgnoreCase(userName)==0)
+        		{
+	        		BadgeForDisplay displayBadge = new BadgeForDisplay();
+	        		displayBadge.description = badge.badge.description;
+	        		displayBadge.url =  "http://openbadges-hci.appspot.com"+badge.badge.image;
+	        		displayBadge.name = badge.badge.name;
+	        		badgesForDisplay.add(displayBadge);
+        		}
+        		
+        	}
+            	
+            	
+            
+            req.getSession().setAttribute("badges", badgesForDisplay);
+            
+        	req.getSession().setAttribute("username", userName);
+            RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/navi.jsp");
+        	if(dispatch != null)
+        		dispatch.forward(req, resp);
+        
         
 	}
 	

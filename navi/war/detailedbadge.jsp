@@ -22,16 +22,14 @@
 
 	
 		<%
-	String userId = (String) request.getSession().getAttribute("userId");
-    if (userId == null || userId == "") 
-    {
-    		response.sendRedirect("/login.jsp");
-			return;
-    }
-    else
-    {
-    	String username = (String) request.getSession().getAttribute("username");
-    	
+		String username = (String) request.getSession().getAttribute("username");
+	    if (username == null || username == "") 
+	    {
+	    		response.sendRedirect("/login.jsp");
+				return;
+	    }
+	    else
+	    {
     	  
 %>
 
