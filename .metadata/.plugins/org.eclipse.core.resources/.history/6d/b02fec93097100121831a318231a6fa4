@@ -67,9 +67,9 @@ class OpenBadges_BadgeData
 	String lastValidated;
 	String assertionType;
 	String hostedUrl;
-	//Object assertion;
+	Object assertion;
 	//ArrayList<OpenBadges_BadgeAssertion> assertion; 
-	OpenBadges_BadgeAssertion assertion;
+	//OpenBadges_BadgeAssertion assertion;
 	String imageUrl;
 }
 
@@ -125,9 +125,9 @@ public class NaviServlet extends HttpServlet {
             		//resp.getWriter().println("<img src='" +
             		//		tmp4.imageUrl + "'/>");
             		BadgeForDisplay badge = new BadgeForDisplay();
-            		badge.description = tmp4.assertion.badge.description;
+            		badge.description = tmp4.imageUrl;
             		badge.url = tmp4.imageUrl;
-            		badge.name = tmp4.assertion.badge.name;
+            		badge.name = tmp4.imageUrl;
             		badgesForDisplay.add(badge);
             		
             	}

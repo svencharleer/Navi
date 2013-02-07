@@ -38,9 +38,9 @@
 	int i = 0;
 	while(it.hasNext())
 	{
-		BadgeForDisplay badge = (BadgeForDisplay)it.next();
+		
 	%>
- 		<img class="badge<%= i %>" src="<%= badge.url %>" alt="<%= badge.description %>"/>
+ 		<img class="badge<%= i %>" src="<%= ((BadgeForDisplay)it.next()).url.toString() %>"/>
  	<% 
  	i = (i+1)%2;
 	}
