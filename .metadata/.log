@@ -3835,3 +3835,12 @@ java.lang.StringIndexOutOfBoundsException: String index out of range: -1
 	at org.eclipse.jst.jsp.ui.internal.taginfo.JSPJavaJavadocHoverProcessor.getHoverInfo(JSPJavaJavadocHoverProcessor.java:106)
 	at org.eclipse.wst.sse.ui.internal.taginfo.BestMatchHover.getHoverInfo2(BestMatchHover.java:131)
 	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:166)
+
+!ENTRY com.google.appengine.eclipse.core 1 0 2013-02-07 14:24:02.281
+!MESSAGE navi successfully deployed to Google App Engine
+
+!ENTRY com.google.appengine.eclipse.core 1 0 2013-02-07 14:29:08.858
+!MESSAGE navi successfully deployed to Google App Engine
+
+!ENTRY com.google.appengine.eclipse.core 1 0 2013-02-07 14:30:41.326
+!MESSAGE navi successfully deployed to Google App Engine

@@ -51,7 +51,7 @@
 	<div><h2><%= badge.name %></h2>
 	<p><%= badge.description %></p>
  	</div>
- 	<a data-role="button" href="/navi.jsp">Close</a>
+ 	<a data-role="button" data-rel="back" href="/navi.jsp">Close</a>
  	<%
     }
  	%>
