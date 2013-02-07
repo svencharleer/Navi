@@ -1,0 +1,50 @@
+@CHARSET "UTF-8";
+html
+{
+	
+	overflow-y: scroll; /* Keeps page centred in all browsers regardless of content height */
+}
+
+body
+{
+	font-family: Alegreya, Garamond, Georgia, Times, serif;
+	font-size: 160%;
+	color: #555;
+	line-height: 120%;
+}
+#greeting strong
+{
+	text-transform:uppercase;
+}
+
+#greeting 
+{
+	
+}
+
+#badges
+{
+	border:#555 solid 1px;
+	width:98%;
+}
+
+#badges img
+{
+	width:45%;
+			
+}
+
+#badges img.badge0
+{
+	float:left;
+	display:block;
+	margin-left:5%;	
+}
+
+#badges img.badge1
+{
+	
+	margin-left:50%;
+	margin-right:auto;
+	display:block;
+}
