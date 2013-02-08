@@ -1,7 +1,0 @@
-package hci.wespot.navi;
-
-public class BadgeForDisplay {
-	String url;
-	String name;
-	String description;
-}

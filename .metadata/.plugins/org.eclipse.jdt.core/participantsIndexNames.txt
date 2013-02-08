@@ -1,3 +1,0 @@
-INDEX VERSION 1.126
-/Users/sven/Dropbox/_KULeuven/development/navi/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/1908071599.index
-/navi/src
