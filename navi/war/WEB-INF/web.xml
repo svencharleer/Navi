@@ -23,6 +23,14 @@
 		<servlet-name>BadgeOverview</servlet-name>
 		<url-pattern>/badgeoverview</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>BadgeBoard</servlet-name>
+		<servlet-class>hci.wespot.navi.BadgeBoardServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>BadgeBoard</servlet-name>
+		<url-pattern>/badgeboard</url-pattern>
+	</servlet-mapping>
 	
 	<welcome-file-list>
 		<welcome-file>login</welcome-file>
