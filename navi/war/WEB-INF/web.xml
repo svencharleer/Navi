@@ -33,7 +33,7 @@
 	</servlet-mapping>
 	
 	<welcome-file-list>
-		<welcome-file>login</welcome-file>
+		<welcome-file>badgeoverview</welcome-file>
 	</welcome-file-list>
  <servlet>
   <servlet-name>SystemServiceServlet</servlet-name>

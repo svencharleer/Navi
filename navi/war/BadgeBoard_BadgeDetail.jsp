@@ -29,36 +29,26 @@
 	</script>
 </head>
 <body>
-<div data-role="page" data-theme="b">
-	<div data-role="header">
-		CHI13 Badge Board
-	</div>
-<!-- /header -->
+<div data-role="dialog" data-theme="b">
+
 
 	<div data-role="content" style="background:#fff;">
-	<ul data-role="listview" data-inset="true" data-filter="true">
 	<%
 	
 	
-		Collection<BadgeForDisplay> badges = (Collection<BadgeForDisplay>)request.getSession().getAttribute("badges");
-		Iterator it = badges.iterator();
-		while(it.hasNext())
-		{
-			BadgeForDisplay badge = (BadgeForDisplay)it.next();
-	%>
-		<li data-icon="false">
-			<a href="/badgeboard?badgeid=<%= badge.GUID.toString() %>" data-rel="dialog" data-transition="slidedown">
-				<img src="<%= badge.imageUrl %>" alt="<%= badge.name %>"/>
-				<%= badge.name %>
-			</a>
-		</li>
- 		
-	
-	<%  
-	    }
-	%>
-	</ul>
-	<a data-role="button" href="javascript:history.back();">Back</a>
+		BadgeForDisplay badge = (BadgeForDisplay)request.getSession().getAttribute("badge");
+		String backLink = (String)request.getSession().getAttribute("backLink");
+	%> 
+		<img style="width:20%;float:right;" src="<%= badge.imageUrl %>" alt="<%= badge.name %>"/>
+		<div>
+			<h2><%= badge.name %></h2>
+			<p>
+				<%= badge.description %>
+			</p>
+ 		</div>
+ 		<a data-role="button" data-theme="a" data-icon="star" href="javascript:OpenBadges.issue('<%= badge.url %>');">Add to Backpack</a>
+ 		<a data-role="button" href="javascript:history.back();">Close</a>
+ 	
 	</div>
 </div>
 </body>

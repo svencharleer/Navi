@@ -21,7 +21,39 @@ public class BadgeBoardServlet extends HttpServlet {
 		Collection<JoseBadge> badges = getBadgeData();
 		
 		String pUserName = req.getParameter("username");
-		if(pUserName != null && pUserName.compareTo("") != 0)
+		String pGUID = req.getParameter("badgeid");
+		if(pGUID != null && pGUID.compareTo("") != 0)
+		{
+			 Collection<BadgeForDisplay> displayBadges = (Collection<BadgeForDisplay>)req.getSession().getAttribute("badges");
+			 Iterator<BadgeForDisplay> it = displayBadges.iterator();
+			 BadgeForDisplay foundBadge = null;
+			 while(it.hasNext())
+			 {
+				 BadgeForDisplay displayBadge = it.next();
+				 if(displayBadge != null && displayBadge.GUID.toString().compareTo(pGUID) == 0)
+				 {
+					 foundBadge = displayBadge;
+					 break;
+				 }
+			 }
+			 if(foundBadge != null)
+			 {
+				 req.getSession().setAttribute("badge", foundBadge);
+				 req.getSession().setAttribute("backLink", "/BadgeBoard_User.jsp?username=" + pUserName);
+				 
+				 RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/BadgeBoard_BadgeDetail.jsp");
+					if(dispatch != null)
+						dispatch.forward(req, resp);
+			 }
+			 else
+			 {
+				 RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/BadgeBoard.jsp");
+					if(dispatch != null)
+						dispatch.forward(req, resp);
+			 }
+			 
+		}
+		else if(pUserName != null && pUserName.compareTo("") != 0)
 		{
 			pUserName = URLDecoder.decode(pUserName, "UTF-8");
 			//Iterate and generate display badges
@@ -37,6 +69,7 @@ public class BadgeBoardServlet extends HttpServlet {
 	
 				//Add badge to list
 				BadgeForDisplay displayBadge = new BadgeForDisplay();
+				displayBadge.GUID = UUID.randomUUID();
 				displayBadge.description = badge.badge.description;
 				displayBadge.imageUrl =  "http://openbadges-hci.appspot.com"+badge.badge.image;
 				displayBadge.name = badge.badge.name;
