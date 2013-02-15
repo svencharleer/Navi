@@ -56,7 +56,7 @@ class OpenBadges_Badge
 	String criteria;
 	String image;
 	Object issuer;
-	String recipient;
+
 }
 
 class JoseBadge
@@ -64,6 +64,8 @@ class JoseBadge
 	String id; 
 	OpenBadges_Badge badge;
 	String recipient;
+	String connotation;
+	String type;
 }
 
 class OpenBadges_BadgeAssertion

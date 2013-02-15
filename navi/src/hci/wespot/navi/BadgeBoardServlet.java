@@ -74,12 +74,15 @@ public class BadgeBoardServlet extends HttpServlet {
 				displayBadge.imageUrl =  "http://openbadges-hci.appspot.com"+badge.badge.image;
 				displayBadge.name = badge.badge.name;
 				displayBadge.url = "http://openbadges-hci.appspot.com/rest/getinfo/id/" + badge.id;
+				displayBadge.connotation = badge.connotation;
+				displayBadge.type = badge.type;
 				displayBadges.add(displayBadge);
+				
 			}
 			//add to session and bail
 			req.getSession().setAttribute("name", pUserName);
 			req.getSession().setAttribute("badges", displayBadges);
-			RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/BadgeBoard_user.jsp");
+			RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/BadgeBoard_User.jsp");
 			if(dispatch != null)
 				dispatch.forward(req, resp);
 		

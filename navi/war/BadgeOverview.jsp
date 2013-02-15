@@ -43,11 +43,18 @@
 
 	<%
 	
-		Collection<BadgeForDisplay> badges = (Collection<BadgeForDisplay>)request.getSession().getAttribute("badges");
-		Iterator it = badges.iterator();
+		Collection<BadgeForDisplay> positive_indi_badges = (Collection<BadgeForDisplay>)request.getSession().getAttribute("positive_indi_badges");
+		Collection<BadgeForDisplay> positive_group_badges = (Collection<BadgeForDisplay>)request.getSession().getAttribute("positive_group_badges");
+		Collection<BadgeForDisplay> negative_indi_badges = (Collection<BadgeForDisplay>)request.getSession().getAttribute("negative_indi_badges");
+		Collection<BadgeForDisplay> negative_group_badges = (Collection<BadgeForDisplay>)request.getSession().getAttribute("negative_group_badges");
+		Collection<BadgeForDisplay> neutral_indi_badges = (Collection<BadgeForDisplay>)request.getSession().getAttribute("neutral_indi_badges");
+		Collection<BadgeForDisplay> neutral_group_badges = (Collection<BadgeForDisplay>)request.getSession().getAttribute("neutral_group_badges");
+		
+		Iterator<BadgeForDisplay> it = positive_indi_badges.iterator();
 		while(it.hasNext())
 		{
 			BadgeForDisplay badge = (BadgeForDisplay)it.next();
+			
 	%>
 	
 		<div style="width:40%;display:inline-block;margin-top:0px; padding:10px;">
@@ -59,6 +66,9 @@
 	
 	<%  
 	    }
+		
+		
+		
 	%>
 	</div>
 </div>

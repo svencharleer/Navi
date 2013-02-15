@@ -38,6 +38,7 @@
 	
 		BadgeForDisplay badge = (BadgeForDisplay)request.getSession().getAttribute("badge");
 		String backLink = (String)request.getSession().getAttribute("backLink");
+		
 	%> 
 		<img style="width:20%;float:right;" src="<%= badge.imageUrl %>" alt="<%= badge.name %>"/>
 		<div>

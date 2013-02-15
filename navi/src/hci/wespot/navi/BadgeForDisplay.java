@@ -13,4 +13,6 @@ public class BadgeForDisplay implements Serializable{
 	public String url;
 	public String name;
 	public String description;
+	public String connotation;
+	public String type;
 }
