@@ -41,7 +41,7 @@
 		{
 			$('.indi_badges').show();
 			$('.group_badges').hide();
-			
+
 		}
 		
 		function showGroup()
@@ -54,8 +54,8 @@
 		{
 			$('.badgeicon').removeClass('badgeiconSelected');
 			$('#img'+value).addClass('badgeiconSelected');
-			$('#badgedetail').html("Badge description:<br/>")
-			$('#badgedetail').append($('#'+value).html());
+			
+			$('#badgedetail').html($('#'+value).html());
 			
 		}
 	</script>

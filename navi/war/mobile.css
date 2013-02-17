@@ -48,12 +48,29 @@ a:hover
 	width:95%;
 }
 
+#filter
+{
+	font-size:100%;
+}
+
 #badgedetail
 {
 	background-image:url('background-header.png');
 	background-size:100% 100%;
 	min-height:100px;
 	padding:10px;
+}
+
+#badgedetail h2
+{
+	font-size:90%;
+	margin-bottom:0px;
+}
+
+#badgedetail p
+{
+	margin-top:0px;
+	margin-bottom:0px;
 }
 
 /* BADGES */
@@ -68,7 +85,7 @@ a:hover
 
 .badgeicon
 {
-	width:100px;
+	width:80px;
 	display:inline-block;
 	border:solid 1px #FFFFFF;
 	margin:1px;"
