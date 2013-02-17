@@ -7,58 +7,102 @@ html
 
 body
 {
-	font-family: Alegreya, Garamond, Georgia, Times, serif;
-	font-size: 100%;
+	font-family: Arial;
+	font-size: 80%;
 	color: #555;
 	line-height: 120%;
+	padding:0px;
+	margin:0px;
 }
 
 a 
 {
-	color:#b6e64e
+	color:#96b289;
+	text-decoration: none;
 }
 
-#greeting
+a:hover
+{
+	text-decoration: underline;
+}
+
+
+/* BADGE OVERVIEW */
+
+#header
+{
+	margin:auto;
+	width:90%;
+	position:fixed;
+	top:0px;
+	
+	width:100%;
+	background-color: #FFFFFF;
+	
+}
+
+
+#badgedetail, #filter
+{
+	margin:auto;
+	width:95%;
+}
+
+#badgedetail
+{
+	background-image:url('background-header.png');
+	background-size:100% 100%;
+	min-height:100px;
+	padding:10px;
+}
+
+/* BADGES */
+#badgeoverview
+{
+	width:95%;
+	margin-top:135px;
+	margin-left:auto;
+	margin-right:auto;
+	
+}
+
+.badgeicon
+{
+	width:100px;
+	display:inline-block;
+	border:solid 1px #FFFFFF;
+	margin:1px;"
+}
+
+.badgeicon:hover
+{
+	border:dotted 1px #000000;
+}
+
+.badgeiconSelected
+{
+	border: solid 1px #000000;
+}
+
+img
 {
 	width:100%;
 }
 
-#greeting strong
+.badgePositive
 {
-	font-size: 160%;
-	text-transform:uppercase;
-	word-wrap:break-word;
+	/*background:#ccffcc;*/
 }
 
-#greeting 
+
+.badgeNegative
 {
-	font-size: 100%;
+	/*background:#ffcccc*/
 }
 
-#badges
+
+.badgeNeutral
 {
-	border:rgb(235, 235, 235) solid 1px;
-	width:98%;
-	
+	/*background:#ccffff*/
 }
 
-#badges img
-{
-	width:45%;
-			
-}
-
-#badges img.badge0
-{
-	float:left;
-	display:block;
-	margin-left:5%;	
-}
-
-#badges img.badge1
-{
-	
-	margin-left:50%;
-	margin-right:auto;
-	display:block;
-}

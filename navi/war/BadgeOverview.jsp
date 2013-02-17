@@ -16,9 +16,8 @@
 <head>
 <title>CHI13 Badge Overview</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
-	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+	<link rel="stylesheet" href="mobile.css" />
 	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
-	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
 	<script src="http://beta.openbadges.org/issuer.js"></script>
 	<script type="text/javascript">
 		  var _gaq = _gaq || [];
@@ -42,6 +41,7 @@
 		{
 			$('.indi_badges').show();
 			$('.group_badges').hide();
+			
 		}
 		
 		function showGroup()
@@ -52,20 +52,25 @@
 		
 		function showBadgeData(value)
 		{
-			
-			$('#badgedetail').html($('#'+value).html());
+			$('.badgeicon').removeClass('badgeiconSelected');
+			$('#img'+value).addClass('badgeiconSelected');
+			$('#badgedetail').html("Badge description:<br/>")
+			$('#badgedetail').append($('#'+value).html());
 			
 		}
 	</script>
 </head>
 <body>
-<div data-role="page" data-theme="b">
-	<div data-role="header">
-		CHI13 Badge Overview
-	</div>
-<!-- /header -->
 
-	<div data-role="content" style="background:#fff;">
+<div id="header">
+	<div id="filter">View 
+		<a id="showAll" href="javascript:showAll();">All</a> /
+		<a id="showIndi" href="javascript:showIndi();">Individual</a> /
+		<a id="showGroup" href="javascript:showGroup();">Group</a>
+	</div>
+	<div id="badgedetail">Select a badge to view its details</div>
+</div>
+<div id="badgeoverview" >
 
 	<%
 	
@@ -77,13 +82,8 @@
 		Collection<BadgeForDisplay> neutral_group_badges = (Collection<BadgeForDisplay>)request.getSession().getAttribute("neutral_group_badges");
 		
 	%>
-		<div data-role="controlgroup" data-type="horizontal">
-<a href="javascript:showAll();" data-role="button">All</a>
-<a href="javascript:showIndi();" data-role="button">Individual</a>
-<a href="javascript:showGroup();" data-role="button">Group</a>
-</div>
-		<div id="badgedetail" style="width:35%;float:right;">lala</div>
-		<div style="width:60%;">	
+		
+		
 		
 		
 
@@ -98,8 +98,10 @@
 			
 	%>
 
-				<div class="indi_badges" style="width:8%;display:inline-block;background:#ccffcc;margin:0.5px;">
-					<a href="javascript:showBadgeData('<%= badge.GUID %>')" data-rel="popup"><img  style="width:100%" src="<%= badge.imageUrl %>" alt="<%= badge.name %>"/></a>
+				<div id="img<%= badge.GUID %>" class="indi_badges badgeicon badgePositive">
+					<a href="javascript:showBadgeData('<%= badge.GUID %>')">
+						<img src="<%= badge.imageUrl %>" alt="<%= badge.name %>"/>
+					</a>
 				</div>
 				
 				<div id="<%= badge.GUID %>" style="display:none;">
@@ -123,12 +125,14 @@
 			
 	%>
 	
-				<div class="indi_badges" style="width:8%;display:inline-block;background:#ffcccc;margin:0.5px;">
-					<img  style="width:100%" src="<%= badge.imageUrl %>" alt="<%= badge.name %>"/>
+				<div id="img<%= badge.GUID %>" class="indi_badges badgeicon badgeNegative">
+					<a href="javascript:showBadgeData('<%= badge.GUID %>')">
+						<img src="<%= badge.imageUrl %>" alt="<%= badge.name %>"/>
+					</a>
 				</div>
-				<!-- <div style="border-left:solid #000 1px; padding-left:10px;font-size:small;margin-top:10px;">
-					<h2><%= badge.name %> </h2><p><%= badge.description %></p>
-				</div> -->
+				<div id="<%= badge.GUID %>" style="display:none;">
+					<h2><%= badge.name %> </h2><p><%= badge.description %></p>	
+				</div>
 	
 	<%  
 	    }
@@ -143,12 +147,14 @@
 			
 	%>
 	
-				<div class="indi_badges" style="width:8%;display:inline-block;background:#ccffff;margin:0.5px;">
-					<img  style="width:100%" src="<%= badge.imageUrl %>" alt="<%= badge.name %>"/>
+				<div id="img<%= badge.GUID %>" class="indi_badges badgeicon badgeNeutral">
+					<a href="javascript:showBadgeData('<%= badge.GUID %>')">
+						<img src="<%= badge.imageUrl %>" alt="<%= badge.name %>"/>
+					</a>
 				</div>
-				<!-- <div style="border-left:solid #000 1px; padding-left:10px;font-size:small;margin-top:10px;">
-					<h2><%= badge.name %> </h2><p><%= badge.description %></p>
-				</div> -->
+				<div id="<%= badge.GUID %>" style="display:none;">
+					<h2><%= badge.name %> </h2><p><%= badge.description %></p>	
+				</div>
 	
 	<%  
 	    }
@@ -166,12 +172,14 @@
 			
 	%>
 	
-				<div class="group_badges" style="width:8%;display:inline-block;background:#ccffcc;margin:0.5px;">
-					<img  style="width:100%" src="<%= badge.imageUrl %>" alt="<%= badge.name %>"/>
+				<div id="img<%= badge.GUID %>" class="group_badges badgeicon badgePositive" >
+					<a href="javascript:showBadgeData('<%= badge.GUID %>')">
+						<img src="<%= badge.imageUrl %>" alt="<%= badge.name %>"/>
+					</a>
 				</div>
-				<!-- <div style="border-left:solid #000 1px; padding-left:10px;font-size:small;margin-top:10px;">
-					<h2><%= badge.name %> </h2><p><%= badge.description %></p>
-				</div> -->
+				<div id="<%= badge.GUID %>" style="display:none;">
+					<h2><%= badge.name %> </h2><p><%= badge.description %></p>	
+				</div>
 	
 	<%  
 	    }
@@ -183,12 +191,14 @@
 			
 	%>
 	
-				<div class="group_badges" style="width:8%;display:inline-block;background:#ffcccc;margin:0.5px;">
-					<img  style="width:100%" src="<%= badge.imageUrl %>" alt="<%= badge.name %>"/>
+				<div id="img<%= badge.GUID %>" class="group_badges badgeicon badgeNegative">
+					<a href="javascript:showBadgeData('<%= badge.GUID %>')">
+						<img src="<%= badge.imageUrl %>" alt="<%= badge.name %>"/>
+					</a>
 				</div>
-				<!-- <div style="border-left:solid #000 1px; padding-left:10px;font-size:small;margin-top:10px;">
-					<h2><%= badge.name %> </h2><p><%= badge.description %></p>
-				</div> -->
+				<div id="<%= badge.GUID %>" style="display:none;">
+					<h2><%= badge.name %> </h2><p><%= badge.description %></p>	
+				</div>
 	
 	<%  
 	    }
@@ -200,21 +210,22 @@
 			
 	%>
 	
-				<div class="group_badges" style="width:8%;display:inline-block;background:#ccffff;margin:0.5px;">
-					<img  style="width:100%" src="<%= badge.imageUrl %>" alt="<%= badge.name %>"/>
+				<div id="img<%= badge.GUID %>" class="group_badges badgeicon badgeNeutral">
+					<a href="javascript:showBadgeData('<%= badge.GUID %>')">
+						<img src="<%= badge.imageUrl %>" alt="<%= badge.name %>"/>
+					</a>
 				</div>
-				<!-- <div style="border-left:solid #000 1px; padding-left:10px;font-size:small;margin-top:10px;">
-					<h2><%= badge.name %> </h2><p><%= badge.description %></p>
-				</div> -->
+				<div id="<%= badge.GUID %>" style="display:none;">
+					<h2><%= badge.name %> </h2><p><%= badge.description %></p>	
+				</div>
 	
 	<%  
 	    }
 		
 	%>
-		</div>
+	
 		
 		
-	</div>
 </div>
 </body>
 </html>
