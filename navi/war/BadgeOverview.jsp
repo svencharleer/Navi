@@ -31,6 +31,32 @@
 		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 		  })();
 	</script>
+	<script type="text/javascript">
+		function showAll()
+		{
+			$('.indi_badges').show();
+			$('.group_badges').show();
+		}
+		
+		function showIndi()
+		{
+			$('.indi_badges').show();
+			$('.group_badges').hide();
+		}
+		
+		function showGroup()
+		{
+			$('.indi_badges').hide();
+			$('.group_badges').show();
+		}
+		
+		function showBadgeData(value)
+		{
+			
+			$('#badgedetail').html($('#'+value).html());
+			
+		}
+	</script>
 </head>
 <body>
 <div data-role="page" data-theme="b">
@@ -50,26 +76,144 @@
 		Collection<BadgeForDisplay> neutral_indi_badges = (Collection<BadgeForDisplay>)request.getSession().getAttribute("neutral_indi_badges");
 		Collection<BadgeForDisplay> neutral_group_badges = (Collection<BadgeForDisplay>)request.getSession().getAttribute("neutral_group_badges");
 		
+	%>
+		<div data-role="controlgroup" data-type="horizontal">
+<a href="javascript:showAll();" data-role="button">All</a>
+<a href="javascript:showIndi();" data-role="button">Individual</a>
+<a href="javascript:showGroup();" data-role="button">Group</a>
+</div>
+		<div id="badgedetail" style="width:35%;float:right;">lala</div>
+		<div style="width:60%;">	
+		
+		
+
+
+	<%
+		
 		Iterator<BadgeForDisplay> it = positive_indi_badges.iterator();
+		int i = 0;
+		while(it.hasNext())
+		{
+			BadgeForDisplay badge = (BadgeForDisplay)it.next();
+			
+	%>
+
+				<div class="indi_badges" style="width:8%;display:inline-block;background:#ccffcc;margin:0.5px;">
+					<a href="javascript:showBadgeData('<%= badge.GUID %>')" data-rel="popup"><img  style="width:100%" src="<%= badge.imageUrl %>" alt="<%= badge.name %>"/></a>
+				</div>
+				
+				<div id="<%= badge.GUID %>" style="display:none;">
+					<h2><%= badge.name %> </h2><p><%= badge.description %></p>	
+				</div>
+
+
+				
+	
+	<%  
+		i++;
+	    }
+
+	
+
+		
+		it = negative_indi_badges.iterator();
 		while(it.hasNext())
 		{
 			BadgeForDisplay badge = (BadgeForDisplay)it.next();
 			
 	%>
 	
-		<div style="width:40%;display:inline-block;margin-top:0px; padding:10px;">
-				<img style="width:50%;margin-bottom:50px;" src="<%= badge.imageUrl %>" alt="<%= badge.name %>"/>
-				<div style="border-left:solid #000 1px; padding-left:10px;font-size:small;margin-top:10px;">
-					<h2><%= badge.name %> </h2><p><%= badge.description %></p>
+				<div class="indi_badges" style="width:8%;display:inline-block;background:#ffcccc;margin:0.5px;">
+					<img  style="width:100%" src="<%= badge.imageUrl %>" alt="<%= badge.name %>"/>
 				</div>
-	 	</div>	
+				<!-- <div style="border-left:solid #000 1px; padding-left:10px;font-size:small;margin-top:10px;">
+					<h2><%= badge.name %> </h2><p><%= badge.description %></p>
+				</div> -->
+	
+	<%  
+	    }
+	
+		
+
+		
+		it = neutral_indi_badges.iterator();
+		while(it.hasNext())
+		{
+			BadgeForDisplay badge = (BadgeForDisplay)it.next();
+			
+	%>
+	
+				<div class="indi_badges" style="width:8%;display:inline-block;background:#ccffff;margin:0.5px;">
+					<img  style="width:100%" src="<%= badge.imageUrl %>" alt="<%= badge.name %>"/>
+				</div>
+				<!-- <div style="border-left:solid #000 1px; padding-left:10px;font-size:small;margin-top:10px;">
+					<h2><%= badge.name %> </h2><p><%= badge.description %></p>
+				</div> -->
+	
+	<%  
+	    }
+	
+	%>
+	
+		
+	
+	
+	<%
+		it = positive_group_badges.iterator();
+		while(it.hasNext())
+		{
+			BadgeForDisplay badge = (BadgeForDisplay)it.next();
+			
+	%>
+	
+				<div class="group_badges" style="width:8%;display:inline-block;background:#ccffcc;margin:0.5px;">
+					<img  style="width:100%" src="<%= badge.imageUrl %>" alt="<%= badge.name %>"/>
+				</div>
+				<!-- <div style="border-left:solid #000 1px; padding-left:10px;font-size:small;margin-top:10px;">
+					<h2><%= badge.name %> </h2><p><%= badge.description %></p>
+				</div> -->
 	
 	<%  
 	    }
 		
+		it = negative_group_badges.iterator();
+		while(it.hasNext())
+		{
+			BadgeForDisplay badge = (BadgeForDisplay)it.next();
+			
+	%>
+	
+				<div class="group_badges" style="width:8%;display:inline-block;background:#ffcccc;margin:0.5px;">
+					<img  style="width:100%" src="<%= badge.imageUrl %>" alt="<%= badge.name %>"/>
+				</div>
+				<!-- <div style="border-left:solid #000 1px; padding-left:10px;font-size:small;margin-top:10px;">
+					<h2><%= badge.name %> </h2><p><%= badge.description %></p>
+				</div> -->
+	
+	<%  
+	    }
 		
+		it = neutral_group_badges.iterator();
+		while(it.hasNext())
+		{
+			BadgeForDisplay badge = (BadgeForDisplay)it.next();
+			
+	%>
+	
+				<div class="group_badges" style="width:8%;display:inline-block;background:#ccffff;margin:0.5px;">
+					<img  style="width:100%" src="<%= badge.imageUrl %>" alt="<%= badge.name %>"/>
+				</div>
+				<!-- <div style="border-left:solid #000 1px; padding-left:10px;font-size:small;margin-top:10px;">
+					<h2><%= badge.name %> </h2><p><%= badge.description %></p>
+				</div> -->
+	
+	<%  
+	    }
 		
 	%>
+		</div>
+		
+		
 	</div>
 </div>
 </body>

@@ -1,7 +1,12 @@
 package hci.wespot.navi;
 import java.io.IOException;
 import java.util.*;
+import java.util.logging.Level;
 
+import com.google.appengine.api.memcache.ErrorHandlers;
+import com.google.appengine.api.memcache.Expiration;
+import com.google.appengine.api.memcache.MemcacheService;
+import com.google.appengine.api.memcache.MemcacheServiceFactory;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import javax.servlet.*;
@@ -15,9 +20,14 @@ public class BadgeOverviewServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 		
 		//GET call
-		String returnValue = WebHelpers.get("http://openbadges-hci.appspot.com/rest/getinfo/chibadges");
-		//String returnValue = get("http://navi-hci.appspot.com/BADGES.JSON");
-
+		MemcacheService syncCache = MemcacheServiceFactory.getMemcacheService();
+	    syncCache.setErrorHandler(ErrorHandlers.getConsistentLogAndContinue(Level.INFO));
+	    String returnValue = (String) syncCache.get("badgesoverall");
+		if(returnValue == null || returnValue.compareTo("") == 0)
+		{
+			returnValue = WebHelpers.get("http://openbadges-hci.appspot.com/rest/getinfo/chibadges");
+			syncCache.put("badgesoverall", returnValue,Expiration.byDeltaSeconds(3000));
+		}
 		//JSON conversion
 		Gson json = new Gson();
 		Type returnType = new TypeToken<Collection<JoseBadge>>(){}.getType();
@@ -40,7 +50,7 @@ public class BadgeOverviewServlet extends HttpServlet {
 			displayBadge.imageUrl =  "http://openbadges-hci.appspot.com"+badge.badge.image;
 			displayBadge.name = badge.badge.name;
 			displayBadge.url = "http://openbadges-hci.appspot.com/rest/getinfo/id/" + badge.id;
-			
+			displayBadge.GUID = UUID.randomUUID();
 			if(badge.type.compareTo("group") == 0)
 			{
 				if(badge.connotation.compareTo("positive") == 0)
@@ -77,11 +87,11 @@ public class BadgeOverviewServlet extends HttpServlet {
 	
 		//add to session and bail
 		req.getSession().setAttribute("positive_indi_badges", positive_indi_badges);
-		req.getSession().setAttribute("positive_group_badges", positive_indi_badges);
+		req.getSession().setAttribute("positive_group_badges", positive_group_badges);
 		req.getSession().setAttribute("negative_indi_badges", negative_indi_badges);
-		req.getSession().setAttribute("negative_group_badges", negative_indi_badges);
+		req.getSession().setAttribute("negative_group_badges", negative_group_badges);
 		req.getSession().setAttribute("neutral_indi_badges", neutral_indi_badges);
-		req.getSession().setAttribute("neutral_group_badges", neutral_indi_badges);
+		req.getSession().setAttribute("neutral_group_badges", neutral_group_badges);
 		RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/BadgeOverview.jsp");
 		if(dispatch != null)
 			dispatch.forward(req, resp);
