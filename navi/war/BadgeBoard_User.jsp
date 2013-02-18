@@ -12,9 +12,8 @@
 <head>
 <title>CHI13 Badge Overview</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
-	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+	<link rel="stylesheet" href="mobile.css" />
 	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
-	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
 	<script src="http://beta.openbadges.org/issuer.js"></script>
 	<script type="text/javascript">
 		  var _gaq = _gaq || [];
@@ -27,16 +26,34 @@
 		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 		  })();
 	</script>
+	<script type="text/javascript">
+	function showBadgeData(value)
+		{
+			$('.badgeicon').removeClass('badgeiconSelected');
+			$('#img'+value).addClass('badgeiconSelected');
+			
+			$('#badgedetail').html($('#'+value).html());
+
+
+			
+		}
+	</script>
 </head>
 <body>
-<div data-role="page" data-theme="b">
-	<div data-role="header">
-		CHI13 Badge Board
+
+<div id="header">
+	<div id="globalheader">
+		<h2>CHI13 Badge Board</h2>
 	</div>
+	<div id="filter">
+	<a href="javascript:history.back();">Back</a>
+	</div>
+	<div id="badgedetail">Select a badge to view its details</div>
+</div>
 <!-- /header -->
 
-	<div data-role="content" style="background:#fff;">
-	<ul data-role="listview" data-inset="true" data-filter="true">
+<div id="badgeoverview" >
+	
 	<%
 	
 	
@@ -46,20 +63,24 @@
 		{
 			BadgeForDisplay badge = (BadgeForDisplay)it.next();
 	%>
-		<li data-icon="false">
-			<a href="/badgeboard?badgeid=<%= badge.GUID.toString() %>" data-rel="dialog" data-transition="slidedown">
+		<div id="img<%= badge.GUID %>" class="indi_badges badgeicon badgePositive">
+			<a href="javascript:showBadgeData('<%= badge.GUID %>')">
 				<img src="<%= badge.imageUrl %>" alt="<%= badge.name %>"/>
-				<%= badge.name %>
 			</a>
-		</li>
+		</div>
+				
+		<div id="<%= badge.GUID %>" style="display:none;">
+			<a id="backpack" href="javascript:OpenBadges.issue('<%= badge.url %>');"><strong>+</strong> Add to Backpack</a><h2><%= badge.name %> </h2><p><%= badge.description %></p>	
+
+		</div>
  		
 	
 	<%  
 	    }
 	%>
-	</ul>
-	<a data-role="button" href="javascript:history.back();">Back</a>
-	</div>
+	
+	
 </div>
+
 </body>
 </html>

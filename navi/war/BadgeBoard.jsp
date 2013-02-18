@@ -12,9 +12,8 @@
 <head>
 <title>CHI13 Badge Overview</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
-	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+	<link rel="stylesheet" href="mobile.css" />
 	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
-	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
 	<script src="http://beta.openbadges.org/issuer.js"></script>
 	<script type="text/javascript">
 		  var _gaq = _gaq || [];
@@ -29,14 +28,14 @@
 	</script>
 </head>
 <body>
-<div data-role="page" data-theme="b">
-	<div data-role="header">
-		CHI13 Badge Board
+<div>
+	<div id="globalheader">
+		<h2>CHI13 Badge Board</h2>
 	</div>
 <!-- /header -->
 
-	<div data-role="content" style="background:#fff;">
-	<ul data-role="listview" data-inset="true" data-filter="true">
+	<div id="useroverview">
+	<ul>
 	<%
 	
 	
@@ -46,7 +45,7 @@
 		{
 			String name = (String)it.next();
 	%>
-		<li  data-icon="false">
+		<li>
 		<a href="badgeboard?username=<%= URLEncoder.encode(name, "UTF-8") %>"><%= name %></a>
 		</li>
 	

@@ -26,6 +26,63 @@ a:hover
 	text-decoration: underline;
 }
 
+#globalheader
+{
+	height:30px;
+	width:100%;
+	background-color: #000;
+}
+
+#globalheader h2
+{
+	display:inline-block;
+	margin-left:10px;
+	margin-right:auto;
+	margin-top:5px;
+	margin-bottom:0px;
+	color:#fff;
+}
+
+/* USER OVERVIEW */
+
+
+
+#useroverview
+{
+	width:95%;
+	margin-top:10px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+#useroverview ul
+{
+	list-style: none;
+	padding-left: 0px;
+}
+
+#useroverview li
+{
+	display: inline-block;
+	margin:1px;
+}
+
+#useroverview li a
+{
+	display: inline-block;
+	width: 300px;
+	background-color: #efefef;
+	padding:3px;
+	border:solid 1px #FFFFFF;
+
+}
+
+#useroverview li a:hover
+{
+	border:dotted 1px #000000;
+
+}
+
 
 /* BADGE OVERVIEW */
 
@@ -77,7 +134,7 @@ a:hover
 #badgeoverview
 {
 	width:95%;
-	margin-top:135px;
+	margin-top:160px;
 	margin-left:auto;
 	margin-right:auto;
 	
@@ -123,3 +180,14 @@ img
 	/*background:#ccffff*/
 }
 
+
+/* badge detail */
+
+#backpack
+{
+	display:inline-block;
+	background-color: #fff;
+	border:solid 1px #ccc;
+	padding:3px;
+	float:right;
+}

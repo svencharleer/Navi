@@ -63,6 +63,9 @@
 <body>
 
 <div id="header">
+	<div id="globalheader">
+		<h2>CHI13 Badge Board</h2>
+	</div>
 	<div id="filter">View 
 		<a id="showAll" href="javascript:showAll();">All</a> /
 		<a id="showIndi" href="javascript:showIndi();">Individual</a> /
