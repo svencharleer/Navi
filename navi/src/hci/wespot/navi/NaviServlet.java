@@ -68,6 +68,38 @@ class JoseBadge
 	String type;
 }
 
+class JoseStudent
+{
+	String username;
+	String full_count;
+}
+
+class JoseReturn
+{
+	String timestamp;
+	String username;
+	String starttime;
+	String verb;
+	String context;
+	String event_id;
+	String object;
+	String full_count;
+	Object originalrequest;
+}
+
+class JoseReturnWithBadgeData
+{
+	String timestamp;
+	String username;
+	String starttime;
+	String verb;
+	String context;
+	String event_id;
+	String object;
+	String full_count;
+	JoseBadge originalrequest;
+}
+
 class OpenBadges_BadgeAssertion
 {
 	String salt;

@@ -46,7 +46,7 @@
 		<h2>CHI13 Badge Board</h2>
 	</div>
 	<div id="filter">
-	<a href="javascript:history.back();">Back</a>
+	<a href="/badgeboard">Back</a>
 	</div>
 	<div id="badgedetail">Select a badge to view its details</div>
 </div>
@@ -58,6 +58,16 @@
 	
 	
 		Collection<BadgeForDisplay> badges = (Collection<BadgeForDisplay>)request.getSession().getAttribute("badges");
+		if(badges.size() == 0)
+		{
+			%>
+			<h2>No badges!</h2>
+			<%
+		}
+		else
+		{
+	
+	
 		Iterator it = badges.iterator();
 		while(it.hasNext())
 		{
@@ -77,6 +87,7 @@
 	
 	<%  
 	    }
+		}
 	%>
 	
 	

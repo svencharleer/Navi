@@ -3,6 +3,7 @@ package hci.wespot.navi;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -17,12 +18,13 @@ public class WebHelpers {
 			URL url = new URL(urlName);
 			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 			connection.setDoOutput(true);
+			connection.setRequestProperty("Content-Type", "application/json");
 			connection.setRequestMethod("POST");
 			
-			OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
+			OutputStream os = connection.getOutputStream();
 			
-			writer.write(params);
-			writer.close();
+			os.write(params.getBytes());
+			os.close();
 			if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
 				
                 BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
