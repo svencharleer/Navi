@@ -61,33 +61,53 @@
 		if(badges.size() == 0)
 		{
 			%>
-			<h2>No badges!</h2>
+			
 			<%
 		}
 		else
 		{
 	
 	
+			Iterator it = badges.iterator();
+			while(it.hasNext())
+			{
+				BadgeForDisplay badge = (BadgeForDisplay)it.next();
+		%>
+			<div id="img<%= badge.GUID %>" class="indi_badges badgeicon badgePositive">
+				<a href="javascript:showBadgeData('<%= badge.GUID %>')">
+					<img src="<%= badge.imageUrl %>" alt="<%= badge.name %>"/>
+				</a>
+			</div>
+					
+			<div id="<%= badge.GUID %>" style="display:none;">
+				<a id="backpack" href="javascript:OpenBadges.issue('<%= badge.url %>');"><strong>+</strong> Add to Backpack</a><h2><%= badge.name %> </h2><p><%= badge.description %></p>	
+	
+			</div>
+	 		
+	
+	<%  
+	    	}
+		}
+		badges = (Collection<BadgeForDisplay>)request.getSession().getAttribute("notYetAchievedBadges");
 		Iterator it = badges.iterator();
 		while(it.hasNext())
 		{
 			BadgeForDisplay badge = (BadgeForDisplay)it.next();
 	%>
-		<div id="img<%= badge.GUID %>" class="indi_badges badgeicon badgePositive">
+		<div id="img<%= badge.GUID %>" class="indi_badges badgeicon badgePositive notYetAchievedBadge">
 			<a href="javascript:showBadgeData('<%= badge.GUID %>')">
 				<img src="<%= badge.imageUrl %>" alt="<%= badge.name %>"/>
 			</a>
 		</div>
 				
 		<div id="<%= badge.GUID %>" style="display:none;">
-			<a id="backpack" href="javascript:OpenBadges.issue('<%= badge.url %>');"><strong>+</strong> Add to Backpack</a><h2><%= badge.name %> </h2><p><%= badge.description %></p>	
-
+			<h2><%= badge.name %> </h2><p><%= badge.description %></p>
 		</div>
  		
-	
-	<%  
-	    }
-		}
+
+<%  
+    	}
+		
 	%>
 	
 	

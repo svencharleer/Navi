@@ -57,6 +57,11 @@ public class BadgeBoardServlet extends HttpServlet {
 		{
 			Collection<JoseBadge> badges = getBadgeData(pUserName);
 			pUserName = URLDecoder.decode(pUserName, "UTF-8");
+			
+			//get all the badges
+			Collection<JoseBadge> allBadges = BadgeHelpers.getAllBadges();
+			Map<String, BadgeForDisplay> notYetAchievedBadges = getBadgesByName(allBadges);
+			
 			//Iterate and generate display badges
 			Iterator<JoseBadge> it = badges.iterator();
 			Collection<BadgeForDisplay> displayBadges = new ArrayList<BadgeForDisplay>();
@@ -79,10 +84,15 @@ public class BadgeBoardServlet extends HttpServlet {
 				displayBadge.type = badge.type;
 				displayBadges.add(displayBadge);
 				
+				//remove badge from notYetAchievedBadges
+				notYetAchievedBadges.remove(badge.badge.name);
+				
 			}
 			//add to session and bail
 			req.getSession().setAttribute("name", pUserName);
 			req.getSession().setAttribute("badges", displayBadges);
+			Collection<BadgeForDisplay> notYetAchievedBadgesForReturn = new ArrayList<BadgeForDisplay>(notYetAchievedBadges.values());
+			req.getSession().setAttribute("notYetAchievedBadges", notYetAchievedBadgesForReturn);
 			RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/BadgeBoard_User.jsp");
 			if(dispatch != null)
 				dispatch.forward(req, resp);
@@ -162,6 +172,27 @@ public class BadgeBoardServlet extends HttpServlet {
 		return students;
 	}
 	
+	
+	private Map<String, BadgeForDisplay> getBadgesByName(Collection<JoseBadge> badges)
+	{
+		Map<String, BadgeForDisplay> badgesByName = new HashMap<String, BadgeForDisplay>();
+		Iterator<JoseBadge> itr = badges.iterator();
+		while(itr.hasNext())
+		{
+			JoseBadge badge = itr.next();
+			BadgeForDisplay displayBadge = new BadgeForDisplay();
+			displayBadge.GUID = UUID.randomUUID();
+			displayBadge.description = badge.badge.description;
+			displayBadge.imageUrl =  "http://openbadges-hci.appspot.com"+badge.badge.image;
+			displayBadge.name = badge.badge.name;
+			displayBadge.connotation = badge.connotation;
+			displayBadge.type = badge.type;
+			
+			
+			badgesByName.put(badge.badge.name, displayBadge);
+		}
+		return badgesByName;
+	}
 	
 	
 	

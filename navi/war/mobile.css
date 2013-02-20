@@ -183,6 +183,16 @@ img
 
 /* badge detail */
 
+.notYetAchievedBadge
+{
+	 -webkit-filter: blur(1px)grayscale(100%);
+       -moz-filter: blur(1px)grayscale(100%);
+         -o-filter: blur(1px)grayscale(100%);
+        -ms-filter: blur(1px)grayscale(100%);
+            filter: blur(1px)grayscale(100%); 
+           	opacity: 0.5;
+}
+
 #backpack
 {
 	display:inline-block;

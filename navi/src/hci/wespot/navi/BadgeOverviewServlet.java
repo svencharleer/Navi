@@ -20,18 +20,7 @@ public class BadgeOverviewServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 		
 		//GET call
-		MemcacheService syncCache = MemcacheServiceFactory.getMemcacheService();
-	    syncCache.setErrorHandler(ErrorHandlers.getConsistentLogAndContinue(Level.INFO));
-	    String returnValue = (String) syncCache.get("badgesoverall");
-		if(returnValue == null || returnValue.compareTo("") == 0)
-		{
-			returnValue = WebHelpers.get("http://openbadges-hci.appspot.com/rest/getinfo/chibadges");
-			syncCache.put("badgesoverall", returnValue,Expiration.byDeltaSeconds(3000));
-		}
-		//JSON conversion
-		Gson json = new Gson();
-		Type returnType = new TypeToken<Collection<JoseBadge>>(){}.getType();
-		Collection<JoseBadge> badges = (Collection<JoseBadge>)json.fromJson(returnValue, returnType);
+		Collection<JoseBadge> badges = BadgeHelpers.getAllBadges();
 		
 		//Iterate and generate display badges
 		Iterator<JoseBadge> it = badges.iterator();
@@ -98,6 +87,8 @@ public class BadgeOverviewServlet extends HttpServlet {
     	
 		
 	}
+
+	
 	
 	
 	
