@@ -41,6 +41,52 @@
 </head>
 <body>
 
+<!-- facebook code -->
+
+<div id="fb-root"></div>
+<script type="text/javascript">
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '131760930333936', // App ID
+      channelUrl : '//WWW.YOUR_DOMAIN.COM/channel.html', // Channel File
+      status     : true, // check login status
+      cookie     : true, // enable cookies to allow the server to access the session
+      xfbml      : true  // parse XFBML
+    });
+
+    FB.Event.subscribe('auth.statusChange', handleStatusChange);
+  };
+
+  // Load the SDK Asynchronously
+  (function(d){
+     var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement('script'); js.id = id; js.async = true;
+     js.src = "//connect.facebook.net/en_US/all.js";
+     ref.parentNode.insertBefore(js, ref);
+   }(document));
+</script>
+
+
+<script type="text/javascript">
+function publishStory(badgeName, badgeImage) {
+  FB.ui({
+    method: 'feed',
+    name: 'Received a CHI badge!',
+    caption: badgeName,
+    description: 'I have been awarded a badge in the CHI course at KU Leuven. Check out my other badges!',
+    link: document.URL,
+    picture: badgeImage
+  }, 
+  function(response) {
+    console.log('publishStory response: ', response);
+  });
+  return false;
+}
+</script>
+
+<!-- end facebook code -->
+
 <div id="header">
 	<div id="globalheader">
 		<h2>CHI13 Badge Board</h2>
@@ -81,7 +127,7 @@
 				
 		<div id="<%= badge.GUID %>" style="display:none;">
 			<a id="backpack" href="javascript:OpenBadges.issue('<%= badge.url %>');"><strong>+</strong> Add to Backpack</a><h2><%= badge.name %> </h2><p><%= badge.description %></p>	
-
+			<a id="facebookShare" href="javascript:publishStory('<%= badge.name %>','<%= badge.url %>')">Share on Facebook</a>
 		</div>
  		
 	
