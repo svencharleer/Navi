@@ -15,6 +15,7 @@
 	<link rel="stylesheet" href="mobile.css" />
 	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 	<script src="http://beta.openbadges.org/issuer.js"></script>
+	<script type="text/javascript" src="d3/d3.v3.js"></script>
 	<script type="text/javascript">
 		  var _gaq = _gaq || [];
 		  _gaq.push(['_setAccount', 'UA-38498955-1']);

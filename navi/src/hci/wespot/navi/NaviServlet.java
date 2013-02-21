@@ -8,6 +8,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -66,6 +67,7 @@ class JoseBadge
 	String recipient;
 	String connotation;
 	String type;
+	Date timestamp;
 }
 
 class JoseStudent

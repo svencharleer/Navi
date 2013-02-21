@@ -55,7 +55,7 @@ public class BadgeBoardServlet extends HttpServlet {
 		}
 		else if(pUserName != null && pUserName.compareTo("") != 0)
 		{
-			Collection<JoseBadge> badges = getBadgeData(pUserName);
+			Collection<JoseBadge> badges = BadgeHelpers.getBadgeData(pUserName);
 			pUserName = URLDecoder.decode(pUserName, "UTF-8");
 			
 			//get all the badges
@@ -108,11 +108,17 @@ public class BadgeBoardServlet extends HttpServlet {
 			{
 				JoseStudent student = (JoseStudent)it.next();
 				if(student.username.compareTo("") != 0 && !userNames.contains(student.username))
+				{
 					userNames.add(student.username);		
+					//we'll store all badges from every user. see it as cache, but we might want to stop doing that
+					//what we need is a function that lets us get all the badges of one badge type/name
+					BadgeHelpers.populateCountAndDatesPerBadge(student.username);
+				}
 			}
 		
 			//add to session and bail
 			req.getSession().setAttribute("userNames", userNames);
+			Map<String, HashMap<Date, Integer>> test = BadgeHelpers.getCountAndDatesPerBadge();
 			RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/BadgeBoard.jsp");
 			if(dispatch != null)
 				dispatch.forward(req, resp);
@@ -120,39 +126,7 @@ public class BadgeBoardServlet extends HttpServlet {
 		
 	}
 
-	private Collection<JoseBadge> getBadgeData(String studentName) {
-		//GET call
-		MemcacheService syncCache = MemcacheServiceFactory.getMemcacheService();
-	    syncCache.setErrorHandler(ErrorHandlers.getConsistentLogAndContinue(Level.INFO));
-	    String returnValue = (String) syncCache.get(studentName);
-		if(returnValue == null)
-		{
-			returnValue = WebHelpers.post("http://ariadne.cs.kuleuven.be/wespot-dev-ws/rest/getCourses/openBadges/" + studentName + "/awarded", "{\"pag\" : \"0\"}");
-			syncCache.put("", returnValue,Expiration.byDeltaSeconds(300));
-		}
-		
-		//JSON conversion
-		Gson json = new Gson();
-		Type returnType = new TypeToken<Collection<JoseReturn>>(){}.getType();
-		Collection<JoseReturn> response = (Collection<JoseReturn>)json.fromJson(returnValue, returnType);
-		
-		Collection<JoseBadge> badges = new ArrayList<JoseBadge>();
-		//in the originalrequest field, we have again the same data. then within that originalrequest we have the badge
-		//weird.. but jose knows ;)
-		Iterator<JoseReturn> it = response.iterator();
-		while(it.hasNext())
-		{
-			JoseReturn responseValue = it.next();
-			Type responseType = new TypeToken<JoseReturnWithBadgeData>(){}.getType();
-			JoseReturnWithBadgeData responseValueWithBadgeData  = (JoseReturnWithBadgeData) json.fromJson((String)responseValue.originalrequest, responseType);
-			
-			badges.add(responseValueWithBadgeData.originalrequest);
-			
-		}
-		
-		
-		return badges;
-	}
+	
 	
 	private Collection<JoseStudent> getUsers() {
 		//GET call
@@ -171,6 +145,7 @@ public class BadgeBoardServlet extends HttpServlet {
 		Collection<JoseStudent> students = (Collection<JoseStudent>)json.fromJson(returnValue, returnType);
 		return students;
 	}
+	
 	
 	
 	private Map<String, BadgeForDisplay> getBadgesByName(Collection<JoseBadge> badges)
