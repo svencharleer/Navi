@@ -106,7 +106,7 @@ public class BadgeHelpers {
 			
 			DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss Z");
 			DateTime dt = formatter.parseDateTime(responseValueWithBadgeData.starttime);
-			responseValueWithBadgeData.originalrequest.timestamp =  dt.toDate();
+			responseValueWithBadgeData.originalrequest.timestamp =  dt.toDateMidnight().toDate();
 			badges.add(responseValueWithBadgeData.originalrequest);
 			
 		}

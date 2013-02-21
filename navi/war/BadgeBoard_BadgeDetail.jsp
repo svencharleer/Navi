@@ -12,10 +12,10 @@
 <head>
 <title>CHI13 Badge Overview</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
-	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+	<link rel="stylesheet" href="mobile.css" />
 	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
-	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
 	<script src="http://beta.openbadges.org/issuer.js"></script>
+	<script type="text/javascript" src="d3/d3.v3.js"></script>
 	<script type="text/javascript">
 		  var _gaq = _gaq || [];
 		  _gaq.push(['_setAccount', 'UA-38498955-1']);
@@ -29,28 +29,54 @@
 	</script>
 </head>
 <body>
-<div data-role="dialog" data-theme="b">
 
+<div>
+<%
 
-	<div data-role="content" style="background:#fff;">
-	<%
+	BadgeForDisplay badge = (BadgeForDisplay)request.getSession().getAttribute("badge");
+	String backLink = (String)request.getSession().getAttribute("backLink");
+	
+	Map<String, HashMap<Date, Integer>> badgeStats = (Map<String, HashMap<Date, Integer>>)request.getSession().getAttribute("badgeStats");
 	
 	
-		BadgeForDisplay badge = (BadgeForDisplay)request.getSession().getAttribute("badge");
-		String backLink = (String)request.getSession().getAttribute("backLink");
-		
-	%> 
-		<img style="width:20%;float:right;" src="<%= badge.imageUrl %>" alt="<%= badge.name %>"/>
-		<div>
-			<h2><%= badge.name %></h2>
-			<p>
-				<%= badge.description %>
-			</p>
- 		</div>
- 		<a data-role="button" data-theme="a" data-icon="star" href="javascript:OpenBadges.issue('<%= badge.url %>');">Add to Backpack</a>
- 		<a data-role="button" href="javascript:history.back();">Close</a>
- 	
+%> 
+	<div id="header">
+		<div id="globalheader">
+			<h2>CHI13 Badge Board</h2>
+		</div>
+		<div id="filter">
+		<a href="<%= backLink %>">Back</a>
+		</div>
+		<div id="badgedetail">
+		<img style="height:100px;float:right;" src="<%= badge.imageUrl %>" alt="<%= badge.name %>"/>
+			<h2><%= badge.name %> </h2>
+			<p><%= badge.description %></p>
+		</div>
 	</div>
+	<div id="badgeoverview" >
+	<%
+		Iterator it = badgeStats.entrySet().iterator();
+		while(it.hasNext())
+		{
+			Map.Entry entry = (Map.Entry)it.next();
+			%>
+			<%= (String)entry.getKey() %>:
+			<%
+			Map<Date,Integer> entry2 = (Map<Date,Integer>)entry.getValue();
+			Iterator it2 = entry2.entrySet().iterator();
+			while(it2.hasNext())
+			{
+				Map.Entry entry3 = (Map.Entry)it2.next();
+				%>
+				<%= ((Date)entry3.getKey()).toString() %> / <%= entry3.getValue().toString() %> 
+				<%
+			}
+		}
+	%>
+	</div>	
+	
+	
 </div>
+
 </body>
 </html>

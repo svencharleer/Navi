@@ -118,7 +118,8 @@ public class BadgeBoardServlet extends HttpServlet {
 		
 			//add to session and bail
 			req.getSession().setAttribute("userNames", userNames);
-			Map<String, HashMap<Date, Integer>> test = BadgeHelpers.getCountAndDatesPerBadge();
+			Map<String, HashMap<Date, Integer>> badgeStatistics = BadgeHelpers.getCountAndDatesPerBadge();
+			req.getSession().setAttribute("badgeStats", badgeStatistics);
 			RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/BadgeBoard.jsp");
 			if(dispatch != null)
 				dispatch.forward(req, resp);

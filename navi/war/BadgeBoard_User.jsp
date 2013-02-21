@@ -15,7 +15,7 @@
 	<link rel="stylesheet" href="mobile.css" />
 	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 	<script src="http://beta.openbadges.org/issuer.js"></script>
-	<script type="text/javascript" src="d3/d3.v3.js"></script>
+	
 	<script type="text/javascript">
 		  var _gaq = _gaq || [];
 		  _gaq.push(['_setAccount', 'UA-38498955-1']);
@@ -81,8 +81,9 @@
 			</div>
 					
 			<div id="<%= badge.GUID %>" style="display:none;">
-				<a id="backpack" href="javascript:OpenBadges.issue('<%= badge.url %>');"><strong>+</strong> Add to Backpack</a><h2><%= badge.name %> </h2><p><%= badge.description %></p>	
-	
+				<a id="backpack" href="javascript:OpenBadges.issue('<%= badge.url %>');"><strong>+</strong> Add to Backpack</a><h2><%= badge.name %> </h2><p><%= badge.description %></p>
+				<a href="/badgeboard?username=<%= request.getParameter("username") %>&badgeid=<%= badge.GUID %>">View stats</a>	
+				
 			</div>
 	 		
 	
