@@ -46,16 +46,16 @@ public class BadgeHelpers {
 		Collection<JoseBadge> badgesOfUser = BadgeHelpers.getBadgeData(username);
 		
 		MemcacheService syncCache = MemcacheServiceFactory.getMemcacheService();
-		Map<String, HashMap<Date, Integer>> badgesByName = (Map<String, HashMap<Date, Integer>>) syncCache.get("badgesPerNameAndDate");
+		Map<String, HashMap<Long, Integer>> badgesByName = (Map<String, HashMap<Long, Integer>>) syncCache.get("badgesPerNameAndDate");
 		if(badgesByName == null)
-			badgesByName = new HashMap<String, HashMap<Date, Integer>>();
+			badgesByName = new HashMap<String, HashMap<Long, Integer>>();
 		Iterator<JoseBadge> itr = badgesOfUser.iterator();
 		while(itr.hasNext())
 		{
 			JoseBadge badge = itr.next();
 			if(!badgesByName.containsKey(badge.badge.name))
 			{
-				badgesByName.put(badge.badge.name, new HashMap<Date, Integer>());
+				badgesByName.put(badge.badge.name, new HashMap<Long, Integer>());
 			}
 			if(!badgesByName.get(badge.badge.name).containsKey(badge.timestamp))
 			{
@@ -72,10 +72,10 @@ public class BadgeHelpers {
 		
 	}
 	
-	static public Map<String, HashMap<Date, Integer>> getCountAndDatesPerBadge()
+	static public Map<String, HashMap<Long, Integer>> getCountAndDatesPerBadge()
 	{
 		MemcacheService syncCache = MemcacheServiceFactory.getMemcacheService();
-		return (Map<String, HashMap<Date, Integer>>) syncCache.get("badgesPerNameAndDate");
+		return (Map<String, HashMap<Long, Integer>>) syncCache.get("badgesPerNameAndDate");
 	}
 	
 	static public Collection<JoseBadge> getBadgeData(String studentName) {
@@ -106,7 +106,7 @@ public class BadgeHelpers {
 			
 			DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss Z");
 			DateTime dt = formatter.parseDateTime(responseValueWithBadgeData.starttime);
-			responseValueWithBadgeData.originalrequest.timestamp =  dt.toDateMidnight().toDate();
+			responseValueWithBadgeData.originalrequest.timestamp =  dt.toDateMidnight().getMillis();
 			badges.add(responseValueWithBadgeData.originalrequest);
 			
 		}

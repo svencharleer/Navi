@@ -67,7 +67,7 @@ class JoseBadge
 	String recipient;
 	String connotation;
 	String type;
-	Date timestamp;
+	long timestamp;
 }
 
 class JoseStudent
