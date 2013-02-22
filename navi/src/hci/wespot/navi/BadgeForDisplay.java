@@ -15,4 +15,6 @@ public class BadgeForDisplay implements Serializable{
 	public String description;
 	public String connotation;
 	public String type;
+	public long timestamp;
+	public String recipient;
 }

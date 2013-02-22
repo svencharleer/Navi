@@ -49,33 +49,6 @@ class OpenBadges_Groups
 	Collection<OpenBadges_Group> groups;
 }
 
-class OpenBadges_Badge
-{
-	String version;
-	String description;
-	String name;
-	String criteria;
-	String image;
-	Object issuer;
-
-}
-
-class JoseBadge
-{
-	String id; 
-	OpenBadges_Badge badge;
-	String recipient;
-	String connotation;
-	String type;
-	long timestamp;
-}
-
-class JoseStudent
-{
-	String username;
-	String full_count;
-}
-
 class JoseReturn
 {
 	String timestamp;

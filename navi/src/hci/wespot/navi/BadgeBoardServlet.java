@@ -49,7 +49,7 @@ public class BadgeBoardServlet extends HttpServlet {
 				 req.getSession().setAttribute("badge", foundBadge);
 				 req.getSession().setAttribute("backLink", "/BadgeBoard_User.jsp?username=" + pUserName);
 				 
-				 Map<Long, Collection<JoseBadge>> badgeStatistics = repository.getBadgesForDateRangeWithBadgeName(DateTime.now().minusDays(30), DateTime.now(), foundBadge.name);
+				 Map<Long, Collection<BadgeForDisplay>> badgeStatistics = repository.getBadgesForDateRangeWithBadgeName(DateTime.now().minusDays(30), DateTime.now(), foundBadge.name);
 				 req.getSession().setAttribute("badgeStats", badgeStatistics);
 				 
 				 RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/BadgeBoard_BadgeDetail.jsp");
@@ -66,37 +66,29 @@ public class BadgeBoardServlet extends HttpServlet {
 		}
 		else if(pUserName != null && pUserName.compareTo("") != 0)
 		{
-			Collection<JoseBadge> badges = repository.getBadgesForStudent(pUserName);
+			Collection<BadgeForDisplay> badges = repository.getBadgesForStudent(pUserName);
 			pUserName = URLDecoder.decode(pUserName, "UTF-8");
 			
 			//get all the badges
-			Collection<JoseBadge> allBadges = repository.getBadgesDefinitions();
+			Collection<BadgeForDisplay> allBadges = repository.getBadgesDefinitions();
 			Map<String, BadgeForDisplay> notYetAchievedBadges = getBadgesByName(allBadges);
 			
 			//Iterate and generate display badges
-			Iterator<JoseBadge> it = badges.iterator();
+			Iterator<BadgeForDisplay> it = badges.iterator();
 			Collection<BadgeForDisplay> displayBadges = new ArrayList<BadgeForDisplay>();
 			while(it.hasNext())
 			{
-				JoseBadge badge = (JoseBadge)it.next();
+				BadgeForDisplay badge = (BadgeForDisplay)it.next();
 				if(badge.recipient == null)
 					continue;
 				if(badge.recipient != null && badge.recipient.compareTo(pUserName) != 0)
 					continue;
 	
-				//Add badge to list
-				BadgeForDisplay displayBadge = new BadgeForDisplay();
-				displayBadge.GUID = UUID.randomUUID();
-				displayBadge.description = badge.badge.description;
-				displayBadge.imageUrl =  "http://openbadges-hci.appspot.com"+badge.badge.image;
-				displayBadge.name = badge.badge.name;
-				displayBadge.url = "http://openbadges-hci.appspot.com/rest/getinfo/id/" + badge.id;
-				displayBadge.connotation = badge.connotation;
-				displayBadge.type = badge.type;
-				displayBadges.add(displayBadge);
+				
+				displayBadges.add(badge);
 				
 				//remove badge from notYetAchievedBadges
-				notYetAchievedBadges.remove(badge.badge.name);
+				notYetAchievedBadges.remove(badge.name);
 				
 			}
 			//add to session and bail
@@ -140,23 +132,15 @@ public class BadgeBoardServlet extends HttpServlet {
 	
 	
 	
-	private Map<String, BadgeForDisplay> getBadgesByName(Collection<JoseBadge> badges)
+	private Map<String, BadgeForDisplay> getBadgesByName(Collection<BadgeForDisplay> badges)
 	{
 		Map<String, BadgeForDisplay> badgesByName = new HashMap<String, BadgeForDisplay>();
-		Iterator<JoseBadge> itr = badges.iterator();
+		Iterator<BadgeForDisplay> itr = badges.iterator();
 		while(itr.hasNext())
 		{
-			JoseBadge badge = itr.next();
-			BadgeForDisplay displayBadge = new BadgeForDisplay();
-			displayBadge.GUID = UUID.randomUUID();
-			displayBadge.description = badge.badge.description;
-			displayBadge.imageUrl =  "http://openbadges-hci.appspot.com"+badge.badge.image;
-			displayBadge.name = badge.badge.name;
-			displayBadge.connotation = badge.connotation;
-			displayBadge.type = badge.type;
+			BadgeForDisplay badge = itr.next();
 			
-			
-			badgesByName.put(badge.badge.name, displayBadge);
+			badgesByName.put(badge.name, badge);
 		}
 		return badgesByName;
 	}

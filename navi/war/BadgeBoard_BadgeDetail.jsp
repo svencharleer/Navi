@@ -35,10 +35,11 @@
 
 	BadgeForDisplay badge = (BadgeForDisplay)request.getSession().getAttribute("badge");
 	String backLink = (String)request.getSession().getAttribute("backLink");
+	System.out.println("hm");
+	Map<Long, Collection<JoseBadge>> badgeStats = (Map<Long, Collection<JoseBadge>>)request.getSession().getAttribute("badgeStats");
+	System.out.println(badgeStats.toString());
 	
-	Map<String, HashMap<Long, Integer>> badgeStats = (Map<String, HashMap<Long, Integer>>)request.getSession().getAttribute("badgeStats");
-	
-	
+	System.out.println(request.getSession().getAttribute("badgeStats").toString());
 %> 
 	<div id="header">
 		<div id="globalheader">
@@ -60,16 +61,16 @@
 	<%
 	
 		
-			Map<Long,Integer> badgeData = badgeStats.get(badge.name);
 			
-			Iterator it2 = badgeData.entrySet().iterator();
+			
+			Iterator it2 = badgeStats.entrySet().iterator();
 			while(it2.hasNext())
 			{
 				Map.Entry entry3 = (Map.Entry)it2.next();
 				%>
 				{
 				date: "<%= ((Long)entry3.getKey()).toString() %>",
-				count: "<%= entry3.getValue().toString() %>" 
+				count: "<%= ((Collection<JoseBadge>)entry3.getValue()).size() %>" 
 				},
 				<%
 			}

@@ -22,10 +22,10 @@ public class BadgeOverviewServlet extends HttpServlet {
 		BadgeRepository repository = BadgeRepository.getRepository();
 		
 		//GET call
-		Collection<JoseBadge> badges = repository.getBadgesDefinitions();
+		Collection<BadgeForDisplay> badges = repository.getBadgesDefinitions();
 		
 		//Iterate and generate display badges
-		Iterator<JoseBadge> it = badges.iterator();
+		Iterator<BadgeForDisplay> it = badges.iterator();
 		Collection<BadgeForDisplay> positive_indi_badges = new ArrayList<BadgeForDisplay>();
 		Collection<BadgeForDisplay> positive_group_badges = new ArrayList<BadgeForDisplay>();
 		Collection<BadgeForDisplay> negative_indi_badges = new ArrayList<BadgeForDisplay>();
@@ -34,42 +34,37 @@ public class BadgeOverviewServlet extends HttpServlet {
 		Collection<BadgeForDisplay> neutral_group_badges = new ArrayList<BadgeForDisplay>();
 		while(it.hasNext())
 		{
-			JoseBadge badge = (JoseBadge)it.next();
+			BadgeForDisplay badge = (BadgeForDisplay)it.next();
 			
-			BadgeForDisplay displayBadge = new BadgeForDisplay();
-			displayBadge.description = badge.badge.description;
-			displayBadge.imageUrl =  "http://openbadges-hci.appspot.com"+badge.badge.image;
-			displayBadge.name = badge.badge.name;
-			displayBadge.url = "http://openbadges-hci.appspot.com/rest/getinfo/id/" + badge.id;
-			displayBadge.GUID = UUID.randomUUID();
+			
 			if(badge.type.compareTo("group") == 0)
 			{
 				if(badge.connotation.compareTo("positive") == 0)
 				{
-					positive_group_badges.add(displayBadge);
+					positive_group_badges.add(badge);
 				}
 				else if(badge.connotation.compareTo("negative") == 0)
 				{
-					negative_group_badges.add(displayBadge);
+					negative_group_badges.add(badge);
 				}
 				else
 				{
-					neutral_group_badges.add(displayBadge);
+					neutral_group_badges.add(badge);
 				}
 			}
 			else
 			{
 				if(badge.connotation.compareTo("positive") == 0)
 				{
-					positive_indi_badges.add(displayBadge);
+					positive_indi_badges.add(badge);
 				}
 				else if(badge.connotation.compareTo("negative") == 0)
 				{
-					negative_indi_badges.add(displayBadge);
+					negative_indi_badges.add(badge);
 				}
 				else
 				{
-					neutral_indi_badges.add(displayBadge);
+					neutral_indi_badges.add(badge);
 				}
 			}
 			

@@ -1,5 +1,6 @@
 package hci.wespot.navi;
 
+import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -23,13 +24,15 @@ import com.google.appengine.api.memcache.MemcacheServiceFactory;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-public class BadgeRepository {
+public class BadgeRepository implements Serializable {
 
-	Collection<JoseBadge> badgeDefinitions;
-	Map<String, Collection<JoseBadge>> awardedBadgesByStudent;
-	Collection<JoseBadge> awardedBadges;
-	Map<Long, Map<String,Collection<JoseBadge>>> badgeCalendar;
-	Collection<JoseStudent> students;
+	
+	private static final long serialVersionUID = 1L;
+	private Collection<BadgeForDisplay> badgeDefinitions;
+	private Map<String, Collection<BadgeForDisplay>> awardedBadgesByStudent;
+	private Collection<BadgeForDisplay> awardedBadges;
+	private Map<Long, Map<String,Collection<BadgeForDisplay>>> badgeCalendar;
+	private Collection<JoseStudent> students;
 	
 	static public BadgeRepository getRepository()
 	{
@@ -39,13 +42,19 @@ public class BadgeRepository {
 		if(rep == null)
 		{
 			rep = new BadgeRepository();
-			syncCache.put("badgeRepository", rep,Expiration.byDeltaSeconds(900));
+			//syncCache.put("badgeRepository", rep,Expiration.byDeltaSeconds(900));
 		}
 		return rep;
 	}
 	
-	private BadgeRepository()
+	// DO NOT USE, ONLY FOR CACHING PURPOSES PUBLIC
+	public BadgeRepository()
 	{
+		badgeDefinitions = new ArrayList<BadgeForDisplay>();
+		awardedBadges = new ArrayList<BadgeForDisplay>();
+		awardedBadgesByStudent = new HashMap<String, Collection<BadgeForDisplay>>();
+		badgeCalendar = new HashMap<Long, Map<String, Collection<BadgeForDisplay>>>();
+		students = new ArrayList<JoseStudent>();
 		reload();
 	}
 	
@@ -62,20 +71,20 @@ public class BadgeRepository {
 		return students;
 	}
 	
-	public Collection<JoseBadge> getBadgesForStudent(String studentName)
+	public Collection<BadgeForDisplay> getBadgesForStudent(String studentName)
 	{
 		return awardedBadgesByStudent.get(studentName);
 	}
 	
-	public Collection<JoseBadge> getAwardedBadgesForStudent(String studentName) {
+	public Collection<BadgeForDisplay> getAwardedBadgesForStudent(String studentName) {
 		return awardedBadgesByStudent.get(studentName);
 	}
 	
-	public Collection<JoseBadge> getBadgesDefinitions() {
+	public Collection<BadgeForDisplay> getBadgesDefinitions() {
 		return badgeDefinitions;
 	}
 
-	public Map<Long,Collection<JoseBadge>> getBadgesForDateRangeWithBadgeName(DateTime startDate, DateTime endDate, String badgeName)
+	public Map<Long,Collection<BadgeForDisplay>> getBadgesForDateRangeWithBadgeName(DateTime startDate, DateTime endDate, String badgeName)
 	{
 		//convert date range to list of days
 		Collection<Long> dates = new ArrayList<Long>();
@@ -90,7 +99,7 @@ public class BadgeRepository {
 		
 		//for every day check how many badges
 		
-		Map<Long, Collection<JoseBadge>> badgesPerDay = new HashMap<Long, Collection<JoseBadge>>();
+		Map<Long, Collection<BadgeForDisplay>> badgesPerDay = new HashMap<Long, Collection<BadgeForDisplay>>();
 		
 		Iterator<Long> itr = dates.iterator();
 		while(itr.hasNext())
@@ -99,17 +108,45 @@ public class BadgeRepository {
 			Boolean badgeAdded = false;
 			if(badgeCalendar.containsKey(day))
 			{
-				Map<String, Collection<JoseBadge>> allBadgesOfDay = badgeCalendar.get((long)itr.next());
-				if(allBadgesOfDay.containsKey(badgeName))
+				Map<String, Collection<BadgeForDisplay>> allBadgesOfDay = badgeCalendar.get(day);
+				if(allBadgesOfDay != null && allBadgesOfDay.containsKey(badgeName))
 				{
-					badgesPerDay.put(day, new ArrayList<JoseBadge>(allBadgesOfDay.get(badgeName)));
+					badgesPerDay.put(day, new ArrayList<BadgeForDisplay>(allBadgesOfDay.get(badgeName)));
 					badgeAdded = true;
 				}
 			}
 			if(!badgeAdded)
-				badgesPerDay.put(day, new ArrayList<JoseBadge>());
+				badgesPerDay.put(day, new ArrayList<BadgeForDisplay>());
 		}
-		return null;
+		return badgesPerDay;
+	}
+	
+	
+	static public BadgeForDisplay convertToBadgeForDisplay(JoseBadge badge)
+	{
+		BadgeForDisplay displayBadge = new BadgeForDisplay();
+		displayBadge.GUID = UUID.randomUUID();
+		displayBadge.description = badge.badge.description;
+		displayBadge.imageUrl =  "http://openbadges-hci.appspot.com"+badge.badge.image;
+		displayBadge.name = badge.badge.name;
+		displayBadge.url = "http://openbadges-hci.appspot.com/rest/getinfo/id/" + badge.id;
+		displayBadge.connotation = badge.connotation;
+		displayBadge.type = badge.type;
+		displayBadge.timestamp = badge.timestamp;
+		displayBadge.recipient = badge.recipient;
+		return displayBadge;
+	}
+	
+	static public Collection<BadgeForDisplay> converttoBadgeForDisplayCollection(Collection<JoseBadge> badges)
+	{
+		Collection<BadgeForDisplay> returnBadges = new ArrayList<BadgeForDisplay>();
+		Iterator<JoseBadge> itr = badges.iterator();
+		while(itr.hasNext())
+		{
+			JoseBadge badge = itr.next();
+			returnBadges.add(BadgeRepository.convertToBadgeForDisplay(badge));
+		}
+		return returnBadges;
 	}
 	
 	//PRIVATE
@@ -119,7 +156,8 @@ public class BadgeRepository {
 		//JSON conversion
 		Gson json = new Gson();
 		Type returnType = new TypeToken<Collection<JoseBadge>>(){}.getType();
-		badgeDefinitions = (Collection<JoseBadge>)json.fromJson(returnData, returnType);
+		Collection<JoseBadge> joseBadges = (Collection<JoseBadge>)json.fromJson(returnData, returnType);
+		badgeDefinitions = BadgeRepository.converttoBadgeForDisplayCollection(joseBadges);
 	}
 	
 	private void reloadAwardedBadges()
@@ -142,7 +180,7 @@ public class BadgeRepository {
 	}
 	
 	private void reloadBadgeDataForStudent(String studentName) {
-		
+		if(studentName == null || studentName.compareTo("") == 0) return;
 		String returnValue = WebHelpers.post("http://ariadne.cs.kuleuven.be/wespot-dev-ws/rest/getCourses/openBadges/" + studentName + "/awarded", "{\"pag\" : \"0\"}");
 		
 		//JSON conversion
@@ -150,7 +188,7 @@ public class BadgeRepository {
 		Type returnType = new TypeToken<Collection<JoseReturn>>(){}.getType();
 		Collection<JoseReturn> response = (Collection<JoseReturn>)json.fromJson(returnValue, returnType);
 		
-		Collection<JoseBadge> badges = new ArrayList<JoseBadge>();
+		Collection<BadgeForDisplay> badges = new ArrayList<BadgeForDisplay>();
 		//in the originalrequest field, we have again the same data. then within that originalrequest we have the badge
 		//weird.. but jose knows ;)
 		Iterator<JoseReturn> it = response.iterator();
@@ -163,7 +201,7 @@ public class BadgeRepository {
 			DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss Z");
 			DateTime dt = formatter.parseDateTime(responseValueWithBadgeData.starttime);
 			responseValueWithBadgeData.originalrequest.timestamp =  dt.toDateMidnight().getMillis();
-			badges.add(responseValueWithBadgeData.originalrequest);
+			badges.add(BadgeRepository.convertToBadgeForDisplay(responseValueWithBadgeData.originalrequest));
 			
 		}
 		awardedBadgesByStudent.put(studentName, badges);
@@ -175,21 +213,21 @@ public class BadgeRepository {
 	private void reloadBadgeCalendar()
 	{
 
-		Iterator<JoseBadge> itr = awardedBadges.iterator();
+		Iterator<BadgeForDisplay> itr = awardedBadges.iterator();
 		while(itr.hasNext())
 		{
-			JoseBadge badge = itr.next();
+			BadgeForDisplay badge = itr.next();
 			if(!badgeCalendar.containsKey(badge.timestamp))
 			{
-				badgeCalendar.put(badge.timestamp, new HashMap<String, Collection<JoseBadge>>());
+				badgeCalendar.put(badge.timestamp, new HashMap<String, Collection<BadgeForDisplay>>());
 			}
-			if(!badgeCalendar.get(badge.timestamp).containsKey(badge.badge.name))
+			if(!badgeCalendar.get(badge.timestamp).containsKey(badge.name))
 			{
-				badgeCalendar.get(badge.timestamp).put(badge.badge.name, new ArrayList<JoseBadge>());
+				badgeCalendar.get(badge.timestamp).put(badge.name, new ArrayList<BadgeForDisplay>());
 			}
-			Collection<JoseBadge> badges = badgeCalendar.get(badge.timestamp).get(badge.badge.name);
+			Collection<BadgeForDisplay> badges = badgeCalendar.get(badge.timestamp).get(badge.name);
 			badges.add(badge);
-			badgeCalendar.get(badge.timestamp).put(badge.badge.name, badges);
+			badgeCalendar.get(badge.timestamp).put(badge.name, badges);
 			
 		}
 		
