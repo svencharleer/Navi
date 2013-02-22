@@ -28,6 +28,16 @@
 		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 		  })();
 	</script>
+	<script type="text/javascript">
+		function submitDateRange(tmp)
+		{
+			
+			var startDate = new Date($("#datePicker_start").val()).valueOf();
+			var endDate = new Date($("#datePicker_end").val()).valueOf();
+			
+			window.location.href = document.URL + "&startdate="+ startDate + "&enddate="+  endDate;
+		}
+	</script>
 </head>
 <body>
 
@@ -54,6 +64,11 @@
 		</div>
 	</div>
 	<div id="badgeoverview" >
+	<!-- DATE PICKERS -->
+	<label for="startdate">Between</label> <input type="date" name="startdate" id="datePicker_start">
+	<label for="enddate">and</label> <input type="date" name="enddate" id="datePicker_end"> <a href="javascript:submitDateRange();">Go</a> <br/>
+	
+	
 	<script type="text/javascript">
 	var data = [
 	            
@@ -78,20 +93,31 @@
 		
 	%>
 	];
+	
+	var personalBadge =
+		{
+			date: "",
+			count: 0
+			};
+	
+	personalBadge.date = <%= badge.timestamp %>;
+	
 	for(var i = 0; i < data.length;i++)
 	{
+		if(personalBadge.date == data[i].date)
+			personalBadge.count = data[i].count;
 		data[i].date = new Date(data[i].date);
+		
 	}
-	
+	personalBadge.date = new Date(personalBadge.date);
 	
 	var height = 400;
-	var width = 700;
-	var padding = 40;
+	var width = 800;
+	var padding = 20;
 	var svg = d3.select("#badgeoverview")
 				.append("svg")
 				.attr("width",width)
 				.attr("height",height);
-	
 	
 	var xscale = d3.time.scale()
 						.domain([
@@ -99,6 +125,7 @@
 						         d3.max(data, function(d) {return d.date;})
 						         ])
 						.range([padding,width - 2*padding]);
+	
 	var yscale = d3.scale.linear()
 						.domain([0, <%= nrOfStudents %>])
 						.range([height - padding,padding]);
@@ -107,32 +134,49 @@
 	 .x(function(d) { return xscale(d.date); })
 	 .y(function(d) { return yscale(d.count); })
  	 .interpolate("linear");
-	
-	
 
 	var lineGraph = svg.append("path")
 	                            .attr("d", lineFunction(data))
-	                            .attr("stroke", "blue")
-	                            .attr("stroke-width", 2)
-	                            .attr("fill", "none");
+	                            .attr("class", "linegraph")
+	                            ;
+	
+	svg.selectAll("circle")
+		.data([personalBadge])
+  		.enter()
+  		.append("circle")
+  		.attr("class","yourbadge")
+    	.attr("cx", function(d) {return xscale(d.date);})
+    	.attr("cy", function(d) {return yscale(d.count);})
+    	.attr("r",5);
+	
+	
+	/* axes */
+	
+	var xAxis = d3.svg.axis()
+					.scale(xscale)
+				    .orient("bottom")
+				    .tickFormat(d3.time.format('%d/%m'))
+				    .ticks(data.length/2);
+	var yAxis = d3.svg.axis()
+				    .scale(yscale)
+				    .orient("left")
+				    .ticks(10);
 	
 	svg.append("g")
-    .call(d3.svg.axis()
-    			
-                .scale(xscale)
-                .orient("bottom")
-                .tickFormat(d3.time.format('%d/%m'))
-                .ticks(data.length/2))
+    			.call(xAxis)
                 .attr("transform", "translate(0," + (height - padding) + ")")
-                .attr("class", "axis");
+                .attr("class", "axis")
+                .selectAll("text")
+                
+                ;
 	svg.append("g")
-    .call(d3.svg.axis()
-                .scale(yscale)
-                .orient("left")
-                .ticks(10))
+    			.call(yAxis)
                 .attr("transform", "translate(" + padding + ",0)")
-                .attr("class", "axis");;
-	
+                .attr("class", "axis")
+                ;
+    
+                
+     
 	</script>
 	</div>	
 	

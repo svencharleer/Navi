@@ -49,9 +49,31 @@ public class BadgeBoardServlet extends HttpServlet {
 				 req.getSession().setAttribute("badge", foundBadge);
 				 req.getSession().setAttribute("nrOfStudents", students.size());
 				 req.getSession().setAttribute("backLink", "/BadgeBoard_User.jsp?username=" + pUserName);
-				 
-				 TreeMap<Long, Collection<BadgeForDisplay>> badgeStatistics = repository.getBadgesForDateRangeWithBadgeName(DateTime.now().minusDays(30), DateTime.now(), foundBadge.name);
+				 String strStartDate = req.getParameter("startdate");
+				 String strEndDate = req.getParameter("enddate");
+				 DateTime startDate;
+				 DateTime endDate;
+				 if(strStartDate == null || strEndDate == null || strStartDate.compareTo("") == 0 || strEndDate.compareTo("") == 0)
+				 {
+					 startDate = DateTime.now().minusDays(21);
+					 endDate = DateTime.now();
+				 }
+				 else
+				 {
+					 try{
+						 startDate = new DateTime(Long.parseLong(strStartDate));
+						 endDate = new DateTime(Long.parseLong(strEndDate));
+					 }
+					 catch(Exception exc)
+					 {
+						 startDate = DateTime.now().minusDays(21);
+						 endDate = DateTime.now();
+					 }
+				 }
+				 TreeMap<Long, Collection<BadgeForDisplay>> badgeStatistics = repository.getBadgesForDateRangeWithBadgeName(startDate, endDate, foundBadge.name);
 				 req.getSession().setAttribute("badgeStats", badgeStatistics);
+				 req.getSession().setAttribute("startdate", startDate);
+				 req.getSession().setAttribute("enddate", endDate);
 				 
 				 RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/BadgeBoard_BadgeDetail.jsp");
 					if(dispatch != null)

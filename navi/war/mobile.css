@@ -203,6 +203,20 @@ img
 }
 
 /* graph stuff */
+.yourbadge
+{
+	fill: #08ff36;
+	stroke: #1492e2;
+	stroke-width:2px;
+}
+
+.linegraph
+{
+	fill: none;
+	stroke: #1492e2;
+	stroke-width:2px;
+}
+
 .axis path,
 .axis line {
     fill: none;
