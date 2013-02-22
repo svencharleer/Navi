@@ -43,7 +43,7 @@ public class BadgeRepository implements Serializable {
 		if(rep == null)
 		{
 			rep = new BadgeRepository();
-			//syncCache.put("badgeRepository", rep,Expiration.byDeltaSeconds(900));
+			syncCache.put("badgeRepository", rep,Expiration.byDeltaSeconds(900));
 		}
 		return rep;
 	}
