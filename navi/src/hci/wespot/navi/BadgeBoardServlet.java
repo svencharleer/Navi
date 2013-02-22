@@ -47,9 +47,10 @@ public class BadgeBoardServlet extends HttpServlet {
 			 if(foundBadge != null)
 			 {
 				 req.getSession().setAttribute("badge", foundBadge);
+				 req.getSession().setAttribute("nrOfStudents", students.size());
 				 req.getSession().setAttribute("backLink", "/BadgeBoard_User.jsp?username=" + pUserName);
 				 
-				 Map<Long, Collection<BadgeForDisplay>> badgeStatistics = repository.getBadgesForDateRangeWithBadgeName(DateTime.now().minusDays(30), DateTime.now(), foundBadge.name);
+				 TreeMap<Long, Collection<BadgeForDisplay>> badgeStatistics = repository.getBadgesForDateRangeWithBadgeName(DateTime.now().minusDays(30), DateTime.now(), foundBadge.name);
 				 req.getSession().setAttribute("badgeStats", badgeStatistics);
 				 
 				 RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/BadgeBoard_BadgeDetail.jsp");

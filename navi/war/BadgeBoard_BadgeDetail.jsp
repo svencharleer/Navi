@@ -1,3 +1,4 @@
+<%@page import="com.google.apphosting.api.ApiBasePb.Integer32Proto"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.google.appengine.api.users.User" %>
 <%@ page import="com.google.appengine.api.users.UserService" %>
@@ -30,23 +31,21 @@
 </head>
 <body>
 
-<div>
+
 <%
 
 	BadgeForDisplay badge = (BadgeForDisplay)request.getSession().getAttribute("badge");
 	String backLink = (String)request.getSession().getAttribute("backLink");
 	System.out.println("hm");
 	Map<Long, Collection<JoseBadge>> badgeStats = (Map<Long, Collection<JoseBadge>>)request.getSession().getAttribute("badgeStats");
-	System.out.println(badgeStats.toString());
-	
-	System.out.println(request.getSession().getAttribute("badgeStats").toString());
+	int nrOfStudents = (Integer) request.getSession().getAttribute("nrOfStudents");
 %> 
 	<div id="header">
 		<div id="globalheader">
 			<h2>CHI13 Badge Board</h2>
 		</div>
 		<div id="filter">
-		<a href="<%= backLink %>">Back</a>
+			<a href="<%= backLink %>">Back</a>
 		</div>
 		<div id="badgedetail">
 		<!--  <img style="height:100px;float:right;" src="<%= badge.imageUrl %>" alt="<%= badge.name %>"/>  -->
@@ -62,44 +61,52 @@
 	
 		
 			
-			
+			long total = 0;
 			Iterator it2 = badgeStats.entrySet().iterator();
 			while(it2.hasNext())
 			{
 				Map.Entry entry3 = (Map.Entry)it2.next();
+				total += ((Collection<JoseBadge>)entry3.getValue()).size();
 				%>
 				{
-				date: "<%= ((Long)entry3.getKey()).toString() %>",
-				count: "<%= ((Collection<JoseBadge>)entry3.getValue()).size() %>" 
+				date: <%= ((Long)entry3.getKey()).toString() %>,
+				count: "<%= total %>" 
 				},
 				<%
+				
 			}
 		
 	%>
 	];
+	for(var i = 0; i < data.length;i++)
+	{
+		data[i].date = new Date(data[i].date);
+	}
+	
+	
 	var height = 400;
 	var width = 700;
-	var padding = 20;
+	var padding = 40;
 	var svg = d3.select("#badgeoverview")
 				.append("svg")
 				.attr("width",width)
 				.attr("height",height);
 	
 	
-	var xscale = d3.scale.linear()
+	var xscale = d3.time.scale()
 						.domain([
 						         d3.min(data, function(d) {return d.date;}), 
 						         d3.max(data, function(d) {return d.date;})
 						         ])
-						.range([width,0]);
+						.range([padding,width - 2*padding]);
 	var yscale = d3.scale.linear()
-						.domain([d3.min(data, function(d) {return d.count;}), d3.max(data, function(d) {return d.count;})])
-						.range([height,0]);
+						.domain([0, <%= nrOfStudents %>])
+						.range([height - padding,padding]);
 	
 	var lineFunction = d3.svg.line()
-	   .x(function(d) { return xscale(d.date); })
+	 .x(function(d) { return xscale(d.date); })
 	 .y(function(d) { return yscale(d.count); })
- .interpolate("linear");
+ 	 .interpolate("linear");
 	
 	
 
@@ -111,22 +118,26 @@
 	
 	svg.append("g")
     .call(d3.svg.axis()
+    			
                 .scale(xscale)
                 .orient("bottom")
-                .ticks(5))
-                .attr("transform", "translate(0," + (height - padding) + ")");
+                .tickFormat(d3.time.format('%d/%m'))
+                .ticks(data.length/2))
+                .attr("transform", "translate(0," + (height - padding) + ")")
+                .attr("class", "axis");
 	svg.append("g")
     .call(d3.svg.axis()
                 .scale(yscale)
                 .orient("left")
-                .ticks(5))
-                .attr("transform", "translate(" + padding + ",0)");
+                .ticks(10))
+                .attr("transform", "translate(" + padding + ",0)")
+                .attr("class", "axis");;
 	
 	</script>
 	</div>	
 	
 	
-</div>
+
 
 </body>
 </html>

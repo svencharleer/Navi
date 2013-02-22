@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.UUID;
 import java.util.logging.Level;
 
@@ -84,8 +85,9 @@ public class BadgeRepository implements Serializable {
 		return badgeDefinitions;
 	}
 
-	public Map<Long,Collection<BadgeForDisplay>> getBadgesForDateRangeWithBadgeName(DateTime startDate, DateTime endDate, String badgeName)
+	public TreeMap<Long,Collection<BadgeForDisplay>> getBadgesForDateRangeWithBadgeName(DateTime startDate, DateTime endDate, String badgeName)
 	{
+		
 		//convert date range to list of days
 		Collection<Long> dates = new ArrayList<Long>();
 		long start = startDate.toDateMidnight().getMillis();
@@ -99,7 +101,7 @@ public class BadgeRepository implements Serializable {
 		
 		//for every day check how many badges
 		
-		Map<Long, Collection<BadgeForDisplay>> badgesPerDay = new HashMap<Long, Collection<BadgeForDisplay>>();
+		TreeMap<Long, Collection<BadgeForDisplay>> badgesPerDay = new TreeMap<Long, Collection<BadgeForDisplay>>();
 		
 		Iterator<Long> itr = dates.iterator();
 		while(itr.hasNext())
