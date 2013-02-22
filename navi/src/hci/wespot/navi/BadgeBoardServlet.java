@@ -8,6 +8,9 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import javax.servlet.*;
 import javax.servlet.http.*;
+
+import org.joda.time.DateTime;
+
 import java.lang.reflect.Type;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -18,12 +21,17 @@ import java.net.URLEncoder;
 public class BadgeBoardServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 		
-		Collection<JoseStudent> students = getUsers();
+		BadgeRepository repository = BadgeRepository.getRepository();
+		
+		Collection<JoseStudent> students = repository.getStudents();
 		
 		String pUserName = req.getParameter("username");
 		String pGUID = req.getParameter("badgeid");
 		if(pGUID != null && pGUID.compareTo("") != 0)
 		{
+			
+					
+			
 			 Collection<BadgeForDisplay> displayBadges = (Collection<BadgeForDisplay>)req.getSession().getAttribute("badges");
 			 Iterator<BadgeForDisplay> it = displayBadges.iterator();
 			 BadgeForDisplay foundBadge = null;
@@ -41,6 +49,9 @@ public class BadgeBoardServlet extends HttpServlet {
 				 req.getSession().setAttribute("badge", foundBadge);
 				 req.getSession().setAttribute("backLink", "/BadgeBoard_User.jsp?username=" + pUserName);
 				 
+				 Map<Long, Collection<JoseBadge>> badgeStatistics = repository.getBadgesForDateRangeWithBadgeName(DateTime.now().minusDays(30), DateTime.now(), foundBadge.name);
+				 req.getSession().setAttribute("badgeStats", badgeStatistics);
+				 
 				 RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/BadgeBoard_BadgeDetail.jsp");
 					if(dispatch != null)
 						dispatch.forward(req, resp);
@@ -55,11 +66,11 @@ public class BadgeBoardServlet extends HttpServlet {
 		}
 		else if(pUserName != null && pUserName.compareTo("") != 0)
 		{
-			Collection<JoseBadge> badges = BadgeHelpers.getBadgeData(pUserName);
+			Collection<JoseBadge> badges = repository.getBadgesForStudent(pUserName);
 			pUserName = URLDecoder.decode(pUserName, "UTF-8");
 			
 			//get all the badges
-			Collection<JoseBadge> allBadges = BadgeHelpers.getAllBadges();
+			Collection<JoseBadge> allBadges = repository.getBadgesDefinitions();
 			Map<String, BadgeForDisplay> notYetAchievedBadges = getBadgesByName(allBadges);
 			
 			//Iterate and generate display badges
@@ -110,16 +121,12 @@ public class BadgeBoardServlet extends HttpServlet {
 				if(student.username.compareTo("") != 0 && !userNames.contains(student.username))
 				{
 					userNames.add(student.username);		
-					//we'll store all badges from every user. see it as cache, but we might want to stop doing that
-					//what we need is a function that lets us get all the badges of one badge type/name
-					BadgeHelpers.populateCountAndDatesPerBadge(student.username);
+					
 				}
 			}
 		
 			//add to session and bail
 			req.getSession().setAttribute("userNames", userNames);
-			Map<String, HashMap<Long, Integer>> badgeStatistics = BadgeHelpers.getCountAndDatesPerBadge();
-			req.getSession().setAttribute("badgeStats", badgeStatistics);
 			RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/BadgeBoard.jsp");
 			if(dispatch != null)
 				dispatch.forward(req, resp);
@@ -129,23 +136,7 @@ public class BadgeBoardServlet extends HttpServlet {
 
 	
 	
-	private Collection<JoseStudent> getUsers() {
-		//GET call
-		MemcacheService syncCache = MemcacheServiceFactory.getMemcacheService();
-	    syncCache.setErrorHandler(ErrorHandlers.getConsistentLogAndContinue(Level.INFO));
-	    String returnValue = (String) syncCache.get("badgestudents");
-		if(returnValue == null)
-		{
-			returnValue = WebHelpers.post("http://ariadne.cs.kuleuven.be/wespot-dev-ws/rest/getCourses/openBadges", "{\"pag\" : \"0\"}");
-			syncCache.put("badgestudents", returnValue,Expiration.byDeltaSeconds(300));
-		}
-		
-		//JSON conversion
-		Gson json = new Gson();
-		Type returnType = new TypeToken<Collection<JoseStudent>>(){}.getType();
-		Collection<JoseStudent> students = (Collection<JoseStudent>)json.fromJson(returnValue, returnType);
-		return students;
-	}
+	
 	
 	
 	

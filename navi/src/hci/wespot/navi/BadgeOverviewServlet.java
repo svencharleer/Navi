@@ -19,8 +19,10 @@ import java.lang.reflect.Type;
 public class BadgeOverviewServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 		
+		BadgeRepository repository = BadgeRepository.getRepository();
+		
 		//GET call
-		Collection<JoseBadge> badges = BadgeHelpers.getAllBadges();
+		Collection<JoseBadge> badges = repository.getBadgesDefinitions();
 		
 		//Iterate and generate display badges
 		Iterator<JoseBadge> it = badges.iterator();
