@@ -48,7 +48,7 @@ public class BadgeBoardServlet extends HttpServlet {
 			 {
 				 req.getSession().setAttribute("badge", foundBadge);
 				 req.getSession().setAttribute("nrOfStudents", students.size());
-				 req.getSession().setAttribute("backLink", "/BadgeBoard_User.jsp?username=" + pUserName);
+				 req.getSession().setAttribute("backLink", "/badgeboard?username=" + pUserName);
 				 String strStartDate = req.getParameter("startdate");
 				 String strEndDate = req.getParameter("enddate");
 				 DateTime startDate;

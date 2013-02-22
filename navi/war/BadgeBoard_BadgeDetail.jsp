@@ -7,6 +7,7 @@
 <%@ page import="hci.wespot.navi.*" %>
 <%@ page import="java.util.*" %>
 <%@ page import="java.net.URLEncoder" %>
+<%@ page import="org.joda.time.DateTime" %>
 
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
@@ -35,7 +36,7 @@
 			var startDate = new Date($("#datePicker_start").val()).valueOf();
 			var endDate = new Date($("#datePicker_end").val()).valueOf();
 			
-			window.location.href = document.URL + "&startdate="+ startDate + "&enddate="+  endDate;
+			window.location.href ="badgeboard?username=<%= request.getParameter("username") %>&badgeid=<%= request.getParameter("badgeid") %>&startdate="+ startDate + "&enddate="+  endDate;
 		}
 	</script>
 </head>
@@ -65,8 +66,13 @@
 	</div>
 	<div id="badgeoverview" >
 	<!-- DATE PICKERS -->
-	<label for="startdate">Between</label> <input type="date" name="startdate" id="datePicker_start">
-	<label for="enddate">and</label> <input type="date" name="enddate" id="datePicker_end"> <a href="javascript:submitDateRange();">Go</a> <br/>
+	<%
+		DateTime startDate = (DateTime)request.getSession().getAttribute("startdate");
+		DateTime endDate = (DateTime)request.getSession().getAttribute("enddate");
+		
+	%>
+	<label for="startdate">Between</label> <input type="date" name="startdate" id="datePicker_start" value="<%= startDate.getYear() %>-<%= String.format("%02d",startDate.getMonthOfYear()) %>-<%= String.format("%02d", startDate.getDayOfMonth()) %>">
+	<label for="enddate">and</label> <input type="date" name="enddate" id="datePicker_end" value="<%= endDate.getYear() %>-<%= String.format("%02d",endDate.getMonthOfYear()) %>-<%= String.format("%02d", endDate.getDayOfMonth()) %>"> <a href="javascript:submitDateRange();">Go</a> <br/>
 	
 	
 	<script type="text/javascript">
