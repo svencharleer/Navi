@@ -164,11 +164,38 @@ public class BadgeRepository implements Serializable {
 	
 	private void reloadAwardedBadges()
 	{
-		Iterator<JoseStudent> itr = students.iterator();
+		/*Iterator<JoseStudent> itr = students.iterator();
 		while(itr.hasNext())
 		{
 			JoseStudent student = (JoseStudent)itr.next();
 			reloadBadgeDataForStudent(student.username);
+		}*/
+		String returnValue =  WebHelpers.get("http://ariadne.cs.kuleuven.be/wespot-dev-ws/rest/getChiBadges");
+		//JSON conversion
+		Gson json = new Gson();
+		Type returnType = new TypeToken<Collection<JoseReturn>>(){}.getType();
+		Collection<JoseReturn> response = (Collection<JoseReturn>)json.fromJson(returnValue, returnType);
+		
+		//in the originalrequest field, we have again the same data. then within that originalrequest we have the badge
+		//weird.. but jose knows ;)
+		Iterator<JoseReturn> it = response.iterator();
+		while(it.hasNext())
+		{
+			JoseReturn responseValue = it.next();
+			Type responseType = new TypeToken<JoseReturnWithBadgeData>(){}.getType();
+			JoseReturnWithBadgeData responseValueWithBadgeData  = (JoseReturnWithBadgeData) json.fromJson((String)responseValue.originalrequest, responseType);
+			
+			DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss Z");
+			DateTime dt = formatter.parseDateTime(responseValueWithBadgeData.starttime);
+			responseValueWithBadgeData.originalrequest.timestamp =  dt.toDateMidnight().getMillis();
+			
+			BadgeForDisplay badge = BadgeRepository.convertToBadgeForDisplay(responseValueWithBadgeData.originalrequest);
+			awardedBadges.add(badge);
+			
+			String studentName = responseValueWithBadgeData.originalrequest.recipient;
+			if(!awardedBadgesByStudent.containsKey(studentName))
+				awardedBadgesByStudent.put(studentName, new ArrayList<BadgeForDisplay>());
+			awardedBadgesByStudent.get(studentName).add(badge);
 		}
 	}
 	

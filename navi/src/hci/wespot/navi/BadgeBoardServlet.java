@@ -95,24 +95,27 @@ public class BadgeBoardServlet extends HttpServlet {
 			//get all the badges
 			Collection<BadgeForDisplay> allBadges = repository.getBadgesDefinitions();
 			Map<String, BadgeForDisplay> notYetAchievedBadges = getBadgesByName(allBadges);
-			
-			//Iterate and generate display badges
-			Iterator<BadgeForDisplay> it = badges.iterator();
 			Collection<BadgeForDisplay> displayBadges = new ArrayList<BadgeForDisplay>();
-			while(it.hasNext())
+			//Iterate and generate display badges
+			if(badges != null)
 			{
-				BadgeForDisplay badge = (BadgeForDisplay)it.next();
-				if(badge.recipient == null)
-					continue;
-				if(badge.recipient != null && badge.recipient.compareTo(pUserName) != 0)
-					continue;
-	
+				Iterator<BadgeForDisplay> it = badges.iterator();
 				
-				displayBadges.add(badge);
-				
-				//remove badge from notYetAchievedBadges
-				notYetAchievedBadges.remove(badge.name);
-				
+				while(it.hasNext())
+				{
+					BadgeForDisplay badge = (BadgeForDisplay)it.next();
+					if(badge.recipient == null)
+						continue;
+					if(badge.recipient != null && badge.recipient.compareTo(pUserName) != 0)
+						continue;
+		
+					
+					displayBadges.add(badge);
+					
+					//remove badge from notYetAchievedBadges
+					notYetAchievedBadges.remove(badge.name);
+					
+				}
 			}
 			//add to session and bail
 			req.getSession().setAttribute("name", pUserName);
