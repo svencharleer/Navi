@@ -2,6 +2,7 @@ package hci.wespot.navi;
 import java.io.IOException;
 import java.util.*;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.google.appengine.api.memcache.*;
 import com.google.gson.Gson;
@@ -19,9 +20,16 @@ import java.net.URLEncoder;
 
 @SuppressWarnings("serial")
 public class BadgeBoardServlet extends HttpServlet {
+	
+
+
+		
+	
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 		
 		BadgeRepository repository = BadgeRepository.getRepository();
+	
+		
 		
 		Collection<JoseStudent> students = repository.getStudents();
 		
@@ -106,8 +114,8 @@ public class BadgeBoardServlet extends HttpServlet {
 					BadgeForDisplay badge = (BadgeForDisplay)it.next();
 					if(badge.recipient == null)
 						continue;
-					if(badge.recipient != null && badge.recipient.compareTo(pUserName) != 0)
-						continue;
+					//if(badge.recipient != null && badge.recipient.compareTo(pUserName) != 0)
+					//	continue;
 		
 					
 					displayBadges.add(badge);

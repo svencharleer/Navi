@@ -57,7 +57,7 @@ public class WebHelpers {
 	{
 		try 
 		{
-			URL url = new URL(urlName);
+			URL url = new URL(urlName + "#"+System.currentTimeMillis());
 			
 				
                 BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));

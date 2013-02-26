@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.UUID;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
@@ -27,6 +28,7 @@ import com.google.gson.reflect.TypeToken;
 
 public class BadgeRepository implements Serializable {
 
+	private static final Logger log = Logger.getLogger(BadgeRepository.class.getName());
 	
 	private static final long serialVersionUID = 1L;
 	private Collection<BadgeForDisplay> badgeDefinitions;
@@ -42,6 +44,7 @@ public class BadgeRepository implements Serializable {
 	    BadgeRepository rep = (BadgeRepository) syncCache.get("badgeRepository");
 		if(rep == null)
 		{
+			//log.log(Level.WARNING, "Cache not found");
 			rep = new BadgeRepository();
 			syncCache.put("badgeRepository", rep,Expiration.byDeltaSeconds(900));
 		}
@@ -171,6 +174,7 @@ public class BadgeRepository implements Serializable {
 			reloadBadgeDataForStudent(student.username);
 		}*/
 		String returnValue =  WebHelpers.get("http://ariadne.cs.kuleuven.be/wespot-dev-ws/rest/getChiBadges");
+		//log.log(Level.WARNING, returnValue);
 		//JSON conversion
 		Gson json = new Gson();
 		Type returnType = new TypeToken<Collection<JoseReturn>>(){}.getType();
@@ -192,7 +196,7 @@ public class BadgeRepository implements Serializable {
 			BadgeForDisplay badge = BadgeRepository.convertToBadgeForDisplay(responseValueWithBadgeData.originalrequest);
 			awardedBadges.add(badge);
 			
-			String studentName = responseValueWithBadgeData.originalrequest.recipient;
+			String studentName = responseValueWithBadgeData.username;
 			if(!awardedBadgesByStudent.containsKey(studentName))
 				awardedBadgesByStudent.put(studentName, new ArrayList<BadgeForDisplay>());
 			awardedBadgesByStudent.get(studentName).add(badge);
@@ -200,7 +204,7 @@ public class BadgeRepository implements Serializable {
 	}
 	
 	private void reloadStudents() {
-		String returnValue = WebHelpers.post("http://ariadne.cs.kuleuven.be/wespot-dev-ws/rest/getCourses/openBadges", "{\"pag\" : \"0\"}");
+		String returnValue = WebHelpers.post("http://ariadne.cs.kuleuven.be/wespot-dev-ws/rest/getCourses/chikul13", "{\"pag\" : \"0\"}");
 		
 		//JSON conversion
 		Gson json = new Gson();
@@ -210,7 +214,7 @@ public class BadgeRepository implements Serializable {
 	
 	private void reloadBadgeDataForStudent(String studentName) {
 		if(studentName == null || studentName.compareTo("") == 0) return;
-		String returnValue = WebHelpers.post("http://ariadne.cs.kuleuven.be/wespot-dev-ws/rest/getCourses/openBadges/" + studentName + "/awarded", "{\"pag\" : \"0\"}");
+		String returnValue = WebHelpers.post("http://ariadne.cs.kuleuven.be/wespot-dev-ws/rest/getCourses/chikul13/" + studentName + "/awarded", "{\"pag\" : \"0\"}");
 		
 		//JSON conversion
 		Gson json = new Gson();
