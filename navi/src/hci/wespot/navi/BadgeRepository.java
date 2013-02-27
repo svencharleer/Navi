@@ -5,9 +5,11 @@ import java.lang.reflect.Type;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.UUID;
@@ -35,7 +37,7 @@ public class BadgeRepository implements Serializable {
 	private Map<String, Collection<BadgeForDisplay>> awardedBadgesByStudent;
 	private Collection<BadgeForDisplay> awardedBadges;
 	private Map<Long, Map<String,Collection<BadgeForDisplay>>> badgeCalendar;
-	private Collection<JoseStudent> students;
+	private List<JoseStudent> students;
 	
 	static public BadgeRepository getRepository()
 	{
@@ -208,8 +210,10 @@ public class BadgeRepository implements Serializable {
 		
 		//JSON conversion
 		Gson json = new Gson();
-		Type returnType = new TypeToken<Collection<JoseStudent>>(){}.getType();
-		students = (Collection<JoseStudent>)json.fromJson(returnValue, returnType);
+		Type returnType = new TypeToken<List<JoseStudent>>(){}.getType();
+		students = (List<JoseStudent>)json.fromJson(returnValue, returnType);
+		Collections.sort(students);
+		
 	}
 	
 	private void reloadBadgeDataForStudent(String studentName) {
