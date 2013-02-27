@@ -65,6 +65,7 @@
 		</div>
 	</div>
 	<div id="badgeoverview" >
+		<div id="graphoptions">
 	<!-- DATE PICKERS -->
 	<%
 		DateTime startDate = (DateTime)request.getSession().getAttribute("startdate");
@@ -73,7 +74,9 @@
 	%>
 	<label for="startdate">Between</label> <input type="date" name="startdate" id="datePicker_start" value="<%= startDate.getYear() %>-<%= String.format("%02d",startDate.getMonthOfYear()) %>-<%= String.format("%02d", startDate.getDayOfMonth()) %>">
 	<label for="enddate">and</label> <input type="date" name="enddate" id="datePicker_end" value="<%= endDate.getYear() %>-<%= String.format("%02d",endDate.getMonthOfYear()) %>-<%= String.format("%02d", endDate.getDayOfMonth()) %>"> <a href="javascript:submitDateRange();">Go</a> <br/>
-	
+	</div>
+	<div id="graphs">
+	</div>
 	
 	<script type="text/javascript">
 	var data = [
@@ -120,21 +123,23 @@
 	var height = 400;
 	var width = 800;
 	var padding = 20;
-	var svg = d3.select("#badgeoverview")
+	var margin = 20;
+	var svg = d3.select("#graphs")
 				.append("svg")
-				.attr("width",width)
-				.attr("height",height);
+				.attr("class", "svgChart")
+				.attr("viewBox", "0 0 " + width + " " + height)
+				.attr("preserveAspectRatio", "xMinYMin meet");
 	
 	var xscale = d3.time.scale()
 						.domain([
 						         d3.min(data, function(d) {return d.date;}), 
 						         d3.max(data, function(d) {return d.date;})
 						         ])
-						.range([padding,width - 2*padding]);
+						.range([padding+margin,width - 2*padding - margin]);
 	
 	var yscale = d3.scale.linear()
 						.domain([0, <%= nrOfStudents %>])
-						.range([height - padding,padding]);
+						.range([height - padding -2*margin,padding]);
 	
 	var lineFunction = d3.svg.line()
 	 .x(function(d) { return xscale(d.date); })
@@ -163,21 +168,36 @@
 				    .orient("bottom")
 				    .tickFormat(d3.time.format('%d/%m'))
 				    .ticks(data.length/2);
+	svg.append("text")      // text label for the x axis
+        	.attr("x", width/2 )
+        	.attr("y", height -margin )
+        	.style("text-anchor", "middle")
+        	.text("Date");
+
 	var yAxis = d3.svg.axis()
 				    .scale(yscale)
 				    .orient("left")
 				    .ticks(10);
+	svg.append("text")
+	        //
+	        .attr("transform", "rotate(-90)")
+	        .attr("x",  -height/2)
+	        .attr("y", 0)
+
+	        .attr("dy", "1em")
+	        .style("text-anchor", "middle")
+	        .text("# students with badge");
 	
 	svg.append("g")
     			.call(xAxis)
-                .attr("transform", "translate(0," + (height - padding) + ")")
+                .attr("transform", "translate("+ margin +"," + (height - padding - 2*margin) + ")")
                 .attr("class", "axis")
                 .selectAll("text")
                 
                 ;
 	svg.append("g")
     			.call(yAxis)
-                .attr("transform", "translate(" + padding + ",0)")
+                .attr("transform", "translate(" + (padding + margin) + ",0)")
                 .attr("class", "axis")
                 ;
     
