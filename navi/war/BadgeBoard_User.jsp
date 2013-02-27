@@ -104,6 +104,7 @@
 				
 		<div id="<%= badge.GUID %>" style="display:none;">
 			<h2><%= badge.name %> </h2><p><%= badge.description %></p>
+			<a href="/badgeboard?username=<%= request.getParameter("username") %>&badgeid=<%= badge.GUID %>">View stats</a>	
 		</div>
  		
 

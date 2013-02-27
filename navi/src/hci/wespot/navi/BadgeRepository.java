@@ -38,6 +38,8 @@ public class BadgeRepository implements Serializable {
 	private Collection<BadgeForDisplay> awardedBadges;
 	private Map<Long, Map<String,Collection<BadgeForDisplay>>> badgeCalendar;
 	private List<JoseStudent> students;
+	private Collection<BadgeForDisplay> biweeklyBadges;
+	private Collection<BadgeForDisplay> globalBadges;
 	
 	static public BadgeRepository getRepository()
 	{
@@ -61,6 +63,8 @@ public class BadgeRepository implements Serializable {
 		awardedBadgesByStudent = new HashMap<String, Collection<BadgeForDisplay>>();
 		badgeCalendar = new HashMap<Long, Map<String, Collection<BadgeForDisplay>>>();
 		students = new ArrayList<JoseStudent>();
+		biweeklyBadges = new ArrayList<BadgeForDisplay>();
+		globalBadges = new ArrayList<BadgeForDisplay>();
 		reload();
 	}
 	
@@ -70,6 +74,7 @@ public class BadgeRepository implements Serializable {
 		reloadStudents();
 		reloadAwardedBadges();
 		reloadBadgeCalendar();
+		reloadBadgeDefinitionsPerWeek();
 	}
 	
 	public Collection<JoseStudent> getStudents()
@@ -90,6 +95,15 @@ public class BadgeRepository implements Serializable {
 		return badgeDefinitions;
 	}
 
+	public Collection<BadgeForDisplay> getBiWeeklyBadges() {
+		return biweeklyBadges;
+	}
+	
+	public Collection<BadgeForDisplay> getGlobalBadges() {
+		return globalBadges;
+	}
+	
+	
 	public TreeMap<Long,Collection<BadgeForDisplay>> getBadgesForDateRangeWithBadgeName(DateTime startDate, DateTime endDate, String badgeName)
 	{
 		
@@ -165,6 +179,30 @@ public class BadgeRepository implements Serializable {
 		Type returnType = new TypeToken<Collection<JoseBadge>>(){}.getType();
 		Collection<JoseBadge> joseBadges = (Collection<JoseBadge>)json.fromJson(returnData, returnType);
 		badgeDefinitions = BadgeRepository.converttoBadgeForDisplayCollection(joseBadges);
+	}
+	
+	private void reloadBadgeDefinitionsPerWeek()
+	{
+		Iterator<BadgeForDisplay> iterator = badgeDefinitions.iterator();
+		while(iterator.hasNext())
+		{
+			BadgeForDisplay badge = iterator.next();
+			if(badge.description.contains("biweekly"))
+			{
+				for(int i =0; i < 7;i++)
+				{
+					BadgeForDisplay b = new BadgeForDisplay(badge);
+					b.name = badge.name + i;
+					b.biweek = i;
+					biweeklyBadges.add(b);
+				}
+			}
+			else
+			{
+				badge.biweek = -1;
+				globalBadges.add(badge);
+			}
+		}
 	}
 	
 	private void reloadAwardedBadges()

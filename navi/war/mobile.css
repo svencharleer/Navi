@@ -31,6 +31,7 @@ a:hover
 	height:30px;
 	width:100%;
 	background-color: #000;
+	
 }
 
 #globalheader h2
@@ -92,9 +93,10 @@ a:hover
 	width:90%;
 	position:fixed;
 	top:0px;
-	
+	z-index: 10;
 	width:100%;
 	background-color: #FFFFFF;
+
 	
 }
 
@@ -183,9 +185,10 @@ img
 
 /* badge detail */
 
-.notYetAchievedBadge
+.notYetAchievedBadge img
 {
-	 -webkit-filter: blur(1px)grayscale(100%);
+
+	-webkit-filter: blur(1px)grayscale(100%);
        -moz-filter: blur(1px)grayscale(100%);
          -o-filter: blur(1px)grayscale(100%);
         -ms-filter: blur(1px)grayscale(100%);

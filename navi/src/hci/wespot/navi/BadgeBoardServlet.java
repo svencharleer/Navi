@@ -37,23 +37,52 @@ public class BadgeBoardServlet extends HttpServlet {
 		String pGUID = req.getParameter("badgeid");
 		if(pGUID != null && pGUID.compareTo("") != 0)
 		{
-			
+			pUserName = URLDecoder.decode(pUserName, "UTF-8");
+			Collection<BadgeForDisplay> displayBadges = repository.getBadgesForStudent(pUserName);
 					
 			
-			 Collection<BadgeForDisplay> displayBadges = (Collection<BadgeForDisplay>)req.getSession().getAttribute("badges");
-			 Iterator<BadgeForDisplay> it = displayBadges.iterator();
+			
 			 BadgeForDisplay foundBadge = null;
-			 while(it.hasNext())
+			 boolean studentHasBadge = false;
+			 
+			 if(displayBadges != null)
 			 {
-				 BadgeForDisplay displayBadge = it.next();
-				 if(displayBadge != null && displayBadge.GUID.toString().compareTo(pGUID) == 0)
+				 Iterator<BadgeForDisplay> it = displayBadges.iterator();
+				 
+				 while(it.hasNext())
 				 {
-					 foundBadge = displayBadge;
-					 break;
+					 BadgeForDisplay displayBadge = it.next();
+					 if(displayBadge != null && displayBadge.GUID.toString().compareTo(pGUID) == 0)
+					 {
+						 foundBadge = displayBadge;
+						 studentHasBadge = true;
+						 break;
+					 }
 				 }
 			 }
+			 if(foundBadge == null)
+			 {
+				 displayBadges = repository.getBiWeeklyBadges();
+				 displayBadges.addAll(repository.getGlobalBadges());
+				 Iterator<BadgeForDisplay> it = displayBadges.iterator();
+				 foundBadge = null;
+				 while(it.hasNext())
+				 {
+					 BadgeForDisplay displayBadge = it.next();
+					 if(displayBadge != null && displayBadge.GUID.toString().compareTo(pGUID) == 0)
+					 {
+						 foundBadge = displayBadge;
+						 break;
+					 }
+				 }
+			 }
+			 
 			 if(foundBadge != null)
 			 {
+				 if(studentHasBadge)
+					 req.getSession().setAttribute("awarded", true);
+				 else
+					 req.getSession().setAttribute("awarded", false);	
 				 req.getSession().setAttribute("badge", foundBadge);
 				 req.getSession().setAttribute("nrOfStudents", students.size());
 				 req.getSession().setAttribute("backLink", "/badgeboard?username=" + pUserName);
@@ -97,11 +126,13 @@ public class BadgeBoardServlet extends HttpServlet {
 		}
 		else if(pUserName != null && pUserName.compareTo("") != 0)
 		{
-			Collection<BadgeForDisplay> badges = repository.getBadgesForStudent(pUserName);
 			pUserName = URLDecoder.decode(pUserName, "UTF-8");
+			Collection<BadgeForDisplay> badges = repository.getBadgesForStudent(pUserName);
+			
 			
 			//get all the badges
-			Collection<BadgeForDisplay> allBadges = repository.getBadgesDefinitions();
+			Collection<BadgeForDisplay> allBadges = repository.getBiWeeklyBadges();
+			allBadges.addAll(repository.getGlobalBadges());
 			Map<String, BadgeForDisplay> notYetAchievedBadges = getBadgesByName(allBadges);
 			Collection<BadgeForDisplay> displayBadges = new ArrayList<BadgeForDisplay>();
 			//Iterate and generate display badges

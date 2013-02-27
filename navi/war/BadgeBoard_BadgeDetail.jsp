@@ -46,6 +46,7 @@
 <%
 
 	BadgeForDisplay badge = (BadgeForDisplay)request.getSession().getAttribute("badge");
+	boolean awarded = (Boolean)request.getSession().getAttribute("awarded");
 	String backLink = (String)request.getSession().getAttribute("backLink");
 	System.out.println("hm");
 	Map<Long, Collection<JoseBadge>> badgeStats = (Map<Long, Collection<JoseBadge>>)request.getSession().getAttribute("badgeStats");
@@ -109,8 +110,14 @@
 			count: 0
 			};
 	
+	<%
+	if(awarded)
+	{
+	%>
 	personalBadge.date = <%= badge.timestamp %>;
-	
+	<% 
+	}
+	%>
 	for(var i = 0; i < data.length;i++)
 	{
 		if(personalBadge.date == data[i].date)
@@ -118,7 +125,14 @@
 		data[i].date = new Date(data[i].date);
 		
 	}
+	<%
+	if(awarded)
+	{
+	%>
 	personalBadge.date = new Date(personalBadge.date);
+	<% 
+	}
+	%>
 	
 	var height = 400;
 	var width = 800;
@@ -150,7 +164,10 @@
 	                            .attr("d", lineFunction(data))
 	                            .attr("class", "linegraph")
 	                            ;
-	
+	<%
+	if(awarded)
+	{
+	%>
 	svg.selectAll("circle")
 		.data([personalBadge])
   		.enter()
@@ -160,6 +177,9 @@
     	.attr("cy", function(d) {return yscale(d.count);})
     	.attr("r",5);
 	
+	<% 
+	}
+	%>
 	
 	/* axes */
 	
