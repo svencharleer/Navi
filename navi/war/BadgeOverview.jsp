@@ -103,7 +103,7 @@
 
 				<div id="img<%= badge.GUID %>" class="indi_badges badgeicon badgePositive">
 					<a href="javascript:showBadgeData('<%= badge.GUID %>')">
-						<img src="<%= badge.imageUrl %>" alt="<%= badge.name %>"/>
+						<img class="iconitself" src="<%= badge.imageUrl %>" alt="<%= badge.name %>"/>
 					</a>
 				</div>
 				
@@ -130,7 +130,7 @@
 	
 				<div id="img<%= badge.GUID %>" class="indi_badges badgeicon badgeNegative">
 					<a href="javascript:showBadgeData('<%= badge.GUID %>')">
-						<img src="<%= badge.imageUrl %>" alt="<%= badge.name %>"/>
+						<img class="iconitself" src="<%= badge.imageUrl %>" alt="<%= badge.name %>"/>
 					</a>
 				</div>
 				<div id="<%= badge.GUID %>" style="display:none;">
@@ -152,7 +152,7 @@
 	
 				<div id="img<%= badge.GUID %>" class="indi_badges badgeicon badgeNeutral">
 					<a href="javascript:showBadgeData('<%= badge.GUID %>')">
-						<img src="<%= badge.imageUrl %>" alt="<%= badge.name %>"/>
+						<img class="iconitself" src="<%= badge.imageUrl %>" alt="<%= badge.name %>"/>
 					</a>
 				</div>
 				<div id="<%= badge.GUID %>" style="display:none;">
@@ -177,7 +177,7 @@
 	
 				<div id="img<%= badge.GUID %>" class="group_badges badgeicon badgePositive" >
 					<a href="javascript:showBadgeData('<%= badge.GUID %>')">
-						<img src="<%= badge.imageUrl %>" alt="<%= badge.name %>"/>
+						<img class="iconitself" src="<%= badge.imageUrl %>" alt="<%= badge.name %>"/>
 					</a>
 				</div>
 				<div id="<%= badge.GUID %>" style="display:none;">
@@ -196,7 +196,7 @@
 	
 				<div id="img<%= badge.GUID %>" class="group_badges badgeicon badgeNegative">
 					<a href="javascript:showBadgeData('<%= badge.GUID %>')">
-						<img src="<%= badge.imageUrl %>" alt="<%= badge.name %>"/>
+						<img class="iconitself" src="<%= badge.imageUrl %>" alt="<%= badge.name %>"/>
 					</a>
 				</div>
 				<div id="<%= badge.GUID %>" style="display:none;">
@@ -215,7 +215,7 @@
 	
 				<div id="img<%= badge.GUID %>" class="group_badges badgeicon badgeNeutral">
 					<a href="javascript:showBadgeData('<%= badge.GUID %>')">
-						<img src="<%= badge.imageUrl %>" alt="<%= badge.name %>"/>
+						<img class="iconitself" src="<%= badge.imageUrl %>" alt="<%= badge.name %>"/>
 					</a>
 				</div>
 				<div id="<%= badge.GUID %>" style="display:none;">

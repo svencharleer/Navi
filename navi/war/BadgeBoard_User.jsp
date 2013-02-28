@@ -94,7 +94,7 @@
 					//FIGURE OUT IF USER HAS BADGE, IF SO, SHOW COLORED BADGE
 					boolean awarded = false;
 					Iterator<BadgeForDisplay> subIt = badge.awardedBadges.iterator();
-					
+					int count = badge.awardedBadges.size();
 					while(subIt.hasNext())
 					{
 						 
@@ -117,13 +117,18 @@
 					}
 					%>
 						<div id="img<%= badge.GUID %>" class="<%= cssClass %>">
+							<div class="badgeCount"><img src="person.png"/><span><%= count %></span></div>
+							<div>
 							<a href="javascript:showBadgeData('<%= badge.GUID %>')">
-								<img src="<%= badge.imageUrl %>" alt="<%= badge.name %>"/>
+								<img class="iconitself" src="<%= badge.imageUrl %>" alt="<%= badge.name %>"/>
 							</a>
+							</div>
+							
 						</div>
 								
 						<div id="<%= badge.GUID %>" style="display:none;">
 							<h2><%= badge.name %> </h2><p><%= badge.description %></p> <%= button %>
+							<p><%= count %> people have been awarded this badge.</p>
 							<a href="/badgeboard?username=<%= URLEncoder.encode(username, "UTF-8") %>&badgeid=<%= badge.GUID %>">View stats</a>	
 							
 						</div>
