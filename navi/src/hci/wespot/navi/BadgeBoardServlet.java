@@ -38,54 +38,43 @@ public class BadgeBoardServlet extends HttpServlet {
 		if(pGUID != null && pGUID.compareTo("") != 0)
 		{
 			pUserName = URLDecoder.decode(pUserName, "UTF-8");
-			Collection<BadgeForDisplay> displayBadges = repository.getBadgesForStudent(pUserName);
-					
+			boolean studentHasBadge = false;
+			BadgeForDisplay foundBadge = null;
+			
+			Collection<BadgeForDisplay> badges = repository.getBadgesDefinitions();
+			Iterator<BadgeForDisplay> itr = badges.iterator();
+			while(itr.hasNext()){
+				BadgeForDisplay b = itr.next();
+				if(b != null && b.GUID.toString().compareTo(pGUID) == 0)
+				{
+					//found correct badge, but does student have badge?
+					foundBadge = b;
+					Iterator<BadgeForDisplay> subIt = b.awardedBadges.iterator();
+					while(subIt.hasNext())
+					{
+						BadgeForDisplay subB = subIt.next();
+						if(subB.username.compareTo(pUserName) == 0)
+						{
+							//student found! he has badge!
+							studentHasBadge = true;
+							foundBadge = subB;
+						}
+					}
+					break;
+				}
+				
+			}
 			
 			
-			 BadgeForDisplay foundBadge = null;
-			 boolean studentHasBadge = false;
-			 
-			 if(displayBadges != null)
-			 {
-				 Iterator<BadgeForDisplay> it = displayBadges.iterator();
-				 
-				 while(it.hasNext())
-				 {
-					 BadgeForDisplay displayBadge = it.next();
-					 if(displayBadge != null && displayBadge.GUID.toString().compareTo(pGUID) == 0)
-					 {
-						 foundBadge = displayBadge;
-						 studentHasBadge = true;
-						 break;
-					 }
-				 }
-			 }
-			 if(foundBadge == null)
-			 {
-				 displayBadges = repository.getBiWeeklyBadges();
-				 displayBadges.addAll(repository.getGlobalBadges());
-				 Iterator<BadgeForDisplay> it = displayBadges.iterator();
-				 foundBadge = null;
-				 while(it.hasNext())
-				 {
-					 BadgeForDisplay displayBadge = it.next();
-					 if(displayBadge != null && displayBadge.GUID.toString().compareTo(pGUID) == 0)
-					 {
-						 foundBadge = displayBadge;
-						 break;
-					 }
-				 }
-			 }
-			 
+			
 			 if(foundBadge != null)
 			 {
-				 if(studentHasBadge)
-					 req.getSession().setAttribute("awarded", true);
-				 else
-					 req.getSession().setAttribute("awarded", false);	
+				 req.getSession().setAttribute("awarded", studentHasBadge);
 				 req.getSession().setAttribute("badge", foundBadge);
 				 req.getSession().setAttribute("nrOfStudents", students.size());
 				 req.getSession().setAttribute("backLink", "/badgeboard?username=" + pUserName);
+				 
+				 //start/end date
 				 String strStartDate = req.getParameter("startdate");
 				 String strEndDate = req.getParameter("enddate");
 				 DateTime startDate;
@@ -107,6 +96,7 @@ public class BadgeBoardServlet extends HttpServlet {
 						 endDate = DateTime.now();
 					 }
 				 }
+				 
 				 TreeMap<Long, Collection<BadgeForDisplay>> badgeStatistics = repository.getBadgesForDateRangeWithBadgeName(startDate, endDate, foundBadge.name);
 				 req.getSession().setAttribute("badgeStats", badgeStatistics);
 				 req.getSession().setAttribute("startdate", startDate);
@@ -118,16 +108,14 @@ public class BadgeBoardServlet extends HttpServlet {
 			 }
 			 else
 			 {
-				 RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/BadgeBoard.jsp");
-					if(dispatch != null)
-						dispatch.forward(req, resp);
+				 resp.sendRedirect("/badgeboard");
+				
 			 }
 			 
 		}
 		else if(pUserName != null && pUserName.compareTo("") != 0)
 		{
 			pUserName = URLDecoder.decode(pUserName, "UTF-8");
-			Collection<BadgeForDisplay> badges = repository.getBadgesForStudent(pUserName);
 			
 			
 			//wondering how this will hold up. it's everyone's badges. everyone ,... that's a lot. might wanna filter one way or another

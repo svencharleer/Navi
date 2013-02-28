@@ -124,7 +124,7 @@
 								
 						<div id="<%= badge.GUID %>" style="display:none;">
 							<h2><%= badge.name %> </h2><p><%= badge.description %></p> <%= button %>
-							<a href="/badgeboard?username=<%= username %>&badgeid=<%= badge.GUID %>">View stats</a>	
+							<a href="/badgeboard?username=<%= URLEncoder.encode(username, "UTF-8") %>&badgeid=<%= badge.GUID %>">View stats</a>	
 							
 						</div>
 				 	<%  
