@@ -158,7 +158,7 @@ public class BadgeRepository implements Serializable {
 		BadgeForDisplay displayBadge = new BadgeForDisplay();
 		displayBadge.GUID = UUID.randomUUID();
 		displayBadge.description = badge.badge.description;
-		displayBadge.imageUrl =  "http://openbadges-hci.appspot.com"+badge.badge.image;
+		displayBadge.imageUrl =  badge.badge.image;
 		displayBadge.name = badge.badge.name;
 		displayBadge.url = "http://openbadges-hci.appspot.com/rest/getinfo/id/" + badge.id;
 		displayBadge.connotation = badge.connotation;
