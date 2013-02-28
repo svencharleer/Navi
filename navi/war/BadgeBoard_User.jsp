@@ -6,6 +6,7 @@
 <%@ page import="hci.wespot.navi.*" %>
 <%@ page import="java.util.*" %>
 <%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.util.Map.*" %>
 
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
@@ -58,7 +59,8 @@
 	<%
 	
 	
-		Collection<BadgeForDisplay> badges = (Collection<BadgeForDisplay>)request.getSession().getAttribute("badges");
+		TreeMap<Integer,List<BadgeForDisplay>> badges = (TreeMap<Integer,List<BadgeForDisplay>>)request.getSession().getAttribute("badges");
+		String username = request.getParameter("username");
 		if(badges.size() == 0)
 		{
 			%>
@@ -67,50 +69,71 @@
 		}
 		else
 		{
-	
-	
-			Iterator it = badges.iterator();
-			while(it.hasNext())
-			{
-				BadgeForDisplay badge = (BadgeForDisplay)it.next();
-		%>
-			<div id="img<%= badge.GUID %>" class="indi_badges badgeicon badgePositive">
-				<a href="javascript:showBadgeData('<%= badge.GUID %>')">
-					<img src="<%= badge.imageUrl %>" alt="<%= badge.name %>"/>
-				</a>
-			</div>
+			//iterate over weeks (start with global)
+			Iterator<Entry<Integer, List<BadgeForDisplay>>> itr = badges.entrySet().iterator();
+			while(itr.hasNext()){
+				Entry<Integer, List<BadgeForDisplay>> entry = itr.next();
+				//DRAW WEEK/GLOBAL
+				if(entry.getKey() == -1)
+				{
+					%>
+					<h2>Global Badges</h2> 
+					 <% 
+				}
+				else
+				{
+					%>
+					<h2> Period <%= entry.getKey()+1 %></h2>
+					<%
+				}
+				//LOOP OVER BADGES
+				Iterator<BadgeForDisplay> it = entry.getValue().iterator();
+				while(it.hasNext())
+				{
+					BadgeForDisplay badge = (BadgeForDisplay)it.next();	
+					//FIGURE OUT IF USER HAS BADGE, IF SO, SHOW COLORED BADGE
+					boolean awarded = false;
+					Iterator<BadgeForDisplay> subIt = badge.awardedBadges.iterator();
 					
-			<div id="<%= badge.GUID %>" style="display:none;">
-				<a id="backpack" href="javascript:OpenBadges.issue('<%= badge.url %>');"><strong>+</strong> Add to Backpack</a><h2><%= badge.name %> </h2><p><%= badge.description %></p>
-				<a href="/badgeboard?username=<%= request.getParameter("username") %>&badgeid=<%= badge.GUID %>">View stats</a>	
+					while(subIt.hasNext())
+					{
+						 
+						BadgeForDisplay awardedBadge = subIt.next();
+						
+						if(awardedBadge.username.compareTo(username) == 0)
+							awarded = true;
+					}
+					String cssClass;
+					String button;
+					if(awarded)
+					{
+						 cssClass = "indi_badges badgeicon badgePositive";
+						 button = "<a id=\"backpack\" href=\"javascript:OpenBadges.issue('" + badge.url +"');\"><strong>+</strong> Add to Backpack</a>";
+					}
+					else
+					{
+						 cssClass = "indi_badges badgeicon badgePositive notYetAchievedBadge";
+						 button = "";
+					}
+					%>
+						<div id="img<%= badge.GUID %>" class="<%= cssClass %>">
+							<a href="javascript:showBadgeData('<%= badge.GUID %>')">
+								<img src="<%= badge.imageUrl %>" alt="<%= badge.name %>"/>
+							</a>
+						</div>
+								
+						<div id="<%= badge.GUID %>" style="display:none;">
+							<h2><%= badge.name %> </h2><p><%= badge.description %></p> <%= button %>
+							<a href="/badgeboard?username=<%= username %>&badgeid=<%= badge.GUID %>">View stats</a>	
+							
+						</div>
+				 	<%  
+		    	}
 				
-			</div>
-	 		
-	
-	<%  
-	    	}
+				%><hr/> <%
+				
+			}
 		}
-		badges = (Collection<BadgeForDisplay>)request.getSession().getAttribute("notYetAchievedBadges");
-		Iterator it = badges.iterator();
-		while(it.hasNext())
-		{
-			BadgeForDisplay badge = (BadgeForDisplay)it.next();
-	%>
-		<div id="img<%= badge.GUID %>" class="indi_badges badgeicon badgePositive notYetAchievedBadge">
-			<a href="javascript:showBadgeData('<%= badge.GUID %>')">
-				<img src="<%= badge.imageUrl %>" alt="<%= badge.name %>"/>
-			</a>
-		</div>
-				
-		<div id="<%= badge.GUID %>" style="display:none;">
-			<h2><%= badge.name %> </h2><p><%= badge.description %></p>
-			<a href="/badgeboard?username=<%= request.getParameter("username") %>&badgeid=<%= badge.GUID %>">View stats</a>	
-		</div>
- 		
-
-<%  
-    	}
-		
 	%>
 	
 	

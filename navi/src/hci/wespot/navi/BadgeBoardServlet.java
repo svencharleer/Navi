@@ -130,37 +130,9 @@ public class BadgeBoardServlet extends HttpServlet {
 			Collection<BadgeForDisplay> badges = repository.getBadgesForStudent(pUserName);
 			
 			
-			//get all the badges
-			Collection<BadgeForDisplay> allBadges = repository.getBiWeeklyBadges();
-			allBadges.addAll(repository.getGlobalBadges());
-			Map<String, BadgeForDisplay> notYetAchievedBadges = getBadgesByName(allBadges);
-			Collection<BadgeForDisplay> displayBadges = new ArrayList<BadgeForDisplay>();
-			//Iterate and generate display badges
-			if(badges != null)
-			{
-				Iterator<BadgeForDisplay> it = badges.iterator();
-				
-				while(it.hasNext())
-				{
-					BadgeForDisplay badge = (BadgeForDisplay)it.next();
-					if(badge.recipient == null)
-						continue;
-					//if(badge.recipient != null && badge.recipient.compareTo(pUserName) != 0)
-					//	continue;
-		
-					
-					displayBadges.add(badge);
-					
-					//remove badge from notYetAchievedBadges
-					notYetAchievedBadges.remove(badge.name);
-					
-				}
-			}
-			//add to session and bail
+			//wondering how this will hold up. it's everyone's badges. everyone ,... that's a lot. might wanna filter one way or another
+			req.getSession().setAttribute("badges",repository.getAllBadgesByPeriodType());
 			req.getSession().setAttribute("name", pUserName);
-			req.getSession().setAttribute("badges", displayBadges);
-			Collection<BadgeForDisplay> notYetAchievedBadgesForReturn = new ArrayList<BadgeForDisplay>(notYetAchievedBadges.values());
-			req.getSession().setAttribute("notYetAchievedBadges", notYetAchievedBadgesForReturn);
 			RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/BadgeBoard_User.jsp");
 			if(dispatch != null)
 				dispatch.forward(req, resp);

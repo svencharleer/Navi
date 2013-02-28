@@ -38,8 +38,9 @@ public class BadgeRepository implements Serializable {
 	private Collection<BadgeForDisplay> awardedBadges;
 	private Map<Long, Map<String,Collection<BadgeForDisplay>>> badgeCalendar;
 	private List<JoseStudent> students;
-	private Collection<BadgeForDisplay> biweeklyBadges;
-	private Collection<BadgeForDisplay> globalBadges;
+	private List<BadgeForDisplay> biweeklyBadges;
+	private List<BadgeForDisplay> globalBadges;
+	private TreeMap<Integer, List<BadgeForDisplay>> allBadgeDefinitionsByPeriod;
 	
 	static public BadgeRepository getRepository()
 	{
@@ -65,6 +66,7 @@ public class BadgeRepository implements Serializable {
 		students = new ArrayList<JoseStudent>();
 		biweeklyBadges = new ArrayList<BadgeForDisplay>();
 		globalBadges = new ArrayList<BadgeForDisplay>();
+		allBadgeDefinitionsByPeriod = new TreeMap<Integer, List<BadgeForDisplay>>();
 		reload();
 	}
 	
@@ -72,9 +74,11 @@ public class BadgeRepository implements Serializable {
 	{
 		reloadBadgeDefinitions();
 		reloadStudents();
+		
+		reloadBadgeDefinitionsPerWeek();
 		reloadAwardedBadges();
 		reloadBadgeCalendar();
-		reloadBadgeDefinitionsPerWeek();
+		
 	}
 	
 	public Collection<JoseStudent> getStudents()
@@ -95,11 +99,17 @@ public class BadgeRepository implements Serializable {
 		return badgeDefinitions;
 	}
 
-	public Collection<BadgeForDisplay> getBiWeeklyBadges() {
+	public List<BadgeForDisplay> getBiWeeklyBadges() {
 		return biweeklyBadges;
 	}
 	
-	public Collection<BadgeForDisplay> getGlobalBadges() {
+	public TreeMap<Integer, List<BadgeForDisplay>> getAllBadgesByPeriodType()
+	{
+		return allBadgeDefinitionsByPeriod;
+		
+	}
+	
+	public List<BadgeForDisplay> getGlobalBadges() {
 		return globalBadges;
 	}
 	
@@ -143,7 +153,7 @@ public class BadgeRepository implements Serializable {
 	}
 	
 	
-	static public BadgeForDisplay convertToBadgeForDisplay(JoseBadge badge)
+	static public BadgeForDisplay convertToBadgeForDisplay(JoseBadge badge, String username)
 	{
 		BadgeForDisplay displayBadge = new BadgeForDisplay();
 		displayBadge.GUID = UUID.randomUUID();
@@ -155,6 +165,7 @@ public class BadgeRepository implements Serializable {
 		displayBadge.type = badge.type;
 		displayBadge.timestamp = badge.timestamp;
 		displayBadge.recipient = badge.recipient;
+		displayBadge.username = username;
 		return displayBadge;
 	}
 	
@@ -165,10 +176,12 @@ public class BadgeRepository implements Serializable {
 		while(itr.hasNext())
 		{
 			JoseBadge badge = itr.next();
-			returnBadges.add(BadgeRepository.convertToBadgeForDisplay(badge));
+			returnBadges.add(BadgeRepository.convertToBadgeForDisplay(badge, ""));
 		}
 		return returnBadges;
 	}
+	
+	
 	
 	//PRIVATE
 	private void reloadBadgeDefinitions()
@@ -183,7 +196,14 @@ public class BadgeRepository implements Serializable {
 	
 	private void reloadBadgeDefinitionsPerWeek()
 	{
+		Collection<BadgeForDisplay> toAddToGlobalDefs = new ArrayList<BadgeForDisplay>();
 		Iterator<BadgeForDisplay> iterator = badgeDefinitions.iterator();
+		//init allBadgeDefinitionsByPeriod
+		allBadgeDefinitionsByPeriod.put(-1, new ArrayList<BadgeForDisplay>());
+		for(int i=0; i < 7; i++)
+		{
+			allBadgeDefinitionsByPeriod.put(i, new ArrayList<BadgeForDisplay>());
+		}
 		while(iterator.hasNext())
 		{
 			BadgeForDisplay badge = iterator.next();
@@ -195,14 +215,24 @@ public class BadgeRepository implements Serializable {
 					b.name = badge.name + i;
 					b.biweek = i;
 					biweeklyBadges.add(b);
+					allBadgeDefinitionsByPeriod.get(i).add(b);
+					toAddToGlobalDefs.add(b);
 				}
 			}
 			else
 			{
-				badge.biweek = -1;
-				globalBadges.add(badge);
+				BadgeForDisplay b = new BadgeForDisplay(badge);
+				b.biweek = -1;
+				globalBadges.add(b);
+				allBadgeDefinitionsByPeriod.get(-1).add(b);
+				toAddToGlobalDefs.add(b);
 			}
+			iterator.remove();
 		}
+		badgeDefinitions.addAll(toAddToGlobalDefs);
+		//for(int i = -1; i < 7; i++)
+		//	Collections.sort((List<BadgeForDisplay>)(allBadgeDefinitionsByPeriod.get(i)));
+		
 	}
 	
 	private void reloadAwardedBadges()
@@ -233,13 +263,33 @@ public class BadgeRepository implements Serializable {
 			DateTime dt = formatter.parseDateTime(responseValueWithBadgeData.starttime);
 			responseValueWithBadgeData.originalrequest.timestamp =  dt.toDateMidnight().getMillis();
 			
-			BadgeForDisplay badge = BadgeRepository.convertToBadgeForDisplay(responseValueWithBadgeData.originalrequest);
+			BadgeForDisplay badge = BadgeRepository.convertToBadgeForDisplay(responseValueWithBadgeData.originalrequest, responseValueWithBadgeData.username);
 			awardedBadges.add(badge);
 			
 			String studentName = responseValueWithBadgeData.username;
 			if(!awardedBadgesByStudent.containsKey(studentName))
 				awardedBadgesByStudent.put(studentName, new ArrayList<BadgeForDisplay>());
 			awardedBadgesByStudent.get(studentName).add(badge);
+			
+			//add it to the def list (to keep track of lots of things actually.. hm)
+			addRewardedBadgesToDefinitions(badge);
+		}
+	}
+	
+	private void addRewardedBadgesToDefinitions(BadgeForDisplay badge)
+	{
+		Iterator<BadgeForDisplay> itr = badgeDefinitions.iterator();
+		while(itr.hasNext())
+		{
+			BadgeForDisplay badgeDef = itr.next();
+			if(badgeDef.name.compareTo(badge.name) == 0)
+			{
+				//add it to definition
+				badgeDef.awardedBadges.add(badge);
+				return;
+				
+			}
+			
 		}
 	}
 	
@@ -252,35 +302,6 @@ public class BadgeRepository implements Serializable {
 		students = (List<JoseStudent>)json.fromJson(returnValue, returnType);
 		Collections.sort(students);
 		
-	}
-	
-	private void reloadBadgeDataForStudent(String studentName) {
-		if(studentName == null || studentName.compareTo("") == 0) return;
-		String returnValue = WebHelpers.post("http://ariadne.cs.kuleuven.be/wespot-dev-ws/rest/getCourses/chikul13/" + studentName + "/awarded", "{\"pag\" : \"0\"}");
-		
-		//JSON conversion
-		Gson json = new Gson();
-		Type returnType = new TypeToken<Collection<JoseReturn>>(){}.getType();
-		Collection<JoseReturn> response = (Collection<JoseReturn>)json.fromJson(returnValue, returnType);
-		
-		Collection<BadgeForDisplay> badges = new ArrayList<BadgeForDisplay>();
-		//in the originalrequest field, we have again the same data. then within that originalrequest we have the badge
-		//weird.. but jose knows ;)
-		Iterator<JoseReturn> it = response.iterator();
-		while(it.hasNext())
-		{
-			JoseReturn responseValue = it.next();
-			Type responseType = new TypeToken<JoseReturnWithBadgeData>(){}.getType();
-			JoseReturnWithBadgeData responseValueWithBadgeData  = (JoseReturnWithBadgeData) json.fromJson((String)responseValue.originalrequest, responseType);
-			
-			DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss Z");
-			DateTime dt = formatter.parseDateTime(responseValueWithBadgeData.starttime);
-			responseValueWithBadgeData.originalrequest.timestamp =  dt.toDateMidnight().getMillis();
-			badges.add(BadgeRepository.convertToBadgeForDisplay(responseValueWithBadgeData.originalrequest));
-			
-		}
-		awardedBadgesByStudent.put(studentName, badges);
-		awardedBadges.addAll(badges);
 	}
 	
 	

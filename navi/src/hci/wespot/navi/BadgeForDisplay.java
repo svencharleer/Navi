@@ -1,9 +1,11 @@
 package hci.wespot.navi;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
-public class BadgeForDisplay implements Serializable{
+public class BadgeForDisplay implements Serializable, Comparable<BadgeForDisplay>{
 	/**
 	 * 
 	 */
@@ -19,11 +21,14 @@ public class BadgeForDisplay implements Serializable{
 		this.timestamp = badge.timestamp;
 		this.recipient = badge.recipient;
 		this.biweek = badge.biweek;
+		this.username = badge.username;
+		awardedBadges = new ArrayList<BadgeForDisplay>();
+		this.awardedBadges.addAll(badge.awardedBadges);
 	}
 	
 	public BadgeForDisplay()
 	{
-		
+		awardedBadges = new ArrayList<BadgeForDisplay>();
 	}
 	private static final long serialVersionUID = 1L;
 	public UUID GUID;
@@ -36,4 +41,15 @@ public class BadgeForDisplay implements Serializable{
 	public long timestamp;
 	public String recipient;
 	public int biweek;
+	public String username;
+	
+	//only used for definition. should split these up i guess
+	public List<BadgeForDisplay> awardedBadges;
+	
+	@Override
+	public int compareTo(BadgeForDisplay o) {
+		int typeCompare = this.type.compareTo(o.type);
+		if(typeCompare != 0) return typeCompare;
+		return this.name.compareTo(o.name);
+	}
 }
