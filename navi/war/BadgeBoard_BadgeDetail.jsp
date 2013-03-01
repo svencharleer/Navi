@@ -8,6 +8,7 @@
 <%@ page import="java.util.*" %>
 <%@ page import="java.net.URLEncoder" %>
 <%@ page import="org.joda.time.DateTime" %>
+<%@ page import="java.util.Map.*" %>
 
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
@@ -39,17 +40,106 @@
 			window.location.href ="badgeboard?username=<%= request.getParameter("username") %>&badgeid=<%= request.getParameter("badgeid") %>&startdate="+ startDate + "&enddate="+  endDate;
 		}
 	</script>
+	
+	<script type="text/javascript">
+	/* D3 GRAPH DRAWING */
+	function drawCurve(svg, data, xscale, yscale, awarded, timestamp)
+	{
+		var personalBadge ={date: "",count: 0};
+		
+		if(awarded == true)
+		{
+			personalBadge.date = timestamp;
+		}
+	
+		for(var i = 0; i < data.length;i++)
+		{
+			if(personalBadge.date == data[i].date)
+			{
+				personalBadge.count = data[i].count;
+			}
+			data[i].date = new Date(data[i].date);
+			
+		}
+		if(awarded == true)
+		{
+			personalBadge.date = new Date(personalBadge.date);
+		}
+		
+		var lineFunction = d3.svg.line()
+		 .x(function(d) { return xscale(d.date); })
+		 .y(function(d) { return yscale(d.count); })
+	 	 .interpolate("linear");
+
+		var lineGraph = svg.append("path")
+		                            .attr("d", lineFunction(data))
+		                            .attr("class", "linegraph")
+		                            ;
+		
+		if(awarded == true)
+		{
+			
+			svg 
+		  		.append("circle")
+		  		.attr("class","yourbadge")
+		    	.attr("cx", function(d) {return xscale(personalBadge.date);})
+		    	.attr("cy", function(d) {return yscale(personalBadge.count);})
+		    	.attr("r",5);	 
+		}
+	}
+	
+	
+	function drawAxes(svg, xscale, yscale, data, height, width,margin,padding)
+	{
+		var xAxis = d3.svg.axis()
+						.scale(xscale)
+					    .orient("bottom")
+					    .tickFormat(d3.time.format('%d/%m'))
+					    .ticks(data.length/2);
+		svg.append("text")      // text label for the x axis
+	        	.attr("x", width/2 )
+	        	.attr("y", height -margin )
+	        	.style("text-anchor", "middle")
+	        	.text("Date");
+	
+		var yAxis = d3.svg.axis()
+					    .scale(yscale)
+					    .orient("left")
+					    .ticks(10);
+		svg.append("text")
+		        //
+		        .attr("transform", "rotate(-90)")
+		        .attr("x",  -height/2)
+		        .attr("y", 0)
+	
+		        .attr("dy", "1em")
+		        .style("text-anchor", "middle")
+		        .text("# students with badge");
+		
+		svg.append("g")
+	    			.call(xAxis)
+	                .attr("transform", "translate("+ margin +"," + (height - padding - 2*margin) + ")")
+	                .attr("class", "axis")
+	                .selectAll("text")
+	                
+	                ;
+		svg.append("g")
+	    			.call(yAxis)
+	                .attr("transform", "translate(" + (padding + margin) + ",0)")
+	                .attr("class", "axis")
+	                ;
+	                
+	}
+	</script>
 </head>
 <body>
 
 
 <%
 
-	BadgeForDisplay badge = (BadgeForDisplay)request.getSession().getAttribute("badge");
-	boolean awarded = (Boolean)request.getSession().getAttribute("awarded");
+	List<FoundBadgeInfo> badgeInfos = (List<FoundBadgeInfo>)request.getSession().getAttribute("badgeInfos");
 	String backLink = (String)request.getSession().getAttribute("backLink");
-	System.out.println("hm");
-	Map<Long, Collection<JoseBadge>> badgeStats = (Map<Long, Collection<JoseBadge>>)request.getSession().getAttribute("badgeStats");
+	TreeMap<String,TreeMap<Long, Collection<BadgeForDisplay>>> badgeStats = (TreeMap<String,TreeMap<Long, Collection<BadgeForDisplay>>>)request.getSession().getAttribute("badgeStats");
 	int nrOfStudents = (Integer) request.getSession().getAttribute("nrOfStudents");
 %> 
 	<div id="header">
@@ -60,9 +150,6 @@
 			<a href="<%= backLink %>">Back</a>
 		</div>
 		<div id="badgedetail">
-		<!--  <img style="height:100px;float:right;" src="<%= badge.imageUrl %>" alt="<%= badge.name %>"/>  -->
-			<h2><%= badge.name %> </h2>
-			<p><%= badge.description %></p>
 		</div>
 	</div>
 	<div id="badgeoverview" >
@@ -80,14 +167,23 @@
 	</div>
 	
 	<script type="text/javascript">
+	var height = 400;
+	var width = 800;
+	var padding = 20;
+	var margin = 20;
+	var svg = d3.select("#graphs")
+					.append("svg")
+					.attr("class", "svgChart")
+					.attr("viewBox", "0 0 " + width + " " + height)
+					.attr("preserveAspectRatio", "xMinYMin meet");
+	
 	var data = [
 	            
 	<%
-	
-		
+			Iterator<Entry<String, TreeMap<Long,Collection<BadgeForDisplay>>>> badgeStatsItr = badgeStats.entrySet().iterator();
 			
 			long total = 0;
-			Iterator it2 = badgeStats.entrySet().iterator();
+			Iterator<Entry<Long, Collection<BadgeForDisplay>>> it2 = badgeStatsItr.next().getValue().entrySet().iterator();
 			while(it2.hasNext())
 			{
 				Map.Entry entry3 = (Map.Entry)it2.next();
@@ -104,125 +200,68 @@
 	%>
 	];
 	
-	var personalBadge =
-		{
-			date: "",
-			count: 0
-			};
-	
-	<%
-	if(awarded)
-	{
-	%>
-	personalBadge.date = <%= badge.timestamp %>;
-	<% 
-	}
-	%>
-	for(var i = 0; i < data.length;i++)
-	{
-		if(personalBadge.date == data[i].date)
-			personalBadge.count = data[i].count;
-		data[i].date = new Date(data[i].date);
-		
-	}
-	<%
-	if(awarded)
-	{
-	%>
-	personalBadge.date = new Date(personalBadge.date);
-	<% 
-	}
-	%>
-	
-	var height = 400;
-	var width = 800;
-	var padding = 20;
-	var margin = 20;
-	var svg = d3.select("#graphs")
-				.append("svg")
-				.attr("class", "svgChart")
-				.attr("viewBox", "0 0 " + width + " " + height)
-				.attr("preserveAspectRatio", "xMinYMin meet");
-	
 	var xscale = d3.time.scale()
 						.domain([
 						         d3.min(data, function(d) {return d.date;}), 
 						         d3.max(data, function(d) {return d.date;})
 						         ])
 						.range([padding+margin,width - 2*padding - margin]);
-	
 	var yscale = d3.scale.linear()
 						.domain([0, <%= nrOfStudents %>])
 						.range([height - padding -2*margin,padding]);
 	
-	var lineFunction = d3.svg.line()
-	 .x(function(d) { return xscale(d.date); })
-	 .y(function(d) { return yscale(d.count); })
- 	 .interpolate("linear");
-
-	var lineGraph = svg.append("path")
-	                            .attr("d", lineFunction(data))
-	                            .attr("class", "linegraph")
-	                            ;
-	<%
-	if(awarded)
+	
+	drawAxes(svg, xscale, yscale, data, height, width,margin,padding);
+	
+	//iterate over different stats
+	<%  
+		Iterator<FoundBadgeInfo> fbiitr = badgeInfos.iterator();
+		while(fbiitr.hasNext())
+		{
+			FoundBadgeInfo fbi = fbiitr.next();
+	%>
+	var awarded = <%= fbi.studentHasBadge %>;
+	<% 
+	if(fbi.studentHasBadge) 
 	{
 	%>
-	svg.selectAll("circle")
-		.data([personalBadge])
-  		.enter()
-  		.append("circle")
-  		.attr("class","yourbadge")
-    	.attr("cx", function(d) {return xscale(d.date);})
-    	.attr("cy", function(d) {return yscale(d.count);})
-    	.attr("r",5);
-	
+	var	timestamp = <%= fbi.studentBadge.timestamp %>;
 	<% 
-	}
+	} else 
+	{%>
+	var	timestamp = 0;
+	<%}%>
+	
+		data = [
+	            
+	        	<%
+	        			
+	        			
+	        			total = 0;
+	        			it2 = badgeStats.get(fbi.badge.GUID.toString()).entrySet().iterator();
+	        			while(it2.hasNext())
+	        			{
+	        				Map.Entry entry3 = (Map.Entry)it2.next();
+	        				total += ((Collection<JoseBadge>)entry3.getValue()).size();
+	        				%>
+	        				{
+	        				date: <%= ((Long)entry3.getKey()).toString() %>,
+	        				count: "<%= total %>" 
+	        				},
+	        				<%
+	        				
+	        			}
+	        		
+	        	%>
+	        	];	
+	
+		
+		
+	drawCurve(svg, data, xscale, yscale, awarded, timestamp);
+	<% 
+		}
 	%>
 	
-	/* axes */
-	
-	var xAxis = d3.svg.axis()
-					.scale(xscale)
-				    .orient("bottom")
-				    .tickFormat(d3.time.format('%d/%m'))
-				    .ticks(data.length/2);
-	svg.append("text")      // text label for the x axis
-        	.attr("x", width/2 )
-        	.attr("y", height -margin )
-        	.style("text-anchor", "middle")
-        	.text("Date");
-
-	var yAxis = d3.svg.axis()
-				    .scale(yscale)
-				    .orient("left")
-				    .ticks(10);
-	svg.append("text")
-	        //
-	        .attr("transform", "rotate(-90)")
-	        .attr("x",  -height/2)
-	        .attr("y", 0)
-
-	        .attr("dy", "1em")
-	        .style("text-anchor", "middle")
-	        .text("# students with badge");
-	
-	svg.append("g")
-    			.call(xAxis)
-                .attr("transform", "translate("+ margin +"," + (height - padding - 2*margin) + ")")
-                .attr("class", "axis")
-                .selectAll("text")
-                
-                ;
-	svg.append("g")
-    			.call(yAxis)
-                .attr("transform", "translate(" + (padding + margin) + ",0)")
-                .attr("class", "axis")
-                ;
-    
-                
-     
 	</script>
 	</div>	
 	

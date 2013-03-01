@@ -152,6 +152,35 @@ public class BadgeRepository implements Serializable {
 		return badgesPerDay;
 	}
 	
+	public TreeMap<Long,Collection<BadgeForDisplay>> getBadgesForDateRangInBadgeCollection(DateTime startDate, DateTime endDate, Collection<BadgeForDisplay> badges)
+	{
+		//convert date range to list of days
+		TreeMap<Long, Collection<BadgeForDisplay>> badgesPerDay = new TreeMap<Long, Collection<BadgeForDisplay>>();
+		
+		//enter the days
+		long start = startDate.toDateMidnight().getMillis();
+		badgesPerDay.put(start, new ArrayList<BadgeForDisplay>());
+		while(start <= endDate.toDateMidnight().getMillis())
+		{
+			startDate = startDate.plusDays(1);
+			start = startDate.toDateMidnight().getMillis();
+			badgesPerDay.put(start, new ArrayList<BadgeForDisplay>());
+		}
+		
+		
+		Iterator<BadgeForDisplay> itr = badges.iterator();
+		while(itr.hasNext())
+		{
+			BadgeForDisplay badge = itr.next();
+			if(badgesPerDay.containsKey(badge.timestamp))
+			{
+				Collection<BadgeForDisplay> badgesOnDay = badgesPerDay.get(badge.timestamp);
+				badgesOnDay.add(badge);
+				badgesPerDay.put(badge.timestamp, badgesOnDay);
+			}
+		}
+		return badgesPerDay;
+	}
 	
 	static public BadgeForDisplay convertToBadgeForDisplay(JoseBadge badge, String username)
 	{

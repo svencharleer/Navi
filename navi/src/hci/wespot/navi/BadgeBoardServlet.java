@@ -35,42 +35,22 @@ public class BadgeBoardServlet extends HttpServlet {
 		
 		String pUserName = req.getParameter("username");
 		String pGUID = req.getParameter("badgeid");
+		String pGUID2 = req.getParameter("badgeid2");
 		if(pGUID != null && pGUID.compareTo("") != 0)
 		{
 			pUserName = URLDecoder.decode(pUserName, "UTF-8");
-			boolean studentHasBadge = false;
-			BadgeForDisplay foundBadge = null;
 			
-			Collection<BadgeForDisplay> badges = repository.getBadgesDefinitions();
-			Iterator<BadgeForDisplay> itr = badges.iterator();
-			while(itr.hasNext()){
-				BadgeForDisplay b = itr.next();
-				if(b != null && b.GUID.toString().compareTo(pGUID) == 0)
-				{
-					//found correct badge, but does student have badge?
-					foundBadge = b;
-					Iterator<BadgeForDisplay> subIt = b.awardedBadges.iterator();
-					while(subIt.hasNext())
-					{
-						BadgeForDisplay subB = subIt.next();
-						if(subB.username.compareTo(pUserName) == 0)
-						{
-							//student found! he has badge!
-							studentHasBadge = true;
-							foundBadge = subB;
-						}
-					}
-					break;
-				}
-				
-			}
+			List<String> GUIDs = new ArrayList<String>();
+			GUIDs.add(pGUID);
+			if(pGUID2 != null)
+				GUIDs.add(pGUID2);
+			List<FoundBadgeInfo> badgeInfos = getBadgeInfo(repository, pUserName, GUIDs);
 			
 			
 			
-			 if(foundBadge != null)
+			 if(badgeInfos != null && badgeInfos.size() > 0)
 			 {
-				 req.getSession().setAttribute("awarded", studentHasBadge);
-				 req.getSession().setAttribute("badge", foundBadge);
+				 req.getSession().setAttribute("badgeInfos", badgeInfos);
 				 req.getSession().setAttribute("nrOfStudents", students.size());
 				 req.getSession().setAttribute("backLink", "/badgeboard?username=" + pUserName);
 				 
@@ -96,9 +76,18 @@ public class BadgeBoardServlet extends HttpServlet {
 						 endDate = DateTime.now();
 					 }
 				 }
+				 //get the badges in that range
+				 TreeMap<String,TreeMap<Long, Collection<BadgeForDisplay>>> badgeStats = new TreeMap<String,TreeMap<Long, Collection<BadgeForDisplay>>>();
+				 Iterator<FoundBadgeInfo> badgeInfoItr = badgeInfos.iterator();
+				 while(badgeInfoItr.hasNext())
+				 {
+					 FoundBadgeInfo binfo = badgeInfoItr.next();
+					 TreeMap<Long, Collection<BadgeForDisplay>> badgeStatistics = repository.getBadgesForDateRangInBadgeCollection(startDate, endDate, binfo.badge.awardedBadges);
+					 badgeStats.put(binfo.badge.GUID.toString(),badgeStatistics);
+					 
+				 }
+				 req.getSession().setAttribute("badgeStats", badgeStats);
 				 
-				 TreeMap<Long, Collection<BadgeForDisplay>> badgeStatistics = repository.getBadgesForDateRangeWithBadgeName(startDate, endDate, foundBadge.name);
-				 req.getSession().setAttribute("badgeStats", badgeStatistics);
 				 req.getSession().setAttribute("startdate", startDate);
 				 req.getSession().setAttribute("enddate", endDate);
 				 
@@ -151,24 +140,44 @@ public class BadgeBoardServlet extends HttpServlet {
 		
 	}
 
-	
-	
-	
-	
-	
-	
-	private Map<String, BadgeForDisplay> getBadgesByName(Collection<BadgeForDisplay> badges)
+
+	private List<FoundBadgeInfo> getBadgeInfo(BadgeRepository repository, String pUserName, List<String> GUID) 
 	{
-		Map<String, BadgeForDisplay> badgesByName = new HashMap<String, BadgeForDisplay>();
+		List<FoundBadgeInfo> badgeInfos = new ArrayList<FoundBadgeInfo>();
+		Collection<BadgeForDisplay> badges = repository.getBadgesDefinitions();
 		Iterator<BadgeForDisplay> itr = badges.iterator();
-		while(itr.hasNext())
-		{
-			BadgeForDisplay badge = itr.next();
-			
-			badgesByName.put(badge.name, badge);
+		while(itr.hasNext()){
+			BadgeForDisplay b = itr.next();
+			if(b != null && GUID.contains(b.GUID.toString()))
+			{
+				//found correct badge, but does student have badge?
+				FoundBadgeInfo badgeInfo = new FoundBadgeInfo();
+				badgeInfo.badge = b;
+				Iterator<BadgeForDisplay> subIt = b.awardedBadges.iterator();
+				while(subIt.hasNext())
+				{
+					BadgeForDisplay subB = subIt.next();
+					if(subB.username.compareTo(pUserName) == 0)
+					{
+						//student found! he has badge!
+						badgeInfo.studentHasBadge = true;
+						badgeInfo.studentBadge = subB;
+					}
+				}
+				badgeInfos.add(badgeInfo);
+				//break;
+			}
 		}
-		return badgesByName;
+		return badgeInfos;
 	}
+
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
