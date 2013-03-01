@@ -129,7 +129,7 @@
 						<div id="<%= badge.GUID %>" style="display:none;">
 							<h2><%= badge.name %> </h2><p><%= badge.description %></p> <%= button %>
 							<p><%= count %> people have been awarded this badge.</p>
-							<a href="/badgeboard?username=<%= URLEncoder.encode(username, "UTF-8") %>&badgeid=<%= badge.GUID %>">View stats</a>	
+							<a href="/badgeboard?username=<%= URLEncoder.encode(username, "UTF-8") %>&week=<%= badge.biweek %>">View stats</a>	
 							
 						</div>
 				 	<%  

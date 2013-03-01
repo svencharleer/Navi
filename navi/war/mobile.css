@@ -241,12 +241,13 @@ img.iconitself
 	stroke-width:2px;
 }
 
-.linegraph
+
+.linecolor
 {
+	stroke-width:1px;
 	fill: none;
-	stroke: #1492e2;
-	stroke-width:2px;
 }
+
 
 .axis path,
 .axis line {

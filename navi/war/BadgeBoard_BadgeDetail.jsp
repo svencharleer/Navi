@@ -37,13 +37,13 @@
 			var startDate = new Date($("#datePicker_start").val()).valueOf();
 			var endDate = new Date($("#datePicker_end").val()).valueOf();
 			
-			window.location.href ="badgeboard?username=<%= request.getParameter("username") %>&badgeid=<%= request.getParameter("badgeid") %>&startdate="+ startDate + "&enddate="+  endDate;
+			window.location.href ="badgeboard?username=<%= request.getParameter("username") %>&week=<%= request.getParameter("week") %>&startdate="+ startDate + "&enddate="+  endDate;
 		}
 	</script>
 	
 	<script type="text/javascript">
 	/* D3 GRAPH DRAWING */
-	function drawCurve(svg, data, xscale, yscale, awarded, timestamp)
+	function drawCurve(svg, data, xscale, yscale, awarded, timestamp, red, green, blue)
 	{
 		var personalBadge ={date: "",count: 0};
 		
@@ -71,9 +71,11 @@
 		 .y(function(d) { return yscale(d.count); })
 	 	 .interpolate("linear");
 
+	 	var rgb = "rgb("+red+","+green+","+blue+")";
 		var lineGraph = svg.append("path")
 		                            .attr("d", lineFunction(data))
-		                            .attr("class", "linegraph")
+		                            .attr("class", "linecolor")
+		                            .attr("stroke", rgb)
 		                            ;
 		
 		if(awarded == true)
@@ -118,7 +120,7 @@
 		
 		svg.append("g")
 	    			.call(xAxis)
-	                .attr("transform", "translate("+ margin +"," + (height - padding - 2*margin) + ")")
+	                .attr("transform", "translate("+ 0 +"," + (height - padding - 2*margin) + ")")
 	                .attr("class", "axis")
 	                .selectAll("text")
 	                
@@ -212,12 +214,14 @@
 	
 	
 	drawAxes(svg, xscale, yscale, data, height, width,margin,padding);
-	
+	var i = 0;
 	//iterate over different stats
 	<%  
 		Iterator<FoundBadgeInfo> fbiitr = badgeInfos.iterator();
+		
 		while(fbiitr.hasNext())
 		{
+
 			FoundBadgeInfo fbi = fbiitr.next();
 	%>
 	var awarded = <%= fbi.studentHasBadge %>;
@@ -255,10 +259,14 @@
 	        	%>
 	        	];	
 	
-		
-		
-	drawCurve(svg, data, xscale, yscale, awarded, timestamp);
+	var frequency = .5;
+	red   = Math.floor(Math.sin(frequency*i + 0) * 127 + 128);
+   	green = Math.floor(Math.sin(frequency*i + 2) * 127 + 128);
+   	blue  = Math.floor(Math.sin(frequency*i + 4) * 127 + 128);	
+	drawCurve(svg, data, xscale, yscale, awarded, timestamp,red, green, blue);
+	i++;
 	<% 
+
 		}
 	%>
 	

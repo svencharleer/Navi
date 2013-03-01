@@ -34,16 +34,28 @@ public class BadgeBoardServlet extends HttpServlet {
 		Collection<JoseStudent> students = repository.getStudents();
 		
 		String pUserName = req.getParameter("username");
-		String pGUID = req.getParameter("badgeid");
-		String pGUID2 = req.getParameter("badgeid2");
-		if(pGUID != null && pGUID.compareTo("") != 0)
+		String pWeek = req.getParameter("week");
+		int week = -2;
+		try{
+			week = Integer.parseInt(pWeek);
+		}
+		catch(NumberFormatException exc)
+		{
+			//do nothing
+		}
+		
+		if(week > -2 && pUserName != null && pUserName.compareTo("") != 0)
 		{
 			pUserName = URLDecoder.decode(pUserName, "UTF-8");
 			
 			List<String> GUIDs = new ArrayList<String>();
-			GUIDs.add(pGUID);
-			if(pGUID2 != null)
-				GUIDs.add(pGUID2);
+			
+			Iterator<BadgeForDisplay> weekBadgesItr = repository.getAllBadgesByPeriodType().get(week).iterator();
+			while(weekBadgesItr.hasNext())
+			{
+				GUIDs.add(weekBadgesItr.next().GUID.toString());
+			}
+			
 			List<FoundBadgeInfo> badgeInfos = getBadgeInfo(repository, pUserName, GUIDs);
 			
 			
