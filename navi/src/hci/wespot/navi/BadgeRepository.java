@@ -34,6 +34,7 @@ public class BadgeRepository implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	private Collection<BadgeForDisplay> badgeDefinitions;
+	private Collection<BadgeForDisplay> shortBadgeOverview;
 	private Map<String, Collection<BadgeForDisplay>> awardedBadgesByStudent;
 	private Collection<BadgeForDisplay> awardedBadges;
 	private Map<Long, Map<String,Collection<BadgeForDisplay>>> badgeCalendar;
@@ -60,6 +61,7 @@ public class BadgeRepository implements Serializable {
 	public BadgeRepository()
 	{
 		badgeDefinitions = new ArrayList<BadgeForDisplay>();
+		shortBadgeOverview = new ArrayList<BadgeForDisplay>();
 		awardedBadges = new ArrayList<BadgeForDisplay>();
 		awardedBadgesByStudent = new HashMap<String, Collection<BadgeForDisplay>>();
 		badgeCalendar = new HashMap<Long, Map<String, Collection<BadgeForDisplay>>>();
@@ -97,6 +99,10 @@ public class BadgeRepository implements Serializable {
 	
 	public Collection<BadgeForDisplay> getBadgesDefinitions() {
 		return badgeDefinitions;
+	}
+
+	public Collection<BadgeForDisplay> getShortBadgeOverview() {
+		return shortBadgeOverview;
 	}
 
 	public List<BadgeForDisplay> getBiWeeklyBadges() {
@@ -192,6 +198,7 @@ public class BadgeRepository implements Serializable {
 		Type returnType = new TypeToken<Collection<JoseBadge>>(){}.getType();
 		Collection<JoseBadge> joseBadges = (Collection<JoseBadge>)json.fromJson(returnData, returnType);
 		badgeDefinitions = BadgeRepository.converttoBadgeForDisplayCollection(joseBadges);
+		shortBadgeOverview = BadgeRepository.converttoBadgeForDisplayCollection(joseBadges); //need to optimize/get rid of this
 	}
 	
 	private void reloadBadgeDefinitionsPerWeek()

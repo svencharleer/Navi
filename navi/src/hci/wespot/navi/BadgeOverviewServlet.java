@@ -22,7 +22,7 @@ public class BadgeOverviewServlet extends HttpServlet {
 		BadgeRepository repository = BadgeRepository.getRepository();
 		
 		//GET call
-		Collection<BadgeForDisplay> badges = repository.getBadgesDefinitions();
+		Collection<BadgeForDisplay> badges = repository.getShortBadgeOverview();
 		
 		//Iterate and generate display badges
 		Iterator<BadgeForDisplay> it = badges.iterator();
