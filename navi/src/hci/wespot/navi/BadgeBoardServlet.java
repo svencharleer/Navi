@@ -98,6 +98,7 @@ public class BadgeBoardServlet extends HttpServlet {
 					 badgeStats.put(binfo.badge.GUID.toString(),badgeStatistics);
 					 
 				 }
+				 req.getSession().setAttribute("badges", repository.getAllBadgesByPeriodType().get(week));
 				 req.getSession().setAttribute("badgeStats", badgeStats);
 				 
 				 req.getSession().setAttribute("startdate", startDate);

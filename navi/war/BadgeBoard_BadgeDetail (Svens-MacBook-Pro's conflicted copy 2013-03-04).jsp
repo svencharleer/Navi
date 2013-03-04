@@ -41,70 +41,8 @@
 		}
 	</script>
 
-<%
-	List<FoundBadgeInfo> badgeInfos = (List<FoundBadgeInfo>)request.getSession().getAttribute("badgeInfos");
-	String backLink = (String)request.getSession().getAttribute("backLink");
-	TreeMap<String,TreeMap<Long, Collection<BadgeForDisplay>>> badgeStats = (TreeMap<String,TreeMap<Long, Collection<BadgeForDisplay>>>)request.getSession().getAttribute("badgeStats");
-	int nrOfStudents = (Integer) request.getSession().getAttribute("nrOfStudents");
-	List<BadgeForDisplay> badges = (List<BadgeForDisplay>)request.getSession().getAttribute("badges");
-	String username = request.getParameter("username");
-	Iterator<BadgeForDisplay> it = badges.iterator();
-%>
 	
 	<script type="text/javascript">
-	var svg;
-	var xscale;
-	var yscale;
-	
-	function initSVG()
-	{
-		var height = 400;
-		var width = 800;
-		var padding = 20;
-		var margin = 20;
-		svg = d3.select("#graphs")
-						.append("svg")
-						.attr("class", "svgChart")
-						.attr("viewBox", "0 0 " + width + " " + height)
-						.attr("preserveAspectRatio", "xMinYMin meet");
-		
-		var data = [
-		            
-		<%
-				Iterator<Entry<String, TreeMap<Long,Collection<BadgeForDisplay>>>> badgeStatsItr = badgeStats.entrySet().iterator();
-				
-				long total = 0;
-				Iterator<Entry<Long, Collection<BadgeForDisplay>>> it2 = badgeStatsItr.next().getValue().entrySet().iterator();
-				while(it2.hasNext())
-				{
-					Map.Entry entry3 = (Map.Entry)it2.next();
-					total += ((Collection<JoseBadge>)entry3.getValue()).size();
-					%>
-					{
-					date: <%= ((Long)entry3.getKey()).toString() %>,
-					count: "<%= total %>" 
-					},
-					<%
-					
-				}
-			
-		%>
-		];
-		
-		xscale = d3.time.scale()
-							.domain([
-							         d3.min(data, function(d) {return d.date;}), 
-							         d3.max(data, function(d) {return d.date;})
-							         ])
-							.range([padding+margin,width - 2*padding - margin]);
-		yscale = d3.scale.linear()
-							.domain([0, <%= nrOfStudents %>])
-							.range([height - padding -2*margin,padding]);
-		
-		
-		drawAxes(svg, xscale, yscale, data, height, width,margin,padding);
-	}
-	
 	/* D3 GRAPH DRAWING */
 	function drawCurve(svg, data, xscale, yscale, awarded, timestamp, red, green, blue)
 	{
@@ -149,30 +87,10 @@
 		  		.attr("class","yourbadge")
 		    	.attr("cx", function(d) {return xscale(personalBadge.date);})
 		    	.attr("cy", function(d) {return yscale(personalBadge.count);})
-		    	.attr("r",5)
-		    	.attr("stroke", rgb);
+		    	.attr("r",5);	 
 		}
 	}
 	
-	function enableDisableGraph(guid)
-	{
-		if($("#img"+guid).attr("data-enabled") == "true")
-		{
-			$("#img"+guid).attr("data-enabled","false");
-			$("#img"+guid).attr("style","border:solid 1px white;");
-			
-			d3.select("svg").remove();
-			initSVG();
-			drawEnabledGraphs();
-		}
-		else
-		{
-			$("#img"+guid).attr("data-enabled","true");
-			d3.select("svg").remove();
-			initSVG();
-			drawEnabledGraphs();
-		}
-	}
 	
 	function drawAxes(svg, xscale, yscale, data, height, width,margin,padding)
 	{
@@ -216,8 +134,98 @@
 	                
 	}
 	
-	function drawEnabledGraphs()
+	function  setColorOfLegend(guid, red, green, blue)
 	{
+		$("#img"+guid).attr("style", "background-color:rgb("+red+","+green+","+blue+")");
+	}
+	</script>
+</head>
+<body>
+
+
+<%
+
+	List<FoundBadgeInfo> badgeInfos = (List<FoundBadgeInfo>)request.getSession().getAttribute("badgeInfos");
+	String backLink = (String)request.getSession().getAttribute("backLink");
+	TreeMap<String,TreeMap<Long, Collection<BadgeForDisplay>>> badgeStats = (TreeMap<String,TreeMap<Long, Collection<BadgeForDisplay>>>)request.getSession().getAttribute("badgeStats");
+	int nrOfStudents = (Integer) request.getSession().getAttribute("nrOfStudents");
+%> 
+	<div id="header">
+		<div id="globalheader">
+			<h2>CHI13 Badge Board</h2>
+		</div>
+		<div id="filter">
+			<a href="<%= backLink %>">Back</a>
+		</div>
+	</div>
+	<div id="badgegraph" >
+		<div id="graphoptions">
+	<!-- DATE PICKERS -->
+	<%
+		DateTime startDate = (DateTime)request.getSession().getAttribute("startdate");
+		DateTime endDate = (DateTime)request.getSession().getAttribute("enddate");
+	%>
+	<label for="startdate">Between</label> <input type="date" name="startdate" id="datePicker_start" value="<%= startDate.getYear() %>-<%= String.format("%02d",startDate.getMonthOfYear()) %>-<%= String.format("%02d", startDate.getDayOfMonth()) %>">
+	<label for="enddate">and</label> <input type="date" name="enddate" id="datePicker_end" value="<%= endDate.getYear() %>-<%= String.format("%02d",endDate.getMonthOfYear()) %>-<%= String.format("%02d", endDate.getDayOfMonth()) %>"> <a href="javascript:submitDateRange();">Go</a> <br/>
+	</div>
+	<div id="badgelegend">
+	<%
+		List<BadgeForDisplay> badges = (List<BadgeForDisplay>)request.getSession().getAttribute("badges");
+		String username = request.getParameter("username");
+		Iterator<BadgeForDisplay> it = badges.iterator();
+	
+	%>
+	<%@ include file="BadgeLegend.jsp" %>
+	</div>
+	<div id="graphs">
+	</div>
+	
+	<script type="text/javascript">
+	var height = 400;
+	var width = 800;
+	var padding = 20;
+	var margin = 20;
+	var svg = d3.select("#graphs")
+					.append("svg")
+					.attr("class", "svgChart")
+					.attr("viewBox", "0 0 " + width + " " + height)
+					.attr("preserveAspectRatio", "xMinYMin meet");
+	
+	var data = [
+	            
+	<%
+			Iterator<Entry<String, TreeMap<Long,Collection<BadgeForDisplay>>>> badgeStatsItr = badgeStats.entrySet().iterator();
+			
+			long total = 0;
+			Iterator<Entry<Long, Collection<BadgeForDisplay>>> it2 = badgeStatsItr.next().getValue().entrySet().iterator();
+			while(it2.hasNext())
+			{
+				Map.Entry entry3 = (Map.Entry)it2.next();
+				total += ((Collection<JoseBadge>)entry3.getValue()).size();
+				%>
+				{
+				date: <%= ((Long)entry3.getKey()).toString() %>,
+				count: "<%= total %>" 
+				},
+				<%
+				
+			}
+		
+	%>
+	];
+	
+	var xscale = d3.time.scale()
+						.domain([
+						         d3.min(data, function(d) {return d.date;}), 
+						         d3.max(data, function(d) {return d.date;})
+						         ])
+						.range([padding+margin,width - 2*padding - margin]);
+	var yscale = d3.scale.linear()
+						.domain([0, <%= nrOfStudents %>])
+						.range([height - padding -2*margin,padding]);
+	
+	
+	drawAxes(svg, xscale, yscale, data, height, width,margin,padding);
 	var i = 0;
 	//iterate over different stats
 	<%  
@@ -263,60 +271,17 @@
 	        	%>
 	        	];	
 	
-	var frequency = 1.7;
+	var frequency = .2;
 	red   = Math.floor(Math.sin(frequency*i + 0) * 127 + 128);
    	green = Math.floor(Math.sin(frequency*i + 2) * 127 + 128);
    	blue  = Math.floor(Math.sin(frequency*i + 4) * 127 + 128);	
-   	if($("#img<%=fbi.badge.GUID.toString()%>").attr("data-enabled") == "true")
-   	{
-   		drawCurve(svg, data, xscale, yscale, awarded, timestamp,red, green, blue);
-		setColorOfLegend('<%= fbi.badge.GUID.toString() %>', red, green, blue);
-   	}
+	drawCurve(svg, data, xscale, yscale, awarded, timestamp,red, green, blue);
+	setColorOfLegend('<%= fbi.badge.GUID.toString() %>', red, green, blue);
 	i++;
 	<% 
 
 		}
 	%>
-	}
-	
-	function  setColorOfLegend(guid, red, green, blue)
-	{
-		$("#img"+guid).attr("style", "border: solid 1px rgb("+red+","+green+","+blue+")");
-	}
-	</script>
-</head>
-<body>
-
-
-	<div id="header">
-		<div id="globalheader">
-			<h2>CHI13 Badge Board</h2>
-		</div>
-		<div id="filter">
-			<a href="<%= backLink %>">Back</a>
-		</div>
-	</div>
-	<div id="badgegraph" >
-		<div id="graphoptions">
-	<!-- DATE PICKERS -->
-	<%
-		DateTime startDate = (DateTime)request.getSession().getAttribute("startdate");
-		DateTime endDate = (DateTime)request.getSession().getAttribute("enddate");
-	%>
-	<label for="startdate">Between</label> <input type="date" name="startdate" id="datePicker_start" value="<%= startDate.getYear() %>-<%= String.format("%02d",startDate.getMonthOfYear()) %>-<%= String.format("%02d", startDate.getDayOfMonth()) %>">
-	<label for="enddate">and</label> <input type="date" name="enddate" id="datePicker_end" value="<%= endDate.getYear() %>-<%= String.format("%02d",endDate.getMonthOfYear()) %>-<%= String.format("%02d", endDate.getDayOfMonth()) %>"> <a href="javascript:submitDateRange();">Go</a> <br/>
-	</div>
-	<div id="badgelegend">
-	
-	<%@ include file="BadgeLegend.jsp" %>
-	</div>
-	<div id="graphs">
-	</div>
-	
-	<script type="text/javascript">
-	initSVG();
-	
-	drawEnabledGraphs();
 	
 	</script>
 	</div>	

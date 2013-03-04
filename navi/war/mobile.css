@@ -167,23 +167,6 @@ img.iconitself
 	width:100%;
 }
 
-.badgePositive
-{
-	/*background:#ccffcc;*/
-}
-
-
-.badgeNegative
-{
-	/*background:#ffcccc*/
-}
-
-
-.badgeNeutral
-{
-	/*background:#ccffff*/
-}
-
 .badgeCount
 {
 	position:absolute;
@@ -236,8 +219,8 @@ img.iconitself
 /* graph stuff */
 .yourbadge
 {
-	fill: #08ff36;
-	stroke: #1492e2;
+	fill: white;
+	
 	stroke-width:2px;
 }
 
@@ -293,7 +276,7 @@ img.iconitself
 	width:100%;
 	margin-left:auto;
 	margin-right:auto;
-	height:300px;
+	height:500px;
 }
 
 .svgChart
@@ -304,3 +287,57 @@ img.iconitself
 	margin-right:auto;
 }
 
+#badgegraph
+{
+	width:95%;
+	margin-top:50px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+#badgelegend
+{
+
+}
+
+#badgelegend .badgeicon
+{
+	width:150px;
+
+}
+#badgelegend .badgeicon .iconitself
+{
+	width:14%;
+}
+
+.badgeinfo
+{
+	float:right;
+	width:85%;
+	font-size: 10px;
+	line-height:100%;
+	display:block;
+	vertical-align: middle;
+}
+
+
+.badgeinfo img
+{
+	
+	margin-left:auto;
+	margin-right:0px;
+	padding:0;
+	height:8px;
+
+}
+
+ .notYetAchievedBadge .badgeinfo img,  .notYetAchievedBadge .iconitself
+{
+
+	-webkit-filter: blur(0px)grayscale(100%);
+       -moz-filter: blur(0px)grayscale(100%);
+         -o-filter: blur(0px)grayscale(100%);
+        -ms-filter: blur(0px)grayscale(100%);
+            filter: blur(0px)grayscale(100%); 
+           	opacity: 1.0;
+}
