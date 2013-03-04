@@ -283,6 +283,21 @@
 	{
 		$("#img"+guid).attr("style", "border: solid 1px rgb("+red+","+green+","+blue+")");
 	}
+	
+	function showHideLegend()
+	{
+		if($("#options").attr("style") == "display:none")
+		{
+			$("#filterLink").text("Hide Filter Options");
+			$("#options").attr("style","display:visible");
+		}
+		else
+		{
+			$("#filterLink").text("Show Filter Options");
+			$("#options").attr("style","display:none");	
+		}
+		
+	}
 	</script>
 </head>
 <body>
@@ -293,22 +308,29 @@
 			<h2>CHI13 Badge Board</h2>
 		</div>
 		<div id="filter">
-			<a href="<%= backLink %>">Back</a>
+			<a href="<%= backLink %>">Back</a> -- <a href="javascript:showHideLegend();" id="filterLink">Show Filter Options</a>
 		</div>
 	</div>
-	<div id="badgegraph" >
-		<div id="graphoptions">
-	<!-- DATE PICKERS -->
-	<%
-		DateTime startDate = (DateTime)request.getSession().getAttribute("startdate");
-		DateTime endDate = (DateTime)request.getSession().getAttribute("enddate");
-	%>
-	<label for="startdate">Between</label> <input type="date" name="startdate" id="datePicker_start" value="<%= startDate.getYear() %>-<%= String.format("%02d",startDate.getMonthOfYear()) %>-<%= String.format("%02d", startDate.getDayOfMonth()) %>">
-	<label for="enddate">and</label> <input type="date" name="enddate" id="datePicker_end" value="<%= endDate.getYear() %>-<%= String.format("%02d",endDate.getMonthOfYear()) %>-<%= String.format("%02d", endDate.getDayOfMonth()) %>"> <a href="javascript:submitDateRange();">Go</a> <br/>
-	</div>
-	<div id="badgelegend">
 	
-	<%@ include file="BadgeLegend.jsp" %>
+	
+	<div id="badgegraph" >
+	<div id="options" style="display:none">
+		<div id="graphoptions">
+			
+			
+		<!-- DATE PICKERS -->
+		<%
+			DateTime startDate = (DateTime)request.getSession().getAttribute("startdate");
+			DateTime endDate = (DateTime)request.getSession().getAttribute("enddate");
+		%>
+		<label for="startdate">Between</label> <input type="date" name="startdate" id="datePicker_start" value="<%= startDate.getYear() %>-<%= String.format("%02d",startDate.getMonthOfYear()) %>-<%= String.format("%02d", startDate.getDayOfMonth()) %>">
+		<label for="enddate">and</label> <input type="date" name="enddate" id="datePicker_end" value="<%= endDate.getYear() %>-<%= String.format("%02d",endDate.getMonthOfYear()) %>-<%= String.format("%02d", endDate.getDayOfMonth()) %>"> <a href="javascript:submitDateRange();">Go</a> <br/>
+		</div>
+	
+		<div id="badgelegend">
+		
+			<%@ include file="BadgeLegend.jsp" %>
+		</div>
 	</div>
 	<div id="graphs">
 	</div>
