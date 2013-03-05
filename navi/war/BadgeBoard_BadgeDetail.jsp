@@ -37,7 +37,7 @@
 			var startDate = new Date($("#datePicker_start").val()).valueOf();
 			var endDate = new Date($("#datePicker_end").val()).valueOf();
 			
-			window.location.href ="badgeboard?username=<%= request.getParameter("username") %>&week=<%= request.getParameter("week") %>&startdate="+ startDate + "&enddate="+  endDate;
+			window.location.href ="badgeboard?username=<%= request.getParameter("username") %>&week=<%= request.getParameter("week") %>&badgeid=<%= request.getParameter("badgeid")%>&startdate="+ startDate + "&enddate="+  endDate;
 		}
 	</script>
 
