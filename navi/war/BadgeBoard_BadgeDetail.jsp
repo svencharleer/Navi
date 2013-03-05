@@ -365,7 +365,7 @@
 		<a href="javascript:enableDisableGraph('<%= badge.GUID %>')">
 		<%
 			boolean dataenabled = false;
-			if(request.getParameter("badgeid").compareTo(badge.GUID.toString())== 0)
+			if(request.getParameter("badgeid") == null || request.getParameter("badgeid").compareTo(badge.GUID.toString())== 0)
 				dataenabled = true;
 		%>
 			<div id="img<%= badge.GUID %>" class="<%= cssClass %>" data-enabled="<%= dataenabled %>">
@@ -403,6 +403,6 @@
 	
 	
 
-
+<%@ include file="/WEB-INF/includes/footer.jsp" %>
 </body>
 </html>

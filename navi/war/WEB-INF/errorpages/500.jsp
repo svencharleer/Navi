@@ -35,26 +35,10 @@
 <!-- /header -->
 
 	<div id="useroverview">
-	<ul>
-	<%
-	
-	
-		Collection<String> userNames = (Collection<String>)request.getSession().getAttribute("userNames");
-		Iterator it = userNames.iterator();
-		while(it.hasNext())
-		{
-			String name = (String)it.next();
-	%>
-		<li>
-		<a href="badgeboard?username=<%= URLEncoder.encode(name, "UTF-8") %>"><%= name %></a>
-		</li>
-	
-	<%  
-	    }
-	%>
-	</ul>
-	</div>
+	Cleaning lady probably unplugged the server again.<br/> If not, there's a good chance a <strong>refresh</strong> will sort it out!
+
+	<br/><br/>
+	In case it doesn't, ping me at <a href="http://twitter.com/svencharleer">@svencharleer</a>.
 </div>
-<%@ include file="/WEB-INF/includes/footer.jsp" %>
 </body>
 </html>

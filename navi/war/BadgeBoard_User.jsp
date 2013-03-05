@@ -42,10 +42,12 @@
 	</script>
 </head>
 <body>
-
+<%
+String username = request.getParameter("username");
+%>
 <div id="header">
 	<div id="globalheader">
-		<h2>CHI13 Badge Board</h2>
+		<h2>CHI13 Badge Board - <%= username %></h2>
 	</div>
 	<div id="filter">
 	<a href="/badgeboard">Back</a>
@@ -60,7 +62,7 @@
 	
 	
 		TreeMap<Integer,List<BadgeForDisplay>> badges = (TreeMap<Integer,List<BadgeForDisplay>>)request.getSession().getAttribute("badges");
-		String username = request.getParameter("username");
+		
 		if(badges.size() == 0)
 		{
 			%>
@@ -77,13 +79,13 @@
 				if(entry.getKey() == -1)
 				{
 					%>
-					<h2>Global Badges</h2> 
+					<h2>Global Badges - <a href="/badgeboard?username=<%= URLEncoder.encode(username, "UTF-8") %>&week=-1">Stats</a></h2> 
 					 <% 
 				}
 				else
 				{
 					%>
-					<h2> Period <%= entry.getKey()+1 %></h2>
+					<h2> Period <%= entry.getKey()+1 %> - <a href="/badgeboard?username=<%= URLEncoder.encode(username, "UTF-8") %>&week=<%= entry.getKey() %>">Stats</a></h2>
 					<%
 				}
 				//LOOP OVER BADGES
@@ -102,6 +104,7 @@
 		boolean awarded = false;
 		Iterator<BadgeForDisplay> subIt = badge.awardedBadges.iterator();
 		int count = badge.awardedBadges.size();
+		String studentNames = "";
 		while(subIt.hasNext())
 		{
 			 
@@ -109,6 +112,7 @@
 			
 			if(awardedBadge.username.compareTo(username) == 0)
 				awarded = true;
+			studentNames += " " + awardedBadge.username;
 		}
 		String cssClass;
 		String button;
@@ -123,8 +127,14 @@
 			 button = "";
 		}
 		%>
-			<div id="img<%= badge.GUID %>" class="<%= cssClass %>">
-				<div class="badgeCount"><img src="person.png"/><span><%= count %></span></div>
+			<div title="<%= studentNames %>" id="img<%= badge.GUID %>" class="<%= cssClass %>">
+			<%
+				String countStyle = "";
+				if(count == 0)
+					countStyle = "color:rgb(213, 212, 208)";
+			%>
+			
+				<div class="badgeCount"><img src="person.png"/><span style="<%= countStyle %>"><%= count %></span></div>
 				<div>
 				<a href="javascript:showBadgeData('<%= badge.GUID %>')">
 					<img class="iconitself" src="<%= badge.imageUrl %>" alt="<%= badge.name %>"/>
@@ -152,6 +162,6 @@
 	
 	
 </div>
-
+<%@ include file="/WEB-INF/includes/footer.jsp" %>
 </body>
 </html>

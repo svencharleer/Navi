@@ -292,6 +292,7 @@ public class BadgeRepository implements Serializable {
 		while(it.hasNext())
 		{
 			JoseReturn responseValue = it.next();
+			String username = responseValue.username;
 			Type responseType = new TypeToken<JoseReturnWithBadgeData>(){}.getType();
 			JoseReturnWithBadgeData responseValueWithBadgeData  = (JoseReturnWithBadgeData) json.fromJson((String)responseValue.originalrequest, responseType);
 			
@@ -299,13 +300,12 @@ public class BadgeRepository implements Serializable {
 			DateTime dt = formatter.parseDateTime(responseValueWithBadgeData.starttime);
 			responseValueWithBadgeData.originalrequest.timestamp =  dt.toDateMidnight().getMillis();
 			
-			BadgeForDisplay badge = BadgeRepository.convertToBadgeForDisplay(responseValueWithBadgeData.originalrequest, responseValueWithBadgeData.username);
+			BadgeForDisplay badge = BadgeRepository.convertToBadgeForDisplay(responseValueWithBadgeData.originalrequest, username);
 			awardedBadges.add(badge);
 			
-			String studentName = responseValueWithBadgeData.username;
-			if(!awardedBadgesByStudent.containsKey(studentName))
-				awardedBadgesByStudent.put(studentName, new ArrayList<BadgeForDisplay>());
-			awardedBadgesByStudent.get(studentName).add(badge);
+			if(!awardedBadgesByStudent.containsKey(username))
+				awardedBadgesByStudent.put(username, new ArrayList<BadgeForDisplay>());
+			awardedBadgesByStudent.get(username).add(badge);
 			
 			//add it to the def list (to keep track of lots of things actually.. hm)
 			addRewardedBadgesToDefinitions(badge);
