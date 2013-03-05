@@ -73,7 +73,7 @@ public class BadgeBoardServlet extends HttpServlet {
 				 DateTime endDate;
 				 if(strStartDate == null || strEndDate == null || strStartDate.compareTo("") == 0 || strEndDate.compareTo("") == 0)
 				 {
-					 startDate = DateTime.now().minusDays(21);
+					 startDate = DateTime.now().minusDays(15);
 					 endDate = DateTime.now();
 				 }
 				 else
