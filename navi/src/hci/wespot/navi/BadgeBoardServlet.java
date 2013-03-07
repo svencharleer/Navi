@@ -35,22 +35,33 @@ public class BadgeBoardServlet extends HttpServlet {
 		
 		String pUserName = req.getParameter("username");
 		String pWeek = req.getParameter("week");
+		String pIteration = req.getParameter("iteration");
 		int week = -2;
-		try{
+		int iteration = -1;
+		try
+		{
 			week = Integer.parseInt(pWeek);
 		}
 		catch(NumberFormatException exc)
 		{
 			//do nothing
 		}
+		try
+		{
+			iteration = Integer.parseInt(pIteration);
+		}
+		catch(NumberFormatException exc)
+		{
+			
+		}
 		
-		if(week > -2 && pUserName != null && pUserName.compareTo("") != 0)
+		if((week > -2 || iteration > -1) && pUserName != null && pUserName.compareTo("") != 0)
 		{
 			pUserName = URLDecoder.decode(pUserName, "UTF-8");
 			
 			List<String> GUIDs = new ArrayList<String>();
-			
-			Iterator<BadgeForDisplay> weekBadgesItr = repository.getAllBadgesByPeriodType().get(week).iterator();
+			int weekOrIterationKey = week > -2 ? week : iteration;
+			Iterator<BadgeForDisplay> weekBadgesItr = repository.getAllBadgesByPeriodType().get(weekOrIterationKey).iterator();
 			while(weekBadgesItr.hasNext())
 			{
 				GUIDs.add(weekBadgesItr.next().GUID.toString());
@@ -98,7 +109,7 @@ public class BadgeBoardServlet extends HttpServlet {
 					 badgeStats.put(binfo.badge.GUID.toString(),badgeStatistics);
 					 
 				 }
-				 req.getSession().setAttribute("badges", repository.getAllBadgesByPeriodType().get(week));
+				 req.getSession().setAttribute("badges", repository.getAllBadgesByPeriodType().get(weekOrIterationKey));
 				 req.getSession().setAttribute("badgeStats", badgeStats);
 				 
 				 req.getSession().setAttribute("startdate", startDate);

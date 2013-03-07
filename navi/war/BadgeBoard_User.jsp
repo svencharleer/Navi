@@ -39,9 +39,21 @@
 
 			
 		}
+	function showPeriod(value)
+	{
+		$('div[id^="period"]').attr("style","display:none;")
+		$('#period'+value).attr("style","");
+	}
+	
+	function showIteration(value)
+	{
+		$('div[id^="iteration"]').attr("style","display:none;")
+		
+		$('#iteration'+value).attr("style","");
+	}
 	</script>
 </head>
-<body>
+<body onload="javascript:showPeriod(0);showIteration(100);">
 <%
 String username = request.getParameter("username");
 %>
@@ -79,13 +91,62 @@ String username = request.getParameter("username");
 				if(entry.getKey() == -1)
 				{
 					%>
+					<div id="global" class="badgesection">
 					<h2>Global Badges - <a href="/badgeboard?username=<%= URLEncoder.encode(username, "UTF-8") %>&week=-1">Stats</a></h2> 
 					 <% 
 				}
+				else if(entry.getKey() < 100)
+				{
+					%>
+					<div id="period<%= entry.getKey() %>" class="badgesection" style="display:none;">
+					<h2> Period <span class="colorOrange" ><%= entry.getKey()+1 %></span> - <a href="/badgeboard?username=<%= URLEncoder.encode(username, "UTF-8") %>&week=<%= entry.getKey() %>">Stats</a>
+					<% if(entry.getKey() > 0) { %>
+					[<a href="javascript:showPeriod(<%= entry.getKey() -1 %>)">prev</a>/
+					<% } 
+					else
+					{%>
+					[prev/
+					<% 
+					} %>
+					
+					<% if(entry.getKey() < 6) { %>
+					<a href="javascript:showPeriod(<%= entry.getKey() +1 %>)">next</a>]
+					<% } 
+					else
+					{%>
+					next]
+					<% 
+					} %>
+					
+					</h2>
+					<%
+				}	
 				else
 				{
 					%>
-					<h2> Period <%= entry.getKey()+1 %> - <a href="/badgeboard?username=<%= URLEncoder.encode(username, "UTF-8") %>&week=<%= entry.getKey() %>">Stats</a></h2>
+					<div id="iteration<%= entry.getKey() %>" class="" style="display:none;">
+					<h2> Iteration <span class="colorOrange" ><%= entry.getKey()+1-100 %></span> - <a href="/badgeboard?username=<%= URLEncoder.encode(username, "UTF-8") %>&iteration=<%= entry.getKey() %>">Stats</a>
+					<% if(entry.getKey() > 100) { %>
+					[<a href="javascript:showIteration(<%= entry.getKey()  -1 %>)">prev</a>/
+					<% } 
+					else
+					{%>
+					[prev/
+					<% 
+					} %>
+					
+					<% if(entry.getKey() < 103) { %>
+					<a href="javascript:showIteration(<%= entry.getKey() +1 %>)">next</a>]
+					<% } 
+					else
+					{%>
+					next]
+					<% 
+					} %>
+					
+					</h2>
+					
+					
 					<%
 				}
 				//LOOP OVER BADGES
@@ -119,7 +180,7 @@ String username = request.getParameter("username");
 		if(awarded)
 		{
 			 cssClass = "badgeicon";
-			 button = "<a id=\"backpack\" href=\"javascript:OpenBadges.issue('" + badge.url +"');\"><strong>+</strong> Add to Backpack</a>";
+			 button = "<a class=\"topbutton\" href=\"javascript:OpenBadges.issue('" + badge.url +"');\"><strong>+</strong> Add to Backpack</a>";
 		}
 		else
 		{
@@ -145,16 +206,18 @@ String username = request.getParameter("username");
 					
 			<div id="<%= badge.GUID %>" style="display:none;">
 				<h2><%= badge.name %> </h2><p><%= badge.description %></p> <%= button %>
-				<p><%= count %> people have been awarded this badge.</p>
+				
 				<% if(showStatLink) { %>
-					<a href="/badgeboard?username=<%= URLEncoder.encode(username, "UTF-8") %>&week=<%= badge.biweek %>&badgeid=<%= badge.GUID.toString()%>">View stats</a>	
+					<a class="topbutton" href="/badgeboard?username=<%= URLEncoder.encode(username, "UTF-8") %>&week=<%= badge.biweek %>&badgeid=<%= badge.GUID.toString()%>">View stats</a>	
 				<% } %>
 			</div>
 	 	<%  
    	}
    	%>
 				
-				<hr/> <%
+			
+				</div>
+				 <%
 				
 			}
 		}

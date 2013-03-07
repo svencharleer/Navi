@@ -40,6 +40,7 @@ public class BadgeRepository implements Serializable {
 	private Map<Long, Map<String,Collection<BadgeForDisplay>>> badgeCalendar;
 	private List<JoseStudent> students;
 	private List<BadgeForDisplay> biweeklyBadges;
+	private List<BadgeForDisplay> iterationBadges;
 	private List<BadgeForDisplay> globalBadges;
 	private TreeMap<Integer, List<BadgeForDisplay>> allBadgeDefinitionsByPeriod;
 	
@@ -67,6 +68,7 @@ public class BadgeRepository implements Serializable {
 		badgeCalendar = new HashMap<Long, Map<String, Collection<BadgeForDisplay>>>();
 		students = new ArrayList<JoseStudent>();
 		biweeklyBadges = new ArrayList<BadgeForDisplay>();
+		iterationBadges = new ArrayList<BadgeForDisplay>();
 		globalBadges = new ArrayList<BadgeForDisplay>();
 		allBadgeDefinitionsByPeriod = new TreeMap<Integer, List<BadgeForDisplay>>();
 		reload();
@@ -240,6 +242,10 @@ public class BadgeRepository implements Serializable {
 		{
 			allBadgeDefinitionsByPeriod.put(i, new ArrayList<BadgeForDisplay>());
 		}
+		for(int i=0; i < 4; i++)
+		{
+			allBadgeDefinitionsByPeriod.put(i+100, new ArrayList<BadgeForDisplay>());
+		}
 		while(iterator.hasNext())
 		{
 			BadgeForDisplay badge = iterator.next();
@@ -252,6 +258,18 @@ public class BadgeRepository implements Serializable {
 					b.biweek = i;
 					biweeklyBadges.add(b);
 					allBadgeDefinitionsByPeriod.get(i).add(b);
+					toAddToGlobalDefs.add(b);
+				}
+			}
+			else if(badge.name.contains("SUS"))
+			{
+				for(int i =0; i < 4;i++)
+				{
+					BadgeForDisplay b = new BadgeForDisplay(badge);
+					b.name = badge.name + i;
+					b.iteration = i;
+					iterationBadges.add(b);
+					allBadgeDefinitionsByPeriod.get(100+i).add(b);
 					toAddToGlobalDefs.add(b);
 				}
 			}

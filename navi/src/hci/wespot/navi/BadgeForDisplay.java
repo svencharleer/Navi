@@ -41,10 +41,12 @@ public class BadgeForDisplay implements Serializable, Comparable<BadgeForDisplay
 	public long timestamp;
 	public String recipient;
 	public int biweek;
+	public int iteration;
 	public String username;
 	
 	//only used for definition. should split these up i guess
 	public List<BadgeForDisplay> awardedBadges;
+	
 	
 	@Override
 	public int compareTo(BadgeForDisplay o) {

@@ -135,15 +135,46 @@
 	 	 .interpolate("linear");
 
 	 	var rgb = "rgb("+red+","+green+","+blue+")";
-		var lineGraph = svg.append("path")
+	 	
+	 	var badgeDiv = d3.select("body")
+	 					.append("div")
+	 					.html($("#"+data[0].divID).html())
+	 					.attr("class","tooltip")
+	 					.attr("style","display:none;");
+	 
+	 	var lineGraph = svg.append("path")
 		                            .attr("d", lineFunction(data))
 		                            .attr("class", "linecolor")
 		                            .attr("stroke", rgb)
-		                            ;
-		
+		                            .on("mouseover", function() {   
+		                            	lineGraph.attr("style","stroke-width:4px");
+		                            	badgeDiv
+		                            		.transition()
+		                            			.duration(200)
+		                            			.style("opacity", .9);
+		                            			
+		                            	badgeDiv
+		                            		.attr("class","tooltip")
+							                .attr("style","opacity:.9;position:absolute;left:" + (d3.event.pageX) + "px; top:" + (d3.event.pageY - 28) + "px");  
+		                            	$("#"+data[0].divID).css("background-color","black");
+		                            	$("#"+data[0].divID).css("color","white");
+						            })                  
+							        .on("mouseout", function(d) {  
+							        	lineGraph.attr("style","");
+							        	badgeDiv
+							        	.transition()
+							        	.duration(500)      
+						                .style("opacity", 0);  
+							        	$("#"+data[0].divID).css("background-color","");
+		                            	$("#"+data[0].divID).css("color","");
+							        });
+							
 		if(awarded == true)
 		{
 			
+			var div = d3.select("body").append("div")   
+			.attr("class", "tooltip")               
+			.style("opacity", 0);
 			svg 
 		  		.append("circle")
 		  		.attr("class","yourbadge")
@@ -254,7 +285,8 @@
 	        				%>
 	        				{
 	        				date: <%= ((Long)entry3.getKey()).toString() %>,
-	        				count: "<%= total %>" 
+	        				count: "<%= total %>",
+	        				divID : "img<%= fbi.badge.GUID.toString() %>"
 	        				},
 	        				<%
 	        				
