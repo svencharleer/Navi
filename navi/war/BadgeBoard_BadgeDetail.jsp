@@ -150,12 +150,12 @@
 		                            	lineGraph.attr("style","stroke-width:4px");
 		                            	badgeDiv
 		                            		.transition()
-		                            			.duration(200)
+		                            			.duration(300)
 		                            			.style("opacity", .9);
 		                            			
 		                            	badgeDiv
 		                            		.attr("class","tooltip")
-							                .attr("style","opacity:.9;position:absolute;left:" + (d3.event.pageX) + "px; top:" + (d3.event.pageY - 28) + "px");  
+							                .attr("style","left:" + (d3.event.pageX) + "px; top:" + (d3.event.pageY - 28) + "px");  
 		                            	$("#"+data[0].divID).css("background-color","black");
 		                            	$("#"+data[0].divID).css("color","white");
 						            })                  
@@ -175,13 +175,35 @@
 			var div = d3.select("body").append("div")   
 			.attr("class", "tooltip")               
 			.style("opacity", 0);
-			svg 
+			var circle = svg 
 		  		.append("circle")
 		  		.attr("class","yourbadge")
 		    	.attr("cx", function(d) {return xscale(personalBadge.date);})
 		    	.attr("cy", function(d) {return yscale(personalBadge.count);})
 		    	.attr("r",5)
-		    	.attr("stroke", rgb);
+		    	.attr("stroke", rgb)
+		    	.on("mouseover", function() {   
+                	circle.attr("style","stroke-width:4px");
+                	badgeDiv
+                		.transition()
+                			.duration(300)
+                			.style("opacity", .9);
+                			
+                	badgeDiv
+                		.attr("class","tooltip")
+		                .attr("style","left:" + (d3.event.pageX) + "px; top:" + (d3.event.pageY - 28) + "px");  
+                	$("#"+data[0].divID).css("background-color","black");
+                	$("#"+data[0].divID).css("color","white");
+	            })                  
+		        .on("mouseout", function(d) {  
+		        	circle.attr("style","");
+		        	badgeDiv
+		        	.transition()
+		        	.duration(500)      
+	                .style("opacity", 0);  
+		        	$("#"+data[0].divID).css("background-color","");
+                	$("#"+data[0].divID).css("color","");
+		        });
 		}
 	}
 	
@@ -337,7 +359,7 @@
 
 	<div id="header">
 		<div id="globalheader">
-			<h2>CHI13 Badge Board</h2>
+			<h2>CHI13 Badge Board - <%= username %></h2>
 		</div>
 		<div id="filter">
 			<a href="<%= backLink %>">Back</a> -- <strong><a href="javascript:showHideLegend();" id="filterLink">Show Filter Options</a></strong>
