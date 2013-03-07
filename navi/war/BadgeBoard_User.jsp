@@ -53,7 +53,7 @@
 	}
 	</script>
 </head>
-<body onload="javascript:showPeriod(0);showIteration(100);">
+<body>
 <%
 String username = request.getParameter("username");
 %>
@@ -71,6 +71,8 @@ String username = request.getParameter("username");
 <div id="badgeoverview" >
 	
 	<%
+	int lastPeriod = -1;
+	int lastIteration = -1;
 	
 	
 		TreeMap<Integer,List<BadgeForDisplay>> badges = (TreeMap<Integer,List<BadgeForDisplay>>)request.getSession().getAttribute("badges");
@@ -157,7 +159,7 @@ String username = request.getParameter("username");
 
 
 //LOOP OVER BADGES
-	
+
 	while(it.hasNext())
 	{
 		BadgeForDisplay badge = (BadgeForDisplay)it.next();	
@@ -181,6 +183,8 @@ String username = request.getParameter("username");
 		{
 			 cssClass = "badgeicon";
 			 button = "<a class=\"topbutton\" href=\"javascript:OpenBadges.issue('" + badge.url +"');\"><strong>+</strong> Add to Backpack</a>";
+			
+				
 		}
 		else
 		{
@@ -193,6 +197,18 @@ String username = request.getParameter("username");
 				String countStyle = "";
 				if(count == 0)
 					countStyle = "color:rgb(213, 212, 208)";
+				else
+				{
+					 int counter = entry.getKey();
+						if(counter >= 0 && counter < 100)
+						{
+							lastPeriod = counter;
+						}
+						else if(counter >= 100)
+						{
+							lastIteration = counter;
+						}
+				}
 			%>
 			
 				<div class="badgeCount"><img src="person.png"/><span style="<%= countStyle %>"><%= count %></span></div>
@@ -225,6 +241,21 @@ String username = request.getParameter("username");
 	
 	
 </div>
+
+<script type="text/javascript">
+	<% if(lastPeriod != -1) { %>
+		showPeriod(<%= lastPeriod %>);
+	<% } else { %>
+		showPeriod(0);
+	<%
+	}
+	if(lastIteration != -1) { %>
+	showIteration(<%= lastIteration %>);
+	<% } else { %>
+	showIteration(100);
+	<% } %>
+</script>
+
 <%@ include file="/WEB-INF/includes/footer.jsp" %>
 </body>
 </html>
