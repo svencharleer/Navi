@@ -362,7 +362,7 @@
 			<h2>CHI13 Badge Board - <%= username %></h2>
 		</div>
 		<div id="filter">
-			<a href="<%= backLink %>">Back</a> -- <strong><a href="javascript:showHideLegend();" id="filterLink">Show Filter Options</a></strong>
+			<a href="<%= backLink %>">Back</a> <a href="javascript:showHideLegend();" id="filterLink">Show Filter Options</a>
 		</div>
 	</div>
 	

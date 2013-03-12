@@ -7,7 +7,7 @@ html
 
 body
 {
-	font-family: Arial;
+	font-family: Helvetica;
 	font-size: 80%;
 	color: #555;
 	line-height: 120%;
@@ -17,7 +17,7 @@ body
 
 a 
 {
-	color:#96b289;
+	color:#f4e88e;
 	text-decoration: none;
 }
 
@@ -28,9 +28,11 @@ a:hover
 
 #globalheader
 {
-	height:30px;
+	height:40px;
+	padding-top:10px;
 	width:100%;
-	background-color: #000;
+	background-color: #545454;
+	box-shadow: inset 0px 2px 3px rgb(48, 46, 46);
 
 }
 
@@ -72,16 +74,15 @@ a:hover
 {
 	display: inline-block;
 	width: 300px;
-	background-color: #efefef;
+	background-color: #58c9cb;
+	color:white;
 	padding:3px;
-	border:solid 1px #FFFFFF;
-
+	
 }
 
 #useroverview li a:hover
 {
-	border:dotted 1px #000000;
-
+	background-color: #b277d3;
 }
 
 
@@ -90,12 +91,13 @@ a:hover
 #header
 {
 	margin:auto;
-	width:90%;
+	width:100%;
 	position:fixed;
 	top:0px;
 	z-index: 10;
 	width:100%;
-	background-color: #FFFFFF;
+	background-color: #545454;
+
 
 	
 }
@@ -104,20 +106,23 @@ a:hover
 #badgedetail, #filter
 {
 	margin:auto;
-	width:95%;
+	width:100%;
+	background-color: #545454;
 }
 
 #filter
 {
 	font-size:100%;
+	padding-left:10px;
 }
 
 #badgedetail
 {
-	background-image:url('background-header.png');
+	background-color:#58c9cb;
 	background-size:100% 100%;
 	min-height:100px;
 	padding:10px;
+	color:white;
 }
 
 #badgedetail h2
@@ -135,8 +140,9 @@ a:hover
 /* BADGES */
 #badgeoverview
 {
-	width:95%;
-	margin-top:165px;
+	width:100%;
+	padding:0;
+	margin-top:185px;
 	margin-left:auto;
 	margin-right:auto;
 	
@@ -148,7 +154,8 @@ a:hover
 	width:80px;
 	display:inline-block;
 	border:solid 1px #FFFFFF;
-	margin:1px;"
+	margin:1px;
+	margin-left:10px;
 	
 }
 
@@ -182,7 +189,7 @@ img.iconitself
 	margin-right:7px;
 	padding:0;
 	width:15px;
-	color:rgb(185, 164, 55);
+	color:#b277d3;
 }
 
 .badgeCount img
@@ -210,10 +217,7 @@ img.iconitself
 
 .topbutton
 {
-	display:inline-block;
-	background-color: #fff;
-	border:solid 1px #ccc;
-	padding:3px;
+	
 	
 }
 
@@ -245,9 +249,14 @@ img.iconitself
     font-size: 11px;
 }
 
+#options
+{
+
+}
+
 #graphoptions
 {
-	border-bottom: solid 1px #96b289;
+	border-bottom: solid 1px #545454;
 	padding:2px;
 	margin-bottom:10px;
 	
@@ -259,7 +268,7 @@ img.iconitself
 #graphoptions a
 {
 	display:inline-block;
-	border: solid 1px #96b289;
+	background-color: #545454;
 	margin-top:0px;
 	padding:2px;
 }
@@ -290,15 +299,15 @@ img.iconitself
 
 #badgegraph
 {
-	width:95%;
-	margin-top:50px;
+	width:98%;
+	margin-top:70px;
 	margin-left:auto;
 	margin-right:auto;
 }
 
-#badgelegend
+#badgelegend a
 {
-
+	color:#545454;
 }
 
 #badgelegend .badgeicon
@@ -346,23 +355,29 @@ img.iconitself
 #footer
 {
 	display:block;
-	width:98%;
-	padding:10px;
+	width:auto;
+	padding-top:10px;
+	padding-bottom:10px;
+	padding-right:10px;
 	margin:auto;
 	margin-top:20px;
+	margin:0px;
 	text-align: right;
 	font-size: 10px;
-	border-top:solid 1px rgb(151, 151, 151);
+	box-shadow: inset 0px 2px 1px #47a9ab;
+	background-color: #58c9cb;
+	color:white;
+	height:30px;
 }
 
 .badgesection
 {
-	border-bottom: solid 1px rgb(151, 151, 151);
+	
 }
 
 .colorOrange
 {
-	color:rgb(185, 164, 55);
+	color:#FF6B40;
 }
 
 div.tooltip {   
@@ -372,8 +387,25 @@ div.tooltip {
   height: 48px;                 
   padding: 1px;             
   font-size:12px;
-  background: lightsteelblue;   
+  background: #895ba2;
+  color:white;   
   border: 0px;      
   border-radius: 8px;           
   pointer-events: none;         
+}
+
+
+.badgesection h2
+{
+  background-color: #b277d3;   
+	color:white;
+	padding:6px;
+	padding-left:10px;
+	width: 100%;
+	box-shadow: inset 0px 2px 1px #895ba2;
+}
+
+.badgesection h2 img
+{
+	height:15px;
 }
