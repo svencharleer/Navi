@@ -364,8 +364,8 @@ img.iconitself
 	margin:0px;
 	text-align: right;
 	font-size: 10px;
-	box-shadow: inset 0px 2px 1px #47a9ab;
-	background-color: #58c9cb;
+	background-color: #545454;
+	box-shadow: inset 0px 2px 3px rgb(48, 46, 46);
 	color:white;
 	height:30px;
 }
